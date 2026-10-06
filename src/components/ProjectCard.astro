@@ -1,0 +1,79 @@
+---
+import { Image } from 'astro:assets';
+import Tag from './Tag.astro';
+import { projectUrl, type Project } from '../lib/projects';
+
+interface Props {
+  project: Project;
+  /** The first card's image loads eagerly because it's likely visible right away. */
+  eager?: boolean;
+}
+
+const { project, eager = false } = Astro.props;
+const { title, description, tags, thumbnail, thumbnailAlt, status } = project.data;
+const comingSoon = status === 'coming-soon';
+---
+
+<article
+  class:list={[
+    'group relative flex h-full flex-col overflow-hidden rounded-card border border-line/70 bg-bg shadow-card',
+    !comingSoon &&
+      'transition-[transform,box-shadow] duration-300 ease-out hover:-translate-y-1 hover:shadow-card-hover has-[a:focus-visible]:-translate-y-1 has-[a:focus-visible]:shadow-card-hover has-[a:focus-visible]:outline-3 has-[a:focus-visible]:outline-offset-4 has-[a:focus-visible]:outline-sage motion-reduce:hover:translate-y-0',
+  ]}
+>
+  <div class="relative aspect-[16/10] overflow-hidden bg-surface">
+    <Image
+      src={thumbnail}
+      alt={thumbnailAlt}
+      widths={[400, 640, 960, 1280]}
+      sizes="(min-width: 1152px) 560px, (min-width: 768px) 50vw, 100vw"
+      loading={eager ? 'eager' : 'lazy'}
+      class:list={[
+        'size-full object-cover transition-transform duration-500 ease-out',
+        comingSoon
+          ? 'opacity-80 saturate-[.6]'
+          : 'group-hover:scale-[1.03] group-has-[a:focus-visible]:scale-[1.03] motion-reduce:group-hover:scale-100',
+      ]}
+    />
+    {comingSoon && (
+      <p class="absolute top-4 left-4 inline-flex items-center gap-2 rounded-pill bg-bg/95 px-3 py-1.5 label-mono text-ink shadow-card">
+        <span class="size-2 rounded-full bg-sage" aria-hidden="true" />
+        Coming soon
+      </p>
+    )}
+  </div>
+
+  <div class="flex flex-1 flex-col gap-4 p-6 md:p-8">
+    <h3 class="text-h3">
+      {comingSoon ? (
+        title
+      ) : (
+        <a
+          href={projectUrl(project)}
+          class="after:absolute after:inset-0 after:content-[''] focus-visible:outline-none"
+        >
+          {title}
+        </a>
+      )}
+    </h3>
+    <p class="text-muted">{description}</p>
+
+    <ul class="mt-auto flex flex-wrap gap-2 pt-2" role="list" aria-label="Skills">
+      {tags.map((tag) => (
+        <Tag>{tag}</Tag>
+      ))}
+    </ul>
+
+    {!comingSoon && (
+      <p
+        class="inline-flex items-center gap-1.5 font-display text-sm font-medium text-sage"
+        aria-hidden="true"
+      >
+        View case study
+        <span class="transition-transform duration-200 group-hover:translate-x-1 motion-reduce:transform-none">
+          →
+        </span>
+      </p>
+    )}
+  </div>
+</article>

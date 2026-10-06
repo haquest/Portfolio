@@ -1,0 +1,25 @@
+---
+import { availability } from '../data/site';
+---
+
+<p class="inline-flex max-w-full flex-wrap items-center gap-x-2 gap-y-1 rounded-2xl border border-sage/25 bg-sage-50 px-3.5 py-2 label-mono text-[0.75rem] text-sage-dark sm:rounded-pill sm:px-4 sm:text-xs">
+  <span class="inline-flex items-center gap-2">
+    <span class="relative flex size-2.5" aria-hidden="true">
+      <span class="absolute inline-flex size-full animate-ping rounded-full bg-sage opacity-60 motion-reduce:hidden"></span>
+      <span class="relative inline-flex size-2.5 rounded-full bg-sage"></span>
+    </span>
+    {availability.status}
+    <span class="sr-only">,</span>
+  </span>
+  <span aria-hidden="true" class="hidden sm:inline">
+    ·
+  </span>
+  <span class="min-[360px]:whitespace-nowrap">
+    {availability.detail}
+    <span aria-hidden="true" class="mx-1">
+      ✦
+    </span>
+    <span class="sr-only">,</span>
+    {availability.extra}
+  </span>
+</p>

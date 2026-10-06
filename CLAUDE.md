@@ -39,6 +39,7 @@ src/
   components/mdx/        # components usable inside case-study MDX
   content/projects/      # one .md/.mdx file per project (kebab-case slug = URL)
   content.config.ts      # Zod schema for projects
+  lib/projects.ts        # getProjects() (sorted by `order`) and projectUrl()
   assets/                # images processed by astro:assets (illustrations/, projects/<slug>/, logos/)
   pages/                 # routes: index, about, work/[slug], 404
 public/                  # files served as-is (favicon, og image, robots.txt)

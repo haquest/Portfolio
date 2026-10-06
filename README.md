@@ -28,7 +28,27 @@ the default page title/description used by Google and link previews.
 
 ## Add a case study
 
-_(The project template arrives in build step 2; instructions will be filled in then.)_
+Every project is one file in `src/content/projects/`. The file name becomes the web address:
+`cardamom.md` → `/work/cardamom`.
+
+1. Put the cover image in `src/assets/projects/<project-name>/thumbnail.png`.
+2. Copy an existing project file (e.g. `nail-salon-cooperative.md`), rename it, and edit the
+   section between the `---` lines:
+
+   ```yaml
+   title: Cardamom – Ann Arbor
+   description: One sentence for the card (also shown on Google and link previews).
+   tags: [UX Design, Usability Testing]
+   thumbnail: ../../assets/projects/cardamom/thumbnail.png
+   thumbnailAlt: Describe what the image shows for people using screen readers.
+   status: coming-soon # change to "published" when the case study is ready
+   order: 4 # position on the home page (1 = first)
+   ```
+
+3. Save. The home page updates automatically. If you forget a required field, the preview shows
+   an error naming the field that's missing.
+
+Card thumbnails are shown at a 16:10 ratio, so 1600 × 1000 px (or anything wider) works best.
 
 ## Deploy
 

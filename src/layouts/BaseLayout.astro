@@ -21,6 +21,9 @@ const seo = Astro.props;
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="sitemap" href="/sitemap-index.xml" />
     <SEO {...seo} />
+    <script is:inline>
+      document.documentElement.classList.add('js');
+    </script>
   </head>
   <body class="flex min-h-dvh flex-col">
     <SkipLink />
