@@ -1,0 +1,47 @@
+---
+import { links, site } from '../data/site';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="mt-24 border-t border-line bg-surface">
+  <div class="container-page flex flex-col gap-10 py-16 md:flex-row md:items-end md:justify-between">
+    <div>
+      <h2 class="text-h2">Let's connect, I don't bite!</h2>
+      <p class="mt-2 text-lg text-muted">
+        Unless you're banana bread…
+        <span role="img" aria-label="banana and bread">
+          🍌🍞
+        </span>
+      </p>
+    </div>
+
+    <ul class="flex flex-wrap gap-3" role="list">
+      <li>
+        <a
+          href={links.linkedin}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex min-h-11 items-center gap-2 rounded-pill border border-ink/15 bg-bg px-5 font-display text-sm font-medium transition-colors hover:border-sage hover:text-sage"
+        >
+          LinkedIn <span aria-hidden="true">↗</span>
+          <span class="sr-only">(opens in new tab)</span>
+        </a>
+      </li>
+      <li>
+        <a
+          href={`mailto:${links.email}`}
+          class="inline-flex min-h-11 items-center gap-2 rounded-pill bg-sage px-5 font-display text-sm font-medium text-bg transition-colors hover:bg-sage-dark"
+        >
+          Email me <span class="sr-only">at {links.email}</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="border-t border-line">
+    <p class="container-page py-6 text-sm text-muted">
+      Designed with love <span aria-hidden="true">♡</span> {`© ${year} ${site.name}`}
+    </p>
+  </div>
+</footer>

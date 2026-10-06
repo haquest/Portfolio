@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://tanyamirza.vercel.app/sitemap-index.xml

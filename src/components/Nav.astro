@@ -1,0 +1,47 @@
+---
+import { nav, links } from '../data/site';
+
+const path = Astro.url.pathname.replace(/\/$/, '') || '/';
+const isCurrent = (href: string) => href === path;
+---
+
+<header class="sticky top-0 z-40 border-b border-line/70 bg-bg/90 backdrop-blur-md">
+  <nav aria-label="Main" class="container-page flex min-h-16 items-center justify-between gap-4">
+    <a
+      href="/"
+      class="font-display text-lg font-semibold tracking-tight text-ink transition-colors hover:text-sage"
+      aria-label="Tanya Mirza, home"
+      aria-current={path === '/' ? 'page' : undefined}
+    >
+      TM{' '}
+      <span class="text-sage" aria-hidden="true">
+        ★
+      </span>
+    </a>
+
+    <ul class="flex items-center gap-1 sm:gap-2" role="list">
+      {nav.map((item) => (
+        <li>
+          <a
+            href={item.href}
+            aria-current={isCurrent(item.href) ? 'page' : undefined}
+            class="inline-flex min-h-11 items-center rounded-pill px-3 font-display text-sm font-medium text-ink transition-colors hover:bg-surface hover:text-sage aria-[current=page]:text-sage sm:px-4"
+          >
+            {item.label}
+          </a>
+        </li>
+      ))}
+      <li>
+        <a
+          href={links.resume}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex min-h-11 items-center gap-1 rounded-pill px-3 font-display text-sm font-medium text-ink transition-colors hover:bg-surface hover:text-sage sm:px-4"
+        >
+          Resume <span aria-hidden="true">↗</span>
+          <span class="sr-only">(opens in new tab)</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</header>

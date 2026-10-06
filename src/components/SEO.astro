@@ -1,0 +1,58 @@
+---
+// All <head> metadata: title, description, canonical, Open Graph, Twitter, JSON-LD.
+import { site, links } from '../data/site';
+
+interface Props {
+  /** Page name, e.g. "About". Leave empty on the home page. */
+  title?: string;
+  description?: string;
+  /** Absolute or root-relative image URL for social previews (1200×630 ideal). */
+  image?: string;
+  imageAlt?: string;
+  type?: 'website' | 'article';
+}
+
+const {
+  title,
+  description = site.description,
+  image = site.ogImage,
+  imageAlt = `${site.name}, ${site.jobTitle}`,
+  type = 'website',
+} = Astro.props;
+
+const fullTitle = title ? `${title} · ${site.name}` : site.title;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const imageUrl = new URL(image, Astro.site);
+
+const person = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: site.name,
+  jobTitle: site.jobTitle,
+  url: Astro.site?.href,
+  email: `mailto:${links.email}`,
+  alumniOf: { '@type': 'CollegeOrUniversity', name: 'University of Michigan' },
+  sameAs: [links.linkedin],
+};
+---
+
+<title>{fullTitle}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonical} />
+
+<meta property="og:type" content={type} />
+<meta property="og:site_name" content={site.name} />
+<meta property="og:locale" content={site.locale} />
+<meta property="og:title" content={fullTitle} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonical} />
+<meta property="og:image" content={imageUrl} />
+<meta property="og:image:alt" content={imageAlt} />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={fullTitle} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={imageUrl} />
+<meta name="twitter:image:alt" content={imageAlt} />
+
+<script type="application/ld+json" set:html={JSON.stringify(person)} />
