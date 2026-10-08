@@ -6,7 +6,11 @@ import { getProjects } from '../lib/projects';
 const projects = await getProjects();
 ---
 
-<section id="projects" aria-labelledby="projects-title" class="container-page pt-12 pb-8 md:pt-16">
+<section
+  id="projects"
+  aria-labelledby="projects-title"
+  class="container-page scroll-mt-16 pt-16 pb-8 md:pt-20"
+>
   <Reveal class="flex items-center gap-4">
     <h2 id="projects-title" class="eyebrow">
       <span aria-hidden="true" class="mr-1.5 text-sage">

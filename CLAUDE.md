@@ -81,9 +81,12 @@ public/                  # files served as-is (favicon, og image, robots.txt, cu
   star that pulses over clickable things and spins on click. It only runs for mouse users with
   motion allowed; everyone else gets the static `public/cursors/star.svg` via CSS. Touch devices
   are untouched. The logo ★ spins on hover; ✦ is used as a small decorative accent.
-- **Hero**: "Hiya, I'm Tanya." in `sage-dark`, letters pop in one by one (`.letter`, CSS only,
-  with an `sr-only` copy of the sentence for screen readers). Illustration sits in the Framer
-  circle composition (outline ring + three sage circles, 367×493 ratio, image 192px wide).
+- **Hero**: fills the screen below the nav (`min-h-[calc(100svh-4rem)]`) so projects are only
+  seen after scrolling or clicking "Take a Peek". "Hiya, I'm Tanya." in `sage-dark`, letters pop
+  in one by one (`.letter`, CSS only, with an `sr-only` copy of the sentence for screen readers).
+  Illustration sits in the Framer circle composition (outline ring + three sage circles, 367×493
+  ratio, image 192px wide). Letters and circles share one slow timeline in `global.css`
+  (both finish ≈2.5s); keep them in sync if you change either.
 - **Availability badge**: two lines, outlined pill. Line 1 "Available for Full-Time" (priority),
   line 2 "Starting Summer 2027 ✦ Open to Relocate".
 - **Project covers**: device mockups (laptop, plus phone when a mobile screen exists) on a soft
