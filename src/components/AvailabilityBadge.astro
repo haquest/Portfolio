@@ -1,25 +1,24 @@
 ---
+// Two-line status, as on the Framer site: full-time availability first,
+// start date and relocation second.
 import { availability } from '../data/site';
 ---
 
-<p class="inline-flex max-w-full flex-wrap items-center gap-x-2 gap-y-1 rounded-2xl border border-sage/25 bg-sage-50 px-3.5 py-2 label-mono text-[0.75rem] text-sage-dark sm:rounded-pill sm:px-4 sm:text-xs">
-  <span class="inline-flex items-center gap-2">
-    <span class="relative flex size-2.5" aria-hidden="true">
-      <span class="absolute inline-flex size-full animate-ping rounded-full bg-sage opacity-60 motion-reduce:hidden"></span>
-      <span class="relative inline-flex size-2.5 rounded-full bg-sage"></span>
-    </span>
-    {availability.status}
-    <span class="sr-only">,</span>
+<p class="inline-flex max-w-full items-center gap-3.5 rounded-pill border-2 border-sage py-2.5 pr-6 pl-4 sm:gap-4 sm:pl-5">
+  <span class="relative flex size-3.5 shrink-0" aria-hidden="true">
+    <span class="absolute inline-flex size-full animate-ping rounded-full bg-sage opacity-50 motion-reduce:hidden"></span>
+    <span class="relative inline-flex size-3.5 rounded-full bg-sage"></span>
   </span>
-  <span aria-hidden="true" class="hidden sm:inline">
-    ·
-  </span>
-  <span class="min-[360px]:whitespace-nowrap">
-    {availability.detail}
-    <span aria-hidden="true" class="mx-1">
-      ✦
-    </span>
+  <span class="flex flex-col">
+    <span class="text-lg leading-tight font-bold text-ink">{availability.status}</span>
     <span class="sr-only">,</span>
-    {availability.extra}
+    <span class="text-sm leading-snug text-muted">
+      {availability.detail}
+      <span aria-hidden="true" class="mx-0.5 text-sage">
+        ✦
+      </span>
+      <span class="sr-only">,</span>
+      {availability.extra}
+    </span>
   </span>
 </p>

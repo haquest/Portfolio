@@ -10,8 +10,8 @@ small, previewable steps.
 - **Astro 7** (static output, zero client JS by default) + **MDX** + **@astrojs/sitemap**
 - **Tailwind CSS v4** via `@tailwindcss/vite`. There is no `tailwind.config.js`; tokens live in
   `src/styles/global.css` under `@theme`.
-- Fonts self-hosted with `@fontsource` (Latin subset): Poppins 500/600, Lato 400/400i/700,
-  JetBrains Mono 500.
+- Fonts self-hosted with `@fontsource` (Latin subset): Poppins 500/600/700, Lato 400/400i/700.
+  No monospace font (the owner disliked it); don't reintroduce one.
 - Prettier + `prettier-plugin-astro`. TypeScript strict (`astro check`).
 - No backend, no UI framework (no React/Vue). Don't add one without asking.
 
@@ -42,7 +42,7 @@ src/
   lib/projects.ts        # getProjects() (sorted by `order`) and projectUrl()
   assets/                # images processed by astro:assets (illustrations/, projects/<slug>/, logos/)
   pages/                 # routes: index, about, work/[slug], 404
-public/                  # files served as-is (favicon, og image, robots.txt)
+public/                  # files served as-is (favicon, og image, robots.txt, cursors/*.svg)
 ```
 
 ## Content rules
@@ -64,13 +64,30 @@ public/                  # files served as-is (favicon, og image, robots.txt)
   (tag tint), `ink` #1C1B1F (text), `muted` #5F5E66 (secondary text), `surface` #F4F4F4,
   `line` #D9D9D9 (decorative borders only), `bg` #FFFFFF. Palette is the owner's existing Framer
   palette; don't introduce new colors without asking. Light mode only (for now).
-- Type: `font-display` (Poppins, headings), `font-sans` (Lato, body), `font-mono` (JetBrains
-  Mono, labels). Sizes: `text-display`, `text-h1`, `text-h2`, `text-h3`, `text-lg`, `text-base`,
+- Green is the brand: page headings (`h1`, footer heading) and the "TM ★" logo use `sage-dark`.
+  Project-cover backdrops may use per-project tints (they're part of the image, not the UI).
+- Type: `font-display` (Poppins: headings, buttons, tags, labels), `font-sans` (Lato, body).
+  Sizes: `text-display`, `text-h1`, `text-h2`, `text-h3`, `text-lg`, `text-base`,
   `text-sm`, `text-xs`. They're fluid via `clamp()`, so you rarely need responsive text classes.
-- Utilities: `container-page` (max-w-6xl + gutters), `label-mono` (uppercase mono label).
+- Utilities: `container-page` (max-w-6xl + gutters), `eyebrow` (small uppercase Poppins label,
+  prefixed with a decorative ✦, e.g. "✦ Selected work").
 - Radius: `rounded-card` (20px), `rounded-pill`. Shadows: `shadow-card`, `shadow-card-hover`.
 - Motion: `ease-out` token; fade-up ≈500ms, hover lift 4px. All motion must respect
   `prefers-reduced-motion` (handled globally in `global.css`; don't override it).
+
+## Brand details (from the Framer site — keep them)
+
+- **Star theme**: the logo is "TM ★". `StarCursor.astro` replaces the mouse cursor with a sage
+  star that pulses over clickable things and spins on click. It only runs for mouse users with
+  motion allowed; everyone else gets the static `public/cursors/star.svg` via CSS. Touch devices
+  are untouched. The logo ★ spins on hover; ✦ is used as a small decorative accent.
+- **Hero**: "Hiya, I'm Tanya." in `sage-dark`, letters pop in one by one (`.letter`, CSS only,
+  with an `sr-only` copy of the sentence for screen readers). Illustration sits in the Framer
+  circle composition (outline ring + three sage circles, 367×493 ratio, image 192px wide).
+- **Availability badge**: two lines, outlined pill. Line 1 "Available for Full-Time" (priority),
+  line 2 "Starting Summer 2027 ✦ Open to Relocate".
+- **Project covers**: device mockups (laptop, plus phone when a mobile screen exists) on a soft
+  backdrop tinted to that project's brand, 1920×1200 (16:10).
 
 ## Accessibility (WCAG AA, non-negotiable)
 

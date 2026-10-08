@@ -1,10 +1,10 @@
 /* Self-hosted fonts (Latin subset only, so pages load fast). */
 @import '@fontsource/poppins/latin-500.css';
 @import '@fontsource/poppins/latin-600.css';
+@import '@fontsource/poppins/latin-700.css';
 @import '@fontsource/lato/latin-400.css';
 @import '@fontsource/lato/latin-400-italic.css';
 @import '@fontsource/lato/latin-700.css';
-@import '@fontsource/jetbrains-mono/latin-500.css';
 
 @import 'tailwindcss';
 
@@ -28,7 +28,6 @@
   /* Type families */
   --font-display: 'Poppins', ui-sans-serif, system-ui, sans-serif;
   --font-sans: 'Lato', ui-sans-serif, system-ui, sans-serif;
-  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
 
   /* Fluid type scale: clamp(mobile, fluid, desktop) */
   --text-display: clamp(2.5rem, 1.6rem + 4.5vw, 4.5rem); /* 40 → 72px */
@@ -47,7 +46,7 @@
   --text-base--line-height: 1.65;
   --text-sm: 0.875rem; /* 14px */
   --text-sm--line-height: 1.5;
-  --text-xs: 0.8125rem; /* 13px — mono labels */
+  --text-xs: 0.8125rem; /* 13px — tags, eyebrow labels */
   --text-xs--line-height: 1.4;
 
   /* Shape & depth */
@@ -107,9 +106,9 @@
   @apply mx-auto w-full max-w-6xl px-5 md:px-8;
 }
 
-/* Mono label style: tags, eyebrows, badge, dates */
-@utility label-mono {
-  @apply font-mono text-xs font-medium tracking-[0.04em] uppercase;
+/* Small uppercase label above a section, e.g. "Selected work" */
+@utility eyebrow {
+  @apply font-display text-xs font-medium tracking-[0.14em] text-sage-dark uppercase;
 }
 
 /* ------------------------------------------------------------------
@@ -150,11 +149,77 @@
   .hero-in-delay {
     animation-delay: 150ms;
   }
+
+  /* "Hiya, I'm Tanya." — letters pop in one by one, like the Framer site.
+     Each letter sets --i (its position) to stagger the delay. */
+  .letter {
+    animation: letter-in 450ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
+    animation-delay: calc(250ms + var(--i) * 55ms);
+  }
+
+  /* Hero circles drift in behind the illustration */
+  .bubble {
+    animation: bubble-in 700ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
+    animation-delay: var(--delay, 0ms);
+  }
+}
+
+@keyframes letter-in {
+  from {
+    opacity: 0;
+    transform: translateY(0.3em) scale(0);
+  }
+}
+
+@keyframes bubble-in {
+  from {
+    opacity: 0;
+    transform: scale(0.6);
+  }
 }
 
 @keyframes fade-up {
   from {
     opacity: 0;
     translate: 0 16px;
+  }
+}
+
+/* ------------------------------------------------------------------
+   Star cursor
+   Baseline (no JS, or reduced motion): a static star cursor image.
+   With JS + a mouse + motion allowed, StarCursor.astro hides the
+   system cursor and draws an animated star that pulses over links
+   and spins on click. Touch screens keep their normal behaviour.
+   ------------------------------------------------------------------ */
+@media (pointer: fine) {
+  html {
+    cursor:
+      url('/cursors/star.svg') 12 12,
+      auto;
+  }
+  a,
+  button,
+  summary,
+  label {
+    cursor:
+      url('/cursors/star-hover.svg') 14 14,
+      pointer;
+  }
+  html.star-cursor,
+  html.star-cursor * {
+    cursor: none !important;
+  }
+}
+
+@keyframes star-pulse {
+  50% {
+    transform: scale(1.35);
+  }
+}
+
+@keyframes star-spin {
+  to {
+    transform: rotate(1turn) scale(1);
   }
 }

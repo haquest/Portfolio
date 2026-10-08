@@ -3,17 +3,42 @@ import { Image } from 'astro:assets';
 import AvailabilityBadge from './AvailabilityBadge.astro';
 import Button from './Button.astro';
 import illustration from '../assets/illustrations/tanya-and-oreo.png';
+
+// The heading is split into letters for the pop-in animation. Screen readers
+// get the plain sentence instead (the letters are hidden from them).
+const heading = "Hiya, I'm Tanya.";
+let index = 0;
+const words = heading.split(' ').map((word) => [...word].map((char) => ({ char, i: index++ })));
 ---
 
 <section
   aria-labelledby="hero-title"
-  class="container-page grid items-center gap-12 pt-12 pb-8 md:pt-20 lg:grid-cols-[1fr_auto] lg:gap-16 lg:pb-12"
+  class="container-page grid items-center gap-10 pt-12 pb-8 md:pt-20 lg:grid-cols-[1fr_auto] lg:gap-16 lg:pb-12"
 >
   <div class="hero-in">
     <AvailabilityBadge />
 
-    <h1 id="hero-title" class="mt-8 text-display">
-      Hiya, I'm Tanya<span class="text-sage">.</span>
+    <h1 id="hero-title" class="mt-8 text-display font-bold text-sage-dark">
+      <span class="sr-only">{heading}</span>
+      <span aria-hidden="true">
+        {words.map((letters, w) => (
+          <span class="mr-[0.25em] inline-block whitespace-nowrap last:mr-0">
+            {letters.map(({ char, i }) => (
+              <span class="letter inline-block" style={`--i: ${i}`}>
+                {char}
+              </span>
+            ))}
+            {w === words.length - 1 && (
+              <span
+                class="letter ml-[0.1em] inline-block align-super text-[0.4em] text-sage"
+                style={`--i: ${index + 2}`}
+              >
+                ✦
+              </span>
+            )}
+          </span>
+        ))}
+      </span>
     </h1>
 
     <p class="mt-6 max-w-[38ch] text-lg text-ink">
@@ -36,15 +61,36 @@ import illustration from '../assets/illustrations/tanya-and-oreo.png';
     </Button>
   </div>
 
-  <div class="hero-in hero-in-delay mx-auto w-3/5 max-w-64 sm:w-2/5 lg:w-72 lg:max-w-none">
+  <!-- Illustration with the sage circles from the Framer site (367 × 493 composition) -->
+  <div class="relative mx-auto aspect-[367/493] w-60 sm:w-72 lg:w-[367px]">
+    <span
+      class="bubble absolute top-[9.94%] left-[12.53%] aspect-square w-[80.1%] rounded-full border-2 border-sage-dark/90"
+      style="--delay: 100ms"
+      aria-hidden="true"
+    ></span>
+    <span
+      class="bubble absolute top-0 left-[46.59%] aspect-square w-[53.41%] rounded-full bg-sage"
+      style="--delay: 200ms"
+      aria-hidden="true"
+    ></span>
+    <span
+      class="bubble absolute top-[42.19%] left-0 aspect-square w-[37.87%] rounded-full bg-sage"
+      style="--delay: 300ms"
+      aria-hidden="true"
+    ></span>
+    <span
+      class="bubble absolute top-[78.9%] left-[79.29%] aspect-square w-[17.17%] rounded-full bg-sage"
+      style="--delay: 400ms"
+      aria-hidden="true"
+    ></span>
     <Image
       src={illustration}
       alt="Hand-drawn illustration of Tanya smiling and holding up her black cat, Oreo."
-      widths={[240, 360, 480, 720]}
-      sizes="(min-width: 1024px) 288px, (min-width: 640px) 40vw, 60vw"
+      widths={[192, 288, 384]}
+      sizes="(min-width: 1024px) 192px, (min-width: 640px) 151px, 126px"
       loading="eager"
       fetchpriority="high"
-      class="h-auto w-full"
+      class="hero-in hero-in-delay absolute top-[15.42%] left-[23.43%] h-auto w-[52.32%]"
     />
   </div>
 </section>

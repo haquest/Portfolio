@@ -9,12 +9,15 @@ const isCurrent = (href: string) => href === path;
   <nav aria-label="Main" class="container-page flex min-h-16 items-center justify-between gap-4">
     <a
       href="/"
-      class="font-display text-lg font-semibold tracking-tight text-ink transition-colors hover:text-sage"
+      class="group inline-flex min-h-11 items-center gap-1.5 font-display text-lg font-bold tracking-tight text-sage-dark"
       aria-label="Tanya Mirza, home"
       aria-current={path === '/' ? 'page' : undefined}
     >
-      TM{' '}
-      <span class="text-sage" aria-hidden="true">
+      TM
+      <span
+        class="inline-block text-sage transition-transform duration-500 ease-out group-hover:rotate-[144deg] group-hover:scale-125 motion-reduce:transform-none"
+        aria-hidden="true"
+      >
         ★
       </span>
     </a>

@@ -1,0 +1,91 @@
+---
+// Animated star cursor (Tanya's "TM ★" brand). Only runs for mouse/trackpad users who
+// haven't asked for reduced motion; everyone else gets the static star from global.css.
+---
+
+<div id="star-cursor" aria-hidden="true">
+  <div class="star-cursor__shape">
+    <svg viewBox="0 0 24 24" width="24" height="24">
+      <path
+        d="M12 2.5l2.8 6.1 6.7.7-5 4.5 1.4 6.6L12 17l-5.9 3.4 1.4-6.6-5-4.5 6.7-.7z"
+        stroke-width="1.6"
+        stroke-linejoin="round"
+      ></path>
+    </svg>
+  </div>
+</div>
+
+<style>
+  #star-cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    width: 24px;
+    height: 24px;
+    margin: -12px 0 0 -12px; /* centre the star on the pointer */
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 150ms;
+    will-change: transform;
+  }
+  :global(html.star-cursor) #star-cursor.is-visible {
+    opacity: 1;
+  }
+  .star-cursor__shape {
+    width: 100%;
+    height: 100%;
+    transition: transform 200ms var(--ease-out);
+  }
+  path {
+    fill: var(--color-sage);
+    stroke: var(--color-bg);
+    transition: fill 200ms;
+  }
+  /* Over anything clickable: grow and gently pulse */
+  #star-cursor.is-hover .star-cursor__shape {
+    animation: star-pulse 900ms ease-in-out infinite;
+  }
+  #star-cursor.is-hover path {
+    fill: var(--color-sage-dark);
+  }
+  /* On click: one spin */
+  #star-cursor.is-click .star-cursor__shape {
+    animation: star-spin 550ms var(--ease-out);
+  }
+</style>
+
+<script>
+  const fine = window.matchMedia('(pointer: fine)');
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const star = document.getElementById('star-cursor');
+  const shape = star?.firstElementChild;
+  const clickable = 'a, button, summary, label, [role="button"]';
+
+  if (star && shape && fine.matches && !reduce.matches) {
+    document.documentElement.classList.add('star-cursor');
+
+    window.addEventListener(
+      'pointermove',
+      (e) => {
+        if (e.pointerType !== 'mouse') return;
+        star.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0)`;
+        star.classList.add('is-visible');
+        star.classList.toggle('is-hover', !!(e.target as Element).closest?.(clickable));
+      },
+      { passive: true },
+    );
+    document.documentElement.addEventListener('pointerleave', () =>
+      star.classList.remove('is-visible'),
+    );
+    window.addEventListener('pointerdown', (e) => {
+      if (e.pointerType !== 'mouse') return;
+      star.classList.remove('is-click');
+      void star.offsetWidth; // restart the spin if clicking quickly
+      star.classList.add('is-click');
+    });
+    shape.addEventListener('animationend', (e) => {
+      if ((e as AnimationEvent).animationName.includes('spin')) star.classList.remove('is-click');
+    });
+  }
+</script>
