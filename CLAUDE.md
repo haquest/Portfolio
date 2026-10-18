@@ -112,25 +112,26 @@ Each `##` starts a numbered section. Add a 1–2 word TOC label as an MDX commen
 
 `src/lib/remark-case-study.mjs` wraps it in `<section id="challenge">`, adds the "01 ✦ CHALLENGE"
 eyebrow and the ✦ ★ ✦ divider, and feeds the TOC. Without a label the heading text is used. Use
-`###` for sub-sections (they don't appear in the TOC). "Overview" is added by the layout. Content
+`###` (and `####`) for sub-sections (they don't appear in the TOC). "Overview" is added by the layout. Content
 before the first `##` (e.g. a confidentiality `<Callout>`) sits under Overview.
 
 ### 4. Components (no imports needed)
 
-| Component                                                                                 | Use                                         |
-| ----------------------------------------------------------------------------------------- | ------------------------------------------- |
-| `<StatRow stats={[{value, label}]} label="…" />`                                          | headline numbers                            |
-| `<PullQuote by="Who">quote</PullQuote>`                                                   | user/stakeholder quote                      |
-| `<Callout variant="note\|problem\|hmw" label?>…</Callout>`                                | problem statement, "How might we…", notes   |
-| `<Figure src={img} alt="…" caption?="…" framed? />`                                       | one image (import it at the top of the MDX) |
-| `<Figure pair={[{src, alt, label:'Desktop'}, {src, alt, label:'Mobile'}]} caption="…" />` | side-by-side, equal heights                 |
-| `<NumberedList>` + markdown `1. **Title** text` + `</NumberedList>`                       | findings, recommendations, decisions        |
-| `<TagList tags={[…]} label="…" />`                                                        | pills matching the home cards               |
-| `<ProcessSteps steps={[{title, text, emphasis?}]} loop? />`                               | phases / loops (emphasis = "Break point")   |
-| `<TwoColumn leftTitle rightTitle>` + `<div slot="left">` / `<div slot="right">`           | "Worked well / Would change"                |
-| `<Finding n="F1" kicker="Finding ONE" title="…">…</Finding>`                              | research findings                           |
-| `<StatusList items={[{label, status}]} />`                                                | "Search — Broken" style status rows         |
-| `<LinkButton href="…" label="View prototype" />`                                          | clear CTA (external → new tab)              |
+| Component                                                                                 | Use                                                                |
+| ----------------------------------------------------------------------------------------- | ------------------------------------------------------------------ |
+| `<StatRow stats={[{value, label}]} label="…" />`                                          | headline numbers                                                   |
+| `<PullQuote by="Who">quote</PullQuote>`                                                   | user/stakeholder quote                                             |
+| `<Callout variant="note\|problem\|hmw" label?>…</Callout>`                                | problem statement, "How might we…", notes                          |
+| `<Figure src={img} alt="…" caption?="…" framed? />`                                       | one image (import it at the top of the MDX)                        |
+| `<Figure … narrow />` / `<Figure pair={[…]} columns={2} />`                               | square/tall charts at a readable size / grids (e.g. persona cards) |
+| `<Figure pair={[{src, alt, label:'Desktop'}, {src, alt, label:'Mobile'}]} caption="…" />` | side-by-side, equal heights                                        |
+| `<NumberedList>` + markdown `1. **Title** text` + `</NumberedList>`                       | findings, recommendations, decisions                               |
+| `<TagList tags={[…]} label="…" />`                                                        | pills matching the home cards                                      |
+| `<ProcessSteps steps={[{title, text, emphasis?}]} loop? />`                               | phases / loops (emphasis = "Break point")                          |
+| `<TwoColumn leftTitle rightTitle>` + `<div slot="left">` / `<div slot="right">`           | "Worked well / Would change"                                       |
+| `<Finding n="F1" kicker="Finding ONE" title="…">…</Finding>`                              | research findings                                                  |
+| `<StatusList items={[{label, status}]} />`                                                | "Search — Broken" style status rows                                |
+| `<LinkButton href="…" label="View prototype" />`                                          | clear CTA (external → new tab)                                     |
 
 MDX gotchas: put markdown inside components on its own lines with blank lines around it, and keep
 closing tags like `</div>` unindented after a list. Give `<LinkButton>` its text via `label`.

@@ -275,8 +275,12 @@
   .cs-section > h3 {
     @apply mt-10 max-w-text text-h3 text-ink;
   }
+  .cs-section > h4 {
+    @apply mt-8 max-w-text font-display text-lg font-semibold text-ink;
+  }
 
-  :is(.cs-section, .cs-finding, .cs-two > div > div, .cs-callout) > :is(p, ul, ol):not([class]) {
+  :is(.cs-article, .cs-section, .cs-finding, .cs-two > div > div, .cs-callout)
+    > :is(p, ul, ol):not([class]) {
     @apply mt-4 max-w-text;
   }
   :is(.cs-section, .cs-finding, .cs-two > div > div) > ul:not([class]) {

@@ -2,7 +2,8 @@
 // An image with an optional caption, or a side-by-side group (e.g. desktop + mobile).
 //   <Figure src={img} alt="…" caption="…" />
 //   <Figure pair={[{ src: desk, alt: '…', label: 'Desktop' }, { src: mob, alt: '…', label: 'Mobile' }]} caption="…" />
-// Images in a group share the same height on wide screens and stack on phones.
+//   <Figure pair={[…5 images]} columns={3} />   ← a grid instead of one row (e.g. personas)
+// Images in a row share the same height on wide screens and stack on phones.
 import type { ImageMetadata } from 'astro';
 import { Picture } from 'astro:assets';
 
@@ -19,20 +20,37 @@ interface Props {
   pair?: Item[];
   /** Give a single image a soft surface background (good for diagrams with white edges). */
   framed?: boolean;
+  /** Lay a group out as a grid with this many columns on wide screens. */
+  columns?: 2 | 3;
+  /** Keep a single tall or square image (e.g. a chart) from filling the whole column. */
+  narrow?: boolean;
 }
 
-const { src, alt, caption, pair, framed = false } = Astro.props;
+const { src, alt, caption, pair, framed = false, columns, narrow = false } = Astro.props;
 const items: Item[] = pair ?? (src && alt !== undefined ? [{ src, alt }] : []);
 if (!items.length) throw new Error('<Figure> needs either `src` + `alt` or `pair`.');
 const many = items.length > 1;
+const grid = many && columns;
+const gridCols = { 2: 'sm:grid-cols-2', 3: 'sm:grid-cols-2 lg:grid-cols-3' };
 ---
 
-<figure class="cs-wide my-10">
-  <div class:list={['flex flex-col gap-4', many && 'sm:flex-row sm:items-end']}>
+<figure class:list={['my-10', narrow ? 'mx-auto max-w-xl' : 'cs-wide']}>
+  <div
+    class:list={[
+      grid ? ['grid gap-4', columns && gridCols[columns]] : 'flex flex-col gap-4',
+      many && !grid && 'sm:flex-row sm:items-end',
+    ]}
+  >
     {items.map((item) => (
       <div
-        class="min-w-0"
-        style={many ? `flex: ${(item.src.width / item.src.height).toFixed(3)} 1 0%` : undefined}
+        class:list={[
+          'min-w-0',
+          // Tall phone screens shouldn't fill the whole width once a group stacks on phones.
+          many && !grid && item.src.height > item.src.width && 'max-sm:mx-auto max-sm:w-3/5',
+        ]}
+        style={
+          many && !grid ? `flex: ${(item.src.width / item.src.height).toFixed(3)} 1 0%` : undefined
+        }
       >
         <Picture
           src={item.src}
