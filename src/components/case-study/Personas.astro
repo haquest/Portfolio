@@ -1,0 +1,114 @@
+---
+// Personas as tabs (one panel visible at a time), styled like the rest of the case study.
+// Without JavaScript every persona is shown, one after another.
+import type { ImageMetadata } from 'astro';
+import { Image } from 'astro:assets';
+
+interface Persona {
+  name: string;
+  archetype: string;
+  photo: ImageMetadata;
+  age: number | string;
+  occupation: string;
+  context: string;
+  goals: string[];
+  needs: string[];
+  frustrations: string[];
+}
+
+interface Props {
+  personas: Persona[];
+  /** Used to build unique ids if a page has more than one persona set. */
+  id?: string;
+}
+
+const { personas, id = 'personas' } = Astro.props;
+const first = (n: string) => n.replace(/^Dr\.\s+/, '').split(' ')[0];
+---
+
+<div class="cs-personas cs-wide my-10" data-tabs>
+  <div
+    role="tablist"
+    aria-label="User personas"
+    class="cs-tabs hidden gap-1 overflow-x-auto border-b-2 border-sage"
+  >
+    {personas.map((p, i) => (
+      <button
+        type="button"
+        role="tab"
+        id={`${id}-tab-${i}`}
+        aria-controls={`${id}-panel-${i}`}
+        aria-selected={i === 0 ? 'true' : 'false'}
+        tabindex={i === 0 ? 0 : -1}
+        class="min-h-11 shrink-0 rounded-t-xl px-5 font-display text-sm font-medium text-sage-dark transition-colors hover:bg-sage-50 aria-selected:bg-sage aria-selected:text-bg"
+      >
+        {first(p.name)}
+      </button>
+    ))}
+  </div>
+
+  {personas.map((p, i) => (
+    <section
+      role="tabpanel"
+      id={`${id}-panel-${i}`}
+      aria-labelledby={`${id}-tab-${i}`}
+      aria-label={`${p.name}, ${p.archetype}`}
+      tabindex="0"
+      class="cs-persona mt-6 rounded-card bg-surface p-5 md:p-8"
+    >
+      <div class="grid items-start gap-6 md:grid-cols-[180px_1fr] md:gap-8">
+        <div class="mx-auto aspect-square w-36 overflow-hidden rounded-full ring-4 ring-bg md:w-full">
+          <Image
+            src={p.photo}
+            alt={`Portrait used for the ${p.name} persona`}
+            widths={[160, 320, 400]}
+            sizes="(min-width: 768px) 180px, 144px"
+            class="size-full scale-[1.04] object-cover"
+          />
+        </div>
+        <div>
+          <p class="eyebrow">
+            <span aria-hidden="true" class="mr-1.5 text-sage">
+              ✦
+            </span>
+            User persona
+          </p>
+          <h4 class="mt-2 font-display text-h3 font-semibold text-ink">
+            {p.name}, <span class="text-sage-dark">{p.archetype}</span>
+          </h4>
+          <p class="mt-3 text-ink">{p.context}</p>
+          <dl class="mt-4 flex flex-wrap gap-2">
+            <div class="rounded-pill bg-bg px-3 py-1.5 text-sm">
+              <dt class="inline font-display font-medium text-sage-dark">Age</dt>
+              <dd class="ml-1 inline">{p.age}</dd>
+            </div>
+            <div class="rounded-pill bg-bg px-3 py-1.5 text-sm">
+              <dt class="inline font-display font-medium text-sage-dark">Role</dt>
+              <dd class="ml-1 inline">{p.occupation}</dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+      <div class="mt-8 grid gap-6 md:grid-cols-3">
+        {[
+          { t: 'Goals', l: p.goals },
+          { t: 'Needs', l: p.needs },
+          { t: 'Frustrations', l: p.frustrations },
+        ].map((col) => (
+          <div class="rounded-card bg-bg p-5">
+            <h5 class="font-display font-semibold text-sage-dark">{col.t}</h5>
+            <ul class="mt-3 list-disc space-y-2 pl-5 text-sm leading-relaxed marker:text-sage">
+              {col.l.map((x) => (
+                <li>{x}</li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </section>
+  ))}
+</div>
+
+<script>
+  import '../../lib/tabs';
+</script>

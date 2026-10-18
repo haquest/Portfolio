@@ -1,9 +1,13 @@
 // Components available inside every case-study MDX file without importing them.
 import Callout from '../components/case-study/Callout.astro';
+import Cards from '../components/case-study/Cards.astro';
+import Compare from '../components/case-study/Compare.astro';
+import Expandable from '../components/case-study/Expandable.astro';
 import Figure from '../components/case-study/Figure.astro';
 import Finding from '../components/case-study/Finding.astro';
 import LinkButton from '../components/case-study/LinkButton.astro';
 import NumberedList from '../components/case-study/NumberedList.astro';
+import Personas from '../components/case-study/Personas.astro';
 import ProcessSteps from '../components/case-study/ProcessSteps.astro';
 import PullQuote from '../components/case-study/PullQuote.astro';
 import StatCard from '../components/case-study/StatCard.astro';
@@ -14,10 +18,14 @@ import TwoColumn from '../components/case-study/TwoColumn.astro';
 
 export const mdxComponents = {
   Callout,
+  Cards,
+  Compare,
+  Expandable,
   Figure,
   Finding,
   LinkButton,
   NumberedList,
+  Personas,
   ProcessSteps,
   PullQuote,
   StatCard,

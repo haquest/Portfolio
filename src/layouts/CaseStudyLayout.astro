@@ -7,6 +7,7 @@ import CaseStudyToc from '../components/case-study/CaseStudyToc.astro';
 import MetaGrid from '../components/case-study/MetaGrid.astro';
 import NextProjectCard from '../components/case-study/NextProjectCard.astro';
 import ReadingProgress from '../components/case-study/ReadingProgress.astro';
+import Lightbox from '../components/case-study/Lightbox.astro';
 import StatRow from '../components/case-study/StatRow.astro';
 import Reveal from '../components/Reveal.astro';
 import type { Project } from '../lib/projects';
@@ -31,6 +32,7 @@ const items = [{ id: 'overview', label: 'Overview' }, ...toc];
   type="article"
 >
   <ReadingProgress />
+  <Lightbox />
 
   <div class="container-page pt-6 md:pt-10">
     <a
@@ -166,6 +168,33 @@ const items = [{ id: 'overview', label: 'Overview' }, ...toc];
   window.addEventListener('scroll', onScroll, { passive: true });
   window.addEventListener('resize', onScroll, { passive: true });
   update();
+
+  // Headline numbers count up once when they scroll into view.
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const counters = document.querySelectorAll<HTMLElement>('[data-count]');
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (!entry.isIntersecting) continue;
+          io.unobserve(entry.target);
+          const el = entry.target as HTMLElement;
+          const target = el.dataset.count!;
+          const end = parseFloat(target.replace(/,/g, ''));
+          const decimals = (target.split('.')[1] ?? '').length;
+          const start = performance.now();
+          const tick = (now: number) => {
+            const t = Math.min((now - start) / 1000, 1);
+            const eased = 1 - Math.pow(1 - t, 3);
+            el.textContent = t < 1 ? (end * eased).toFixed(decimals) : target;
+            if (t < 1) requestAnimationFrame(tick);
+          };
+          requestAnimationFrame(tick);
+        }
+      },
+      { threshold: 0.6 },
+    );
+    counters.forEach((c) => io.observe(c));
+  }
 
   // Close the phone/tablet dropdown after choosing a section.
   mobileToc?.addEventListener('click', (e) => {

@@ -1,0 +1,69 @@
+---
+// Before / after toggle. Put the two states in named slots:
+//   <Compare beforeLabel="Existing pages" afterLabel="Our redesign">
+//     <div slot="before">…</div>
+//     <div slot="after">…</div>
+//   </Compare>
+// Without JavaScript both are shown, one after the other, with their labels.
+interface Props {
+  beforeLabel?: string;
+  afterLabel?: string;
+  id: string;
+}
+
+const { beforeLabel = 'Before', afterLabel = 'After', id } = Astro.props;
+---
+
+<div class="cs-compare cs-wide my-10" data-tabs>
+  <div
+    role="tablist"
+    aria-label="Before and after"
+    class="hidden w-fit gap-1 rounded-pill bg-surface p-1"
+  >
+    <button
+      type="button"
+      role="tab"
+      id={`${id}-tab-0`}
+      aria-controls={`${id}-panel-0`}
+      aria-selected="true"
+      class="min-h-11 rounded-pill px-5 font-display text-sm font-medium text-sage-dark transition-colors aria-selected:bg-bg aria-selected:shadow-card"
+    >
+      {beforeLabel}
+    </button>
+    <button
+      type="button"
+      role="tab"
+      id={`${id}-tab-1`}
+      aria-controls={`${id}-panel-1`}
+      aria-selected="false"
+      tabindex="-1"
+      class="min-h-11 rounded-pill px-5 font-display text-sm font-medium text-sage-dark transition-colors aria-selected:bg-sage aria-selected:text-bg aria-selected:shadow-card"
+    >
+      {afterLabel} <span aria-hidden="true">✦</span>
+    </button>
+  </div>
+  <section
+    role="tabpanel"
+    id={`${id}-panel-0`}
+    aria-labelledby={`${id}-tab-0`}
+    tabindex="0"
+    class="cs-compare-panel"
+  >
+    <p class="cs-compare-fallback eyebrow mt-6">{beforeLabel}</p>
+    <slot name="before" />
+  </section>
+  <section
+    role="tabpanel"
+    id={`${id}-panel-1`}
+    aria-labelledby={`${id}-tab-1`}
+    tabindex="0"
+    class="cs-compare-panel"
+  >
+    <p class="cs-compare-fallback eyebrow mt-6">{afterLabel}</p>
+    <slot name="after" />
+  </section>
+</div>
+
+<script>
+  import '../../lib/tabs';
+</script>

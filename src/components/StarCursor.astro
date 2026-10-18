@@ -60,7 +60,7 @@
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
   const star = document.getElementById('star-cursor');
   const shape = star?.firstElementChild;
-  const clickable = 'a, button, summary, label, [role="button"]';
+  const clickable = 'a, button, summary, label, [role="button"], .cs-media';
 
   if (star && shape && fine.matches && !reduce.matches) {
     document.documentElement.classList.add('star-cursor');

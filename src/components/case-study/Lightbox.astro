@@ -1,0 +1,126 @@
+---
+// Full-screen image viewer for case-study figures. Opened by the ⤢ button on each <Figure>
+// (or by clicking the image). "Actual size" shows the image at full resolution so detailed
+// diagrams can be panned. Uses the native <dialog>, so Esc closes it and focus returns.
+---
+
+<dialog
+  id="cs-lightbox"
+  aria-label="Enlarged image"
+  class="m-0 h-dvh max-h-none w-screen max-w-none bg-transparent p-0 backdrop:bg-ink/85 backdrop:backdrop-blur-sm"
+>
+  <div class="flex h-full flex-col">
+    <div class="flex items-center justify-between gap-3 px-4 py-3 text-bg md:px-6">
+      <p data-lb-caption class="min-w-0 truncate font-display text-sm"></p>
+      <div class="flex shrink-0 items-center gap-2">
+        <button
+          type="button"
+          data-lb-toggle
+          class="inline-flex min-h-11 items-center rounded-pill border border-bg/40 px-4 font-display text-sm font-medium text-bg hover:bg-bg hover:text-ink"
+        >
+          Actual size
+        </button>
+        <button
+          type="button"
+          data-lb-close
+          class="inline-flex size-11 items-center justify-center rounded-full bg-bg font-display text-lg text-ink hover:bg-sage hover:text-bg"
+        >
+          <span aria-hidden="true">✕</span>
+          <span class="sr-only">Close</span>
+        </button>
+      </div>
+    </div>
+    <div
+      data-lb-stage
+      class="flex min-h-0 flex-1 items-center justify-center overflow-auto px-4 pb-6 md:px-10"
+    >
+      <img data-lb-img alt="" class="max-h-full max-w-full rounded-card bg-bg object-contain" />
+    </div>
+  </div>
+</dialog>
+
+<style>
+  dialog[open] {
+    display: block;
+  }
+  dialog[open] [data-lb-img] {
+    cursor: zoom-in;
+  }
+  dialog.is-actual [data-lb-stage] {
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+  dialog.is-actual [data-lb-img] {
+    max-width: none;
+    max-height: none;
+    margin: auto;
+    cursor: zoom-out;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    dialog[open] [data-lb-img] {
+      animation: lb-in 250ms var(--ease-out);
+    }
+  }
+  @keyframes lb-in {
+    from {
+      opacity: 0;
+      transform: scale(0.97);
+    }
+  }
+</style>
+
+<script>
+  const dlg = document.getElementById('cs-lightbox') as HTMLDialogElement | null;
+  if (dlg) {
+    const img = dlg.querySelector<HTMLImageElement>('[data-lb-img]')!;
+    const caption = dlg.querySelector<HTMLElement>('[data-lb-caption]')!;
+    const toggle = dlg.querySelector<HTMLButtonElement>('[data-lb-toggle]')!;
+    const stage = dlg.querySelector<HTMLElement>('[data-lb-stage]')!;
+
+    const setActual = (on: boolean, at?: { x: number; y: number }) => {
+      dlg.classList.toggle('is-actual', on);
+      toggle.textContent = on ? 'Fit to screen' : 'Actual size';
+      toggle.setAttribute('aria-pressed', String(on));
+      if (on && at) {
+        // Keep the spot that was clicked under the pointer.
+        stage.scrollTo({
+          left: at.x * img.naturalWidth - stage.clientWidth / 2,
+          top: at.y * img.naturalHeight - stage.clientHeight / 2,
+        });
+      }
+    };
+
+    const open = (src: string, alt: string, text: string) => {
+      setActual(false);
+      img.src = src;
+      img.alt = alt;
+      caption.textContent = text || alt;
+      dlg.showModal();
+    };
+
+    document.addEventListener('click', (e) => {
+      const target = e.target as Element;
+      const btn = target.closest<HTMLAnchorElement>('[data-zoom]');
+      const media = btn ? null : target.closest('.cs-media');
+      const trigger = btn ?? media?.querySelector<HTMLAnchorElement>('[data-zoom]');
+      if (!trigger) return;
+      e.preventDefault();
+      open(trigger.dataset.zoom!, trigger.dataset.zoomAlt ?? '', trigger.dataset.zoomCaption ?? '');
+    });
+
+    toggle.addEventListener('click', () => setActual(!dlg.classList.contains('is-actual')));
+    img.addEventListener('click', (e) => {
+      const r = img.getBoundingClientRect();
+      setActual(!dlg.classList.contains('is-actual'), {
+        x: (e.clientX - r.left) / r.width,
+        y: (e.clientY - r.top) / r.height,
+      });
+    });
+    dlg.querySelector('[data-lb-close]')!.addEventListener('click', () => dlg.close());
+    // Click on the dark backdrop closes it.
+    stage.addEventListener('click', (e) => {
+      if (e.target === stage) dlg.close();
+    });
+    dlg.addEventListener('close', () => img.removeAttribute('src'));
+  }
+</script>

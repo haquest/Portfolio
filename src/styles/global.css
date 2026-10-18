@@ -283,13 +283,15 @@
     > :is(p, ul, ol):not([class]) {
     @apply mt-4 max-w-text;
   }
-  :is(.cs-section, .cs-finding, .cs-two > div > div) > ul:not([class]) {
+  :is(.cs-section, .cs-finding, .cs-two > div > div, .cs-expand-body) > ul:not([class]) {
     @apply list-disc pl-5;
   }
   :is(.cs-section, .cs-finding, .cs-two > div > div) > ol:not([class]) {
     @apply list-decimal pl-5;
   }
-  :is(.cs-section, .cs-finding, .cs-two > div > div) > :is(ul, ol):not([class]) > li {
+  :is(.cs-section, .cs-finding, .cs-two > div > div, .cs-expand-body)
+    > :is(ul, ol):not([class])
+    > li {
     @apply mt-2 pl-1 marker:text-sage;
   }
   .cs-callout > div > p:first-child {
@@ -377,6 +379,29 @@
   .cs-toc-mobile summary::-webkit-details-marker {
     display: none;
   }
+  .cs-expand summary::-webkit-details-marker {
+    display: none;
+  }
+  .cs-expand-body > :first-child {
+    margin-top: 0;
+  }
+  /* Magnifier buttons only work with JavaScript (they open the lightbox). */
+  .cs-zoom-btn {
+    display: none;
+  }
+  .js .cs-zoom-btn {
+    display: inline-flex;
+  }
+  .js .cs-media {
+    cursor: zoom-in;
+  }
+  .js .cs-media:hover img {
+    box-shadow: var(--shadow-card-hover);
+  }
+  /* <Compare>: the fallback labels are only for when the toggle isn't available */
+  .js .cs-compare-fallback {
+    display: none;
+  }
   [aria-current='location'] .cs-toc-dot {
     background: var(--color-sage);
   }
@@ -389,5 +414,10 @@
   }
   .js .cs-section[data-reveal]:not(.is-visible) {
     translate: 0 12px;
+  }
+  /* Cards inside a section rise in one after another as the section appears */
+  .js .cs-section.is-visible .cs-card {
+    animation: fade-up 500ms var(--ease-out) both;
+    animation-delay: calc(150ms + var(--i, 0) * 80ms);
   }
 }

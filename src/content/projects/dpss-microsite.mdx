@@ -26,11 +26,11 @@ tools: [Figma, Adobe]
 ---
 
 import competitive from '../../assets/case-studies/dpss-microsite/microsite-competitive-analysis.png';
-import jordan from '../../assets/case-studies/dpss-microsite/microsite-persona-jordan-ellis.png';
-import taylor from '../../assets/case-studies/dpss-microsite/microsite-persona-taylor-robinson.png';
-import melissa from '../../assets/case-studies/dpss-microsite/microsite-persona-melissa-edwards.png';
-import amira from '../../assets/case-studies/dpss-microsite/microsite-persona-amira-shah.png';
-import jackie from '../../assets/case-studies/dpss-microsite/microsite-persona-jackie-smith.png';
+import jordan from '../../assets/case-studies/dpss-microsite/microsite-persona-jordan-ellis-photo.png';
+import taylor from '../../assets/case-studies/dpss-microsite/microsite-persona-taylor-robinson-photo.png';
+import melissa from '../../assets/case-studies/dpss-microsite/microsite-persona-melissa-edwards-photo.png';
+import amira from '../../assets/case-studies/dpss-microsite/microsite-persona-amira-shah-photo.png';
+import jackie from '../../assets/case-studies/dpss-microsite/microsite-persona-jackie-smith-photo.png';
 import sitemap from '../../assets/case-studies/dpss-microsite/microsite-sitemap.png';
 import userFlow from '../../assets/case-studies/dpss-microsite/microsite-user-flow.png';
 import moodboard from '../../assets/case-studies/dpss-microsite/microsite-moodboard.png';
@@ -39,8 +39,8 @@ import wireHomeTop from '../../assets/case-studies/dpss-microsite/microsite-wire
 import wireHomeBottom from '../../assets/case-studies/dpss-microsite/microsite-wireframe-homepage-bottom.png';
 import wireListings from '../../assets/case-studies/dpss-microsite/microsite-wireframe-job-listings.png';
 import wireDetails from '../../assets/case-studies/dpss-microsite/microsite-wireframe-job-details.png';
-import detailsBefore from '../../assets/case-studies/dpss-microsite/microsite-job-details-before.png';
-import detailSidebar from '../../assets/case-studies/dpss-microsite/microsite-job-detail-sidebar.png';
+import oldJobDescription from '../../assets/case-studies/dpss-microsite/microsite-job-details-before.png';
+import oldJobDetail from '../../assets/case-studies/dpss-microsite/microsite-job-detail-sidebar.png';
 import homeDesktop from '../../assets/case-studies/dpss-microsite/microsite-homepage-desktop.png';
 import homeMobile from '../../assets/case-studies/dpss-microsite/microsite-homepage-mobile.png';
 import listingsDesktop from '../../assets/case-studies/dpss-microsite/microsite-job-listings-desktop.png';
@@ -48,26 +48,26 @@ import listingsMobile from '../../assets/case-studies/dpss-microsite/microsite-j
 import detailsDesktop from '../../assets/case-studies/dpss-microsite/microsite-job-details-desktop.png';
 import detailsMobile from '../../assets/case-studies/dpss-microsite/microsite-job-details-mobile.png';
 
-DPSS: A Great Place to Work is a UX design project completed through Atlas Digital Consulting Group, where our team partnered with the University of Michigan’s Division of Public Safety and Security to design a careers-focused microsite. The goal was to clearly communicate DPSS’s values, highlight career opportunities beyond law enforcement, and create a more approachable, community-centered recruitment experience.
+**DPSS: A Great Place to Work** is a UX design project completed through Atlas Digital Consulting Group, where our team partnered with the University of Michigan’s Division of Public Safety and Security to design a **careers-focused microsite**. The goal was to clearly communicate DPSS’s values, highlight career opportunities beyond law enforcement, and create a more approachable, community-centered recruitment experience.
 
-This was a design-only project, with a team composed entirely of UX designers and no developers.
+This was a **design-only project**, with a team composed entirely of UX designers and no developers.
 
 ## The problem {/* toc: Problem */}
 
 <TwoColumn leftTitle="The current site struggles with" rightTitle="This project aimed to">
 <div slot="left">
 
-- Careers experience focused mainly on job listings, not storytelling
+- Careers experience focused mainly on **job listings, not storytelling**
 - DPSS’s mission and values were not clearly communicated
-- Non-law-enforcement roles were underrepresented
-- External applicants faced confusion and friction when applying
+- **Non-law-enforcement roles** were underrepresented
+- External applicants faced **confusion and friction** when applying
 
 </div>
 <div slot="right">
 
 - Clearly communicate DPSS’s mission and community impact
 - Highlight diverse roles across the organization
-- Create a welcoming, accessible careers experience
+- Create a **welcoming, accessible** careers experience
 - Reduce friction in job exploration and application
 - Support both desktop and mobile users
 
@@ -85,14 +85,23 @@ This was a design-only project, with a team composed entirely of UX designers an
 
 From initial client meetings, we identified key constraints and opportunities:
 
-- **Accessibility Priority:** PDF brochures needed web alternatives
-- **Technical Context:** Design for Sanity CMS implementation
-- **Brand Alignment:** Follow UMich brand guidelines with DPSS nuances
-- **Audience Diversity:** Serve everyone from external law enforcement candidates to current students
+<Cards
+  cols={4}
+  label="Constraints and opportunities"
+  items={[
+    { title: 'Accessibility Priority', text: 'PDF brochures needed web alternatives' },
+    { title: 'Technical Context', text: 'Design for Sanity CMS implementation' },
+    { title: 'Brand Alignment', text: 'Follow UMich brand guidelines with DPSS nuances' },
+    {
+      title: 'Audience Diversity',
+      text: 'Serve everyone from external law enforcement candidates to current students',
+    },
+  ]}
+/>
 
 ### Competitive analysis
 
-Our team reviewed six career sites (Hilton, Marriott, Coca-Cola, Synchrony, Michigan State Police and Ohio State Patrol) to identify common patterns. The competitive analysis revealed a clear gap: public safety career sites tend to emphasize functionality over emotional connection, while hospitality sites excel at human storytelling but often lack institutional credibility.
+Our team reviewed **six career sites** (Hilton, Marriott, Coca-Cola, Synchrony, Michigan State Police and Ohio State Patrol). The analysis revealed a clear gap: public safety career sites tend to **emphasize functionality over emotional connection**, while hospitality sites excel at human storytelling but often **lack institutional credibility**.
 
 <Figure
   src={competitive}
@@ -101,96 +110,221 @@ Our team reviewed six career sites (Hilton, Marriott, Coca-Cola, Synchrony, Mich
   caption="Hospitality brands feel human; public safety sites feel institutional. DPSS needed both."
 />
 
-This gap shaped the three design principles behind our approach.
-
 ### User personas
 
-We developed 5 detailed personas to guide design decisions:
+We developed **5 detailed personas** to guide design decisions. Each included specific goals, needs, and frustrations that directly informed our design priorities.
 
-- **Jordan Ellis (29):** Current police officer seeking career growth
-- **Taylor Robinson (33):** External applicant with no UMich connection
-- **Melissa Edwards (35):** DPSS administrative coordinator (internal user)
-- **Dr. Amira Shah (47):** University policymaker
-- **Jackie Smith (24):** Graduate student/community member
-
-<Figure
-  columns={2}
-  pair={[
+<Personas
+  personas={[
     {
-      src: jordan,
-      alt: 'Persona card for Jordan Ellis, “The Local Candidate”, 29, a community safety officer at a Michigan municipal police department, with goals, needs and frustrations about learning DPSS’s hiring process.',
+      name: 'Jordan Ellis',
+      archetype: 'The Local Candidate',
+      photo: jordan,
+      age: 29,
+      occupation: 'Community Safety Officer',
+      context:
+        'Jordan currently works at a Michigan municipal police department and is exploring opportunities at U-M DPSS for career growth.',
+      goals: [
+        'Learn about the hiring process, qualifications, and benefits at DPSS',
+        'Understand DPSS’s organizational culture, mission, and training opportunities',
+        'Find clear instructions on how to apply and track the application status',
+      ],
+      needs: [
+        'Transparent information on pay scales, diversity initiatives, and professional development',
+        'Easy navigation to job listings and required certifications',
+        'Examples of employee stories or testimonials to understand workplace culture',
+      ],
+      frustrations: [
+        'Confusing job categories or unclear differences between DPSS units (e.g., police, security, transportation)',
+        'Outdated or hard-to-find application portals',
+        'Lack of visibility into advancement pathways or day-to-day duties',
+      ],
     },
     {
-      src: taylor,
-      alt: 'Persona card for Taylor Robinson, 33, an external applicant with no UMich connection, listing goals, needs and frustrations.',
+      name: 'Taylor Robinson',
+      archetype: 'The External Applicant',
+      photo: taylor,
+      age: 33,
+      occupation: 'Security Supervisor at a private university in Illinois',
+      context:
+        'Taylor has eight years of experience in private campus safety but no prior connection to the University of Michigan or the state of Michigan.',
+      goals: [
+        'Quickly grasp DPSS’s scope, divisions, and culture',
+        'Evaluate whether relocation to Ann Arbor is worthwhile',
+        'Identify how to apply and what distinguishes DPSS from other university safety divisions',
+      ],
+      needs: [
+        'A clear overview of DPSS’s mission, size, and units',
+        'Transparent information about pay, relocation assistance, and career trajectory',
+        'A strong sense of DPSS’s workplace culture and community impact',
+      ],
+      frustrations: [
+        'Institutional jargon or acronyms (e.g., “DPSS,” “UM Safe,” “Division of Student Life”) that aren’t explained',
+        'Difficulty understanding how U-M differs from other campuses in structure and expectations',
+        'Limited information about Ann Arbor lifestyle and relocation logistics',
+      ],
     },
     {
-      src: melissa,
-      alt: 'Persona card for Melissa Edwards, 35, a DPSS administrative coordinator and internal user, listing goals, needs and frustrations.',
+      name: 'Melissa Edwards',
+      archetype: 'DPSS Administrative Coordinator',
+      photo: melissa,
+      age: 35,
+      occupation: 'Full-time DPSS Administrative Coordinator',
+      context:
+        'Melissa has had 5 years of experience working in university administration. She has training in crisis communication basics, records management, customer service and public information standards.',
+      goals: [
+        'Ensure that applicants can easily find information about job roles and submit applications',
+        'Maintain accurate, up-to-date website content about DPSS’s mission, services, and resources',
+        'Streamline administrative tasks such as communication updates, information requests, and documentation',
+      ],
+      needs: [
+        'A clean, easy-to-edit structure for updating pages and resources',
+        'Clear explanations of DPSS roles to help answer inquiries',
+        'A centralized hub for mission, values, services, FAQs, and contact info',
+        'A clear recruitment/role overview page for multiple job types (security, emergency management, administrative, IT, etc.)',
+      ],
+      frustrations: [
+        'The public may have misconceptions about DPSS’s role (e.g., thinking it is only policing/security)',
+        'Outdated or scattered information increases the number of general inquiries Melissa must respond to',
+        'Difficulty centralizing resources for both internal staff and campus community audiences',
+      ],
     },
     {
-      src: amira,
-      alt: 'Persona card for Dr. Amira Shah, 47, a university policymaker, listing goals, needs and frustrations.',
+      name: 'Dr. Amira Shah',
+      archetype: 'The Policymaker',
+      photo: amira,
+      age: 47,
+      occupation: 'U-M Associate Vice President for Student Life',
+      context:
+        'Amira oversees campus partnerships related to safety, emergency management, and student well-being.',
+      goals: [
+        'Evaluate DPSS’s performance, transparency, and community engagement metrics',
+        'Access annual safety reports, policies, and memorandums of understanding',
+        'Understand how DPSS aligns with university-wide DEI and sustainability goals',
+      ],
+      needs: [
+        'Centralized access to data dashboards and downloadable reports',
+        'Clear articulation of DPSS’s governance and accountability structure',
+        'Contact information for inter-departmental coordination',
+      ],
+      frustrations: [
+        'Overly public-facing pages that lack policy depth',
+        'Scattered PDFs or outdated reports',
+        'Hard-to-find contact points for administrative inquiries',
+      ],
     },
     {
-      src: jackie,
-      alt: 'Persona card for Jackie Smith, 24, a graduate student and community member, listing goals, needs and frustrations.',
+      name: 'Jackie Smith',
+      archetype: 'The Public',
+      photo: jackie,
+      age: 24,
+      occupation: 'Ann Arbor resident and U-M graduate student',
+      context: 'Jackie lives on campus and follows local safety updates online.',
+      goals: [
+        'Learn how DPSS supports students and residents through outreach and safety education',
+        'Access contact information and resources easily from mobile devices',
+      ],
+      needs: [
+        'Intuitive navigation that emphasizes community over enforcement',
+        'Quick access to contact information and emergency resources',
+        'Transparent communication about DPSS community programs and values',
+      ],
+      frustrations: [
+        'Limited understanding of DPSS’s non-law-enforcement services',
+        'Feels disconnected from campus safety initiatives despite being nearby',
+      ],
     },
   ]}
-  caption="Each persona included specific goals, needs, and frustrations that directly informed our design priorities."
 />
 
 ## Defining the approach {/* toc: Approach */}
 
-### Key insights & design principles
+From research, we established **three guiding principles**. Together, they address weaknesses in competitor sites while amplifying their strengths.
 
-From research, we established three guiding principles:
-
-<NumberedList>
-
-1. **Humanize Public Safety** Move beyond enforcement imagery to show community engagement and wellness support (including their therapy dog!)
-2. **Reduce Cognitive Load** Simplify navigation and minimize clicks, especially for job applications
-3. **Balance Professionalism & Approachability** Maintain institutional credibility while feeling welcoming
-
-</NumberedList>
-
-Together, these principles address weaknesses in competitor sites while amplifying their strengths.
+<Cards
+  cols={3}
+  numbered
+  label="Design principles"
+  items={[
+    {
+      title: 'Humanize Public Safety',
+      text: 'Move beyond enforcement imagery to show community engagement and wellness support (including their therapy dog!)',
+    },
+    {
+      title: 'Reduce Cognitive Load',
+      text: 'Simplify navigation and minimize clicks, especially for job applications',
+    },
+    {
+      title: 'Balance Professionalism & Approachability',
+      text: 'Maintain institutional credibility while feeling welcoming',
+    },
+  ]}
+/>
 
 ### Project scope & constraints
 
-- Design within existing DPSS website architecture (not standalone)
-- High-fidelity prototypes for 3 core pages: Landing, Job Listings, Detailed Job Description
-- Timeline: 14 weeks with December launch target
+<StatRow
+  label="Project scope"
+  stats={[
+    { value: '3', label: 'High-fidelity pages: Landing, Job Listings, Job Description' },
+    { value: '14 wk', label: 'Timeline, with a December launch target' },
+    { value: '1', label: 'Existing DPSS site to design within (not standalone)' },
+  ]}
+/>
 
 ## Design process {/* toc: Design Process */}
 
 ### Information architecture
 
+We restructured content to prioritize three pathways:
+
+<Cards
+  cols={3}
+  numbered
+  label="Content priorities"
+  items={[
+    { title: '“Why DPSS”', text: 'Values, benefits, community impact' },
+    { title: '“Join Our Team”', text: 'Available positions with filtering' },
+    { title: '“Life at Michigan”', text: 'Ann Arbor lifestyle, university benefits' },
+  ]}
+/>
+
 <Figure
   src={sitemap}
   alt="DPSS website sitemap. The homepage branches into About, Reports & Data, Services, Prevention & Training, and News & Alerts, each with its sub-pages; Hiring sits under About and leads to View Job Postings."
+  caption="DPSS sitemap (open it full-screen to read every page)."
 />
-
-We restructured content to prioritize:
-
-<NumberedList>
-
-1. **"Why DPSS"** Values, benefits, community impact
-2. **"Join Our Team"** Available positions with filtering
-3. **"Life at Michigan"** Ann Arbor lifestyle, university benefits
-
-</NumberedList>
 
 ### User flow
 
-After establishing our information architecture, we mapped the primary user journey for candidates. This user flow ensured our designs would guide visitors from initial interest to application submission with minimal friction:
+We mapped the primary candidate journey so our designs would guide visitors **from initial interest to application submission with minimal friction**.
 
-Key flow decisions:
+<ProcessSteps
+  label="Primary user flow"
+  steps={[
+    {
+      title: 'Why Join DPSS',
+      text: 'Highlights of university and division benefits, plus employee testimonials',
+    },
+    {
+      title: 'Explore Opportunities',
+      text: 'Embedded job feed with clickable role cards and a job summary',
+    },
+    {
+      title: 'Apply',
+      text: 'A step-by-step “How to Apply” graphic, portal and HR contact options, and an FAQ',
+    },
+  ]}
+/>
+
+<Expandable title="Key flow decisions">
 
 - **Progressive Engagement:** 'Why Join DPSS' → 'Explore Opportunities' → 'Apply'
 - **Reduced Cognitive Load:** Visual step-by-step application graphic
 - **Flexible Pathways:** Multiple application options (portal + HR contact)
 - **Ongoing Connection:** Newsletter signup to nurture longer-term candidates
+
+</Expandable>
 
 <Figure
   src={userFlow}
@@ -199,20 +333,24 @@ Key flow decisions:
 
 ### Visual design direction
 
+Public safety recruitment materials often feel **institutional and intimidating**. We started with a mood board to humanize DPSS while maintaining professional credibility.
+
 <Figure
   src={moodboard}
   alt="Mood board collage: officers walking and laughing together, a supportive handshake, an event security officer, a ‘Mental Health’ illustration on maize yellow, the Michigan M logo for Public Safety & Security on navy, and a sunlit tree on campus."
 />
 
-We started with a mood board to solve a core challenge: public safety recruitment materials often feel institutional and intimidating. Our visual direction needed to humanize DPSS while maintaining professional credibility.
+<Cards
+  cols={3}
+  label="What the mood board emphasized"
+  items={[
+    { title: 'Color', text: 'UMich blue with complementary earth tones' },
+    { title: 'Imagery', text: 'Authentic photos of DPSS staff in community settings' },
+    { title: 'Tone', text: 'Professional yet approachable, avoiding corporate coldness' },
+  ]}
+/>
 
-Our moodboard emphasized:
-
-- **Color:** UMich blue with complementary earth tones
-- **Imagery:** Authentic photos of DPSS staff in community settings
-- **Tone:** Professional yet approachable, avoiding corporate coldness
-
-The mood board helped us:
+<Expandable title="How the mood board helped us">
 
 - Visualize 'approachable professionalism' before designing a single screen
 - Align stakeholders on emotional tone early in the process
@@ -221,24 +359,43 @@ The mood board helped us:
 
 This foundation ensured our final designs didn't just function well; they felt right for the audience and organization.
 
+</Expandable>
+
 ### Design system
 
-To ensure a professional and on-brand experience, we established a custom design system using DPSS's official assets. This system provided a unified visual language and reusable building blocks to accelerate prototyping and maintain consistency across the entire microsite.
+We established a **custom design system using DPSS's official assets**: a unified visual language and reusable building blocks to accelerate prototyping and maintain consistency across the entire microsite.
 
 <Figure
   src={designSystem}
   alt="DPSS design system sheet: eight brand color swatches (maize, navy, blue, teal, grey, tan, near-black and white), primary, secondary and tertiary buttons, the DPSS logo, a type scale from Title to Note, and component samples including an Apply Now button and a Job Summary accordion."
 />
 
-Key Deliverables:
-
-- **Brand Foundation:** Formally defined the color palette, typography scale, and logo usage.
-- **Interactive Components:** Built reusable UI elements like hover-aware buttons and interactive accordions to enable clear, engaging user interactions.
-- **Style Guide:** Documented styles for headings, body text, and interactive states to streamline high-fidelity design.
+<Cards
+  cols={3}
+  label="Design system deliverables"
+  items={[
+    {
+      title: 'Brand Foundation',
+      text: 'Formally defined the color palette, typography scale, and logo usage.',
+    },
+    {
+      title: 'Interactive Components',
+      text: 'Built reusable UI elements like hover-aware buttons and interactive accordions.',
+    },
+    {
+      title: 'Style Guide',
+      text: 'Documented styles for headings, body text, and interactive states to streamline high-fidelity design.',
+    },
+  ]}
+/>
 
 ### Wireframing
 
-Our low-fidelity wireframes focused on solving specific pain points before adding visual polish. This phase was about information architecture, content hierarchy, and user flow, the invisible structure that makes or breaks the user experience.
+Our low-fidelity wireframes focused on solving specific pain points **before adding visual polish**: information architecture, content hierarchy, and user flow.
+
+#### Homepage
+
+The goal was to make DPSS’s community-centered brand feel **immediate and accessible, not overwhelming**, built on the principle of progressive disclosure.
 
 <Figure
   pair={[
@@ -255,30 +412,75 @@ Our low-fidelity wireframes focused on solving specific pain points before addin
   ]}
 />
 
-The goal for the home page was to make DPSS’s community-centered brand feel immediate and accessible, not overwhelming. To achieve this, the team focused on establishing a clear information hierarchy in the lo-fi wireframes, prioritizing scannability and user control. The layout was built on the principle of progressive disclosure.
-
-**Homepage wireframe decisions**
-
-- **High-Level Summary First:** Presents only the core value proposition and key information points upfront.
-- **Strategic Use of Dropdowns:** Tucks detailed content behind interactive elements, allowing users to "pull" information as they need.
-- **Visual & Textual Balance:** Uses spacing and clear groupings to prevent dense "walls of text."
-- **User-Controlled Depth:** Empowers readers to choose their own path, scan the overview, or dive into specifics.
+<Cards
+  cols={2}
+  label="Homepage wireframe decisions"
+  items={[
+    {
+      title: 'High-Level Summary First',
+      text: 'Presents only the core value proposition and key information points upfront.',
+    },
+    {
+      title: 'Strategic Use of Dropdowns',
+      text: 'Tucks detailed content behind interactive elements, allowing users to "pull" information as they need.',
+    },
+    {
+      title: 'Visual & Textual Balance',
+      text: 'Uses spacing and clear groupings to prevent dense "walls of text."',
+    },
+    {
+      title: 'User-Controlled Depth',
+      text: 'Empowers readers to choose their own path, scan the overview, or dive into specifics.',
+    },
+  ]}
+/>
 
 #### Job Listings + Job Details
 
 To improve the job application experience, our team identified several key issues on the existing pages:
 
-- **Repetitive and text-heavy content** across the job description and application.
-- **A broken external applicant flow** that incorrectly required UMich authentication.
-- **A disjointed user journey,** where the application opened confusingly in a third-party pop-up.
-
-<Figure
-  src={detailsBefore}
-  alt="The existing job description page: a dense two-column table of job fields (ID, location, salary, posting dates) above long paragraphs of job summary text, with a small Apply for Job button."
-  caption="The existing job description page: dense, repetitive and hard to scan."
+<Cards
+  cols={3}
+  label="Issues on the existing pages"
+  items={[
+    {
+      title: 'Repetitive, text-heavy content',
+      text: 'Across the job description and application.',
+    },
+    {
+      title: 'Broken external applicant flow',
+      text: 'It incorrectly required UMich authentication.',
+    },
+    {
+      title: 'Disjointed user journey',
+      text: 'The application opened confusingly in a third-party pop-up.',
+    },
+  ]}
 />
 
+<Compare id="job-pages" beforeLabel="Existing pages" afterLabel="Our redesign">
+<div slot="before">
+
 <Figure
+  pair={[
+    {
+      src: oldJobDescription,
+      alt: 'The existing job description page: a dense two-column table of job fields (ID, location, salary, posting dates) above long paragraphs of job summary text, with a small Apply for Job button.',
+      label: 'Existing job description',
+    },
+    {
+      src: oldJobDetail,
+      alt: 'The existing job detail page: a shaded Job Detail sidebar listing the opening ID, titles, location, schedule and posting dates, beside long job summary paragraphs under an Apply Now button.',
+      label: 'Existing job detail',
+    },
+  ]}
+/>
+
+</div>
+<div slot="after">
+
+<Figure
+  arrow
   pair={[
     {
       src: wireListings,
@@ -291,40 +493,41 @@ To improve the job application experience, our team identified several key issue
       label: 'Job details',
     },
   ]}
-  caption="Lo-fi wireframes for the redesigned job listings and job details."
 />
 
-To solve this, we redesigned the listings into clear, scannable “cards” that highlight the most important details. This creates a simpler, more welcoming experience for all applicants, reducing cognitive load, cutting down on repetitive text, and shortening the path to applying.
+</div>
+</Compare>
 
-<Figure
-  src={detailSidebar}
-  alt="A job detail page with a Job Detail sidebar listing the opening ID, titles, location, schedule and posting dates, beside the job summary text and an Apply Now button."
-/>
+To solve this, we redesigned the listings into **clear, scannable “cards”** that highlight the most important details, reducing cognitive load, cutting down on repetitive text, and **shortening the path to applying**.
 
 #### Key design decisions
 
-<NumberedList>
-
-1. **Clear Content Hierarchy** Organized information with a "benefits first" approach to help candidates understand DPSS's culture before seeing job listings.
-
-   <TagList
-     label="Design principles"
-     tags={['Progressive Disclosure', 'Information Architecture']}
-   />
-
-2. **Visual Job Discovery System** Transformed dense job listings into scannable cards with essential filters and save/share functionality.
-
-   <TagList label="Design principles" tags={['Cognitive Load Reduction', 'User Control']} />
-
-3. **Streamlined Application Flow** Redesigned job pages to highlight critical details with a persistent "Apply Now" button for straightforward application.
-
-   <TagList label="Design principles" tags={['Clear Pathways', 'Action-Oriented Design']} />
-
-</NumberedList>
+<Cards
+  cols={3}
+  numbered
+  label="Key design decisions"
+  items={[
+    {
+      title: 'Clear Content Hierarchy',
+      text: 'Organized information with a "benefits first" approach to help candidates understand DPSS\'s culture before seeing job listings.',
+      tags: ['Progressive Disclosure', 'Information Architecture'],
+    },
+    {
+      title: 'Visual Job Discovery System',
+      text: 'Transformed dense job listings into scannable cards with essential filters and save/share functionality.',
+      tags: ['Cognitive Load Reduction', 'User Control'],
+    },
+    {
+      title: 'Streamlined Application Flow',
+      text: 'Redesigned job pages to highlight critical details with a persistent "Apply Now" button for straightforward application.',
+      tags: ['Clear Pathways', 'Action-Oriented Design'],
+    },
+  ]}
+/>
 
 ## Final designs {/* toc: Final Designs */}
 
-A clickable prototype showcasing the complete careers experience, from discovering DPSS benefits to applying for positions. Designed for both desktop (1440px) and mobile (393px) screens.
+A clickable prototype showcasing the complete careers experience, from discovering DPSS benefits to applying for positions. Designed for both **desktop (1440px)** and **mobile (393px)**.
 
 <LinkButton
   href="https://www.figma.com/proto/55lESfzIBTm9Gx3MPXW8Xz/DPSS-Prototype?node-id=1-73&p=f&viewport=338%2C54%2C0.06&t=1kKgClx2HeYOOoXX-1&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=1%3A73&show-proto-sidebar=1&page-id=0%3A1"
@@ -333,7 +536,7 @@ A clickable prototype showcasing the complete careers experience, from discoveri
 
 ### Homepage
 
-Introduces DPSS careers with community-focused imagery, key benefits, and clear pathways to explore opportunities. Designed to communicate "A Great Place to Work" before showing job listings.
+Introduces DPSS careers with community-focused imagery, key benefits, and clear pathways, communicating **"A Great Place to Work" before showing job listings**.
 
 <Figure
   pair={[
@@ -357,7 +560,7 @@ Introduces DPSS careers with community-focused imagery, key benefits, and clear 
 
 ### Job listings
 
-Transforms traditional job tables into scannable cards with filtering, save/share functionality, and clear categorization. Helps candidates quickly find and manage relevant opportunities.
+Transforms traditional job tables into **scannable cards** with filtering, save/share functionality, and clear categorization.
 
 <Figure
   pair={[
@@ -381,7 +584,7 @@ Transforms traditional job tables into scannable cards with filtering, save/shar
 
 ### Job details
 
-Reorganizes job information into a clean two-panel layout with persistent "Apply Now" button. Highlights key details while maintaining comprehensive descriptions.
+A clean **two-panel layout with a persistent "Apply Now" button**, highlighting key details while keeping comprehensive descriptions.
 
 <Figure
   pair={[
@@ -405,31 +608,43 @@ Reorganizes job information into a clean two-panel layout with persistent "Apply
 
 ## Results & response {/* toc: Impact */}
 
-The redesign successfully transformed the recruitment experience into a more welcoming, community-focused platform. The DPSS team appreciated how the design balanced institutional credibility with approachable warmth, noting the deliverables were ready for their upcoming hiring campaign.
+The redesign transformed the recruitment experience into a **more welcoming, community-focused platform**. The DPSS team appreciated how the design balanced institutional credibility with approachable warmth, noting the deliverables were **ready for their upcoming hiring campaign**.
 
 ### My top 3 contributions
 
-<NumberedList>
-
-1. **Led stakeholder collaboration across departments.** Facilitated clear communication between design team and DPSS.
-2. **Managed parallel design workflow.** Led a team of 5, coordinating 4 UX designers across a 14-week timeline.
-3. **Prepared implementation-ready handoff.** Ensured designs met brand standards and technical requirements.
-
-</NumberedList>
+<Cards
+  cols={3}
+  numbered
+  label="My top 3 contributions"
+  items={[
+    {
+      title: 'Led stakeholder collaboration across departments',
+      text: 'Facilitated clear communication between design team and DPSS.',
+    },
+    {
+      title: 'Managed parallel design workflow',
+      text: 'Led a team of 5, coordinating 4 UX designers across a 14-week timeline.',
+    },
+    {
+      title: 'Prepared implementation-ready handoff',
+      text: 'Ensured designs met brand standards and technical requirements.',
+    },
+  ]}
+/>
 
 ## Project takeaways {/* toc: Reflection */}
 
 <TwoColumn leftTitle="What made this unique" rightTitle="What I learned as project lead">
 <div slot="left">
 
-This project transformed a traditional university recruitment site into a community-focused careers destination. We redesigned within strict institutional constraints while introducing modern UX patterns, creating an experience that better reflects DPSS's values to both internal teams and potential candidates.
+This project transformed a traditional university recruitment site into a **community-focused careers destination**. We redesigned within strict institutional constraints while introducing modern UX patterns, creating an experience that better reflects DPSS's values to both internal teams and potential candidates.
 
 </div>
 <div slot="right">
 
-- Remote team coordination thrives on clear documentation.
-- Stakeholder management means finding the balance between user needs and institutional priorities.
-- Investing in a design system early pays off in consistency and speed.
+- Remote team coordination thrives on **clear documentation**.
+- Stakeholder management means finding the **balance between user needs and institutional priorities**.
+- Investing in a **design system early** pays off in consistency and speed.
 
 </div>
 </TwoColumn>

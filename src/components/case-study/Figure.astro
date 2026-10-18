@@ -2,10 +2,12 @@
 // An image with an optional caption, or a side-by-side group (e.g. desktop + mobile).
 //   <Figure src={img} alt="…" caption="…" />
 //   <Figure pair={[{ src: desk, alt: '…', label: 'Desktop' }, { src: mob, alt: '…', label: 'Mobile' }]} caption="…" />
-//   <Figure pair={[…5 images]} columns={3} />   ← a grid instead of one row (e.g. personas)
+//   <Figure pair={[…]} columns={2} />   ← a grid instead of one row
+//   <Figure pair={[a, b]} arrow />      ← "a leads to b" (e.g. listings → details)
 // Images in a row share the same height on wide screens and stack on phones.
+// Every image gets a ⤢ magnifier that opens it full-screen (see Lightbox.astro).
 import type { ImageMetadata } from 'astro';
-import { Picture } from 'astro:assets';
+import { Picture, getImage } from 'astro:assets';
 
 interface Item {
   src: ImageMetadata;
@@ -24,52 +26,108 @@ interface Props {
   columns?: 2 | 3;
   /** Keep a single tall or square image (e.g. a chart) from filling the whole column. */
   narrow?: boolean;
+  /** Show an arrow between two images to show a flow from the first to the second. */
+  arrow?: boolean;
 }
 
-const { src, alt, caption, pair, framed = false, columns, narrow = false } = Astro.props;
+const {
+  src,
+  alt,
+  caption,
+  pair,
+  framed = false,
+  columns,
+  narrow = false,
+  arrow = false,
+} = Astro.props;
 const items: Item[] = pair ?? (src && alt !== undefined ? [{ src, alt }] : []);
 if (!items.length) throw new Error('<Figure> needs either `src` + `alt` or `pair`.');
 const many = items.length > 1;
 const grid = many && columns;
 const gridCols = { 2: 'sm:grid-cols-2', 3: 'sm:grid-cols-2 lg:grid-cols-3' };
+
+// Large version for the magnifier: full resolution, capped so huge exports stay light.
+const full = await Promise.all(
+  items.map((item) =>
+    getImage({ src: item.src, width: Math.min(item.src.width, 2800), format: 'webp' }),
+  ),
+);
 ---
 
-<figure class:list={['my-10', narrow ? 'mx-auto max-w-xl' : 'cs-wide']}>
+<figure class:list={['cs-figure my-10', narrow ? 'mx-auto max-w-xl' : 'cs-wide']}>
   <div
     class:list={[
       grid ? ['grid gap-4', columns && gridCols[columns]] : 'flex flex-col gap-4',
       many && !grid && 'sm:flex-row sm:items-end',
+      arrow && 'sm:items-center',
     ]}
   >
-    {items.map((item) => (
-      <div
-        class:list={[
-          'min-w-0',
-          // Tall phone screens shouldn't fill the whole width once a group stacks on phones.
-          many && !grid && item.src.height > item.src.width && 'max-sm:mx-auto max-sm:w-3/5',
-        ]}
-        style={
-          many && !grid ? `flex: ${(item.src.width / item.src.height).toFixed(3)} 1 0%` : undefined
-        }
-      >
-        <Picture
-          src={item.src}
-          alt={item.alt}
-          formats={['avif']}
-          fallbackFormat="webp"
-          widths={[400, 720, 1080, 1600]}
-          sizes={
-            many
-              ? '(min-width: 1152px) 560px, (min-width: 640px) 50vw, 100vw'
-              : '(min-width: 1152px) 880px, (min-width: 1024px) 70vw, 100vw'
-          }
+    {items.map((item, i) => (
+      <>
+        {arrow && i > 0 && (
+          <span
+            aria-hidden="true"
+            class="shrink-0 self-center font-display text-h2 text-sage max-sm:rotate-90"
+          >
+            →
+          </span>
+        )}
+        <div
           class:list={[
-            'h-auto w-full rounded-card border border-line/70',
-            framed && 'bg-surface p-4 sm:p-6',
+            'min-w-0',
+            // Tall phone screens shouldn't fill the whole width once a group stacks on phones.
+            many && !grid && item.src.height > item.src.width && 'max-sm:mx-auto max-sm:w-3/5',
           ]}
-        />
-        {item.label && <p class="mt-2 text-center text-sm text-muted">{item.label}</p>}
-      </div>
+          style={
+            many && !grid
+              ? `flex: ${(item.src.width / item.src.height).toFixed(3)} 1 0%`
+              : undefined
+          }
+        >
+          <div class="cs-media group relative">
+            <Picture
+              src={item.src}
+              alt={item.alt}
+              formats={['avif']}
+              fallbackFormat="webp"
+              widths={[400, 720, 1080, 1600]}
+              sizes={
+                many
+                  ? '(min-width: 1152px) 560px, (min-width: 640px) 50vw, 100vw'
+                  : '(min-width: 1152px) 880px, (min-width: 1024px) 70vw, 100vw'
+              }
+              data-zoom-src={full[i].src}
+              class:list={[
+                'h-auto w-full rounded-card border border-line/70 transition-[box-shadow] duration-300',
+                framed && 'bg-surface p-4 sm:p-6',
+              ]}
+            />
+            <a
+              href={full[i].src}
+              data-zoom={full[i].src}
+              data-zoom-alt={item.alt}
+              data-zoom-caption={item.label ?? caption ?? ''}
+              class="cs-zoom-btn absolute right-3 bottom-3 inline-flex size-11 items-center justify-center rounded-full bg-bg/95 text-sage-dark shadow-card transition-[transform,background-color] duration-200 hover:scale-110 hover:bg-sage hover:text-bg focus-visible:scale-110 motion-reduce:hover:scale-100"
+            >
+              <svg
+                aria-hidden="true"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.2"
+                stroke-linecap="round"
+              >
+                <circle cx="10.5" cy="10.5" r="6.5" />
+                <path d="M15.5 15.5 21 21M10.5 7.5v6M7.5 10.5h6" />
+              </svg>
+              <span class="sr-only">Enlarge image{item.label ? `: ${item.label}` : ''}</span>
+            </a>
+          </div>
+          {item.label && <p class="mt-2 text-center text-sm text-muted">{item.label}</p>}
+        </div>
+      </>
     ))}
   </div>
   {caption && <figcaption class="mt-3 max-w-text text-sm text-muted">{caption}</figcaption>}

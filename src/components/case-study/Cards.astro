@@ -1,0 +1,44 @@
+---
+// A grid of short cards: turns a list of "Label: explanation" points into something scannable.
+//   <Cards cols={3} numbered items={[{ title: 'Humanize Public Safety', text: '…' }]} />
+interface Props {
+  items: { title: string; text?: string; tags?: string[] }[];
+  cols?: 2 | 3 | 4;
+  /** Show 01, 02… on each card. */
+  numbered?: boolean;
+  label?: string;
+}
+
+const { items, cols = 2, numbered = false, label } = Astro.props;
+const colClass = {
+  2: 'sm:grid-cols-2',
+  3: 'sm:grid-cols-2 lg:grid-cols-3',
+  4: 'sm:grid-cols-2 lg:grid-cols-4',
+}[cols];
+---
+
+<ul role="list" aria-label={label} class:list={['cs-wide my-8 grid gap-4', colClass]}>
+  {items.map((item, i) => (
+    <li
+      class="cs-card flex flex-col gap-2 rounded-card border border-line/70 bg-bg p-5 shadow-card transition-[transform,box-shadow] duration-300 ease-out hover:-translate-y-1 hover:shadow-card-hover motion-reduce:hover:translate-y-0"
+      style={`--i: ${i}`}
+    >
+      {numbered && (
+        <span class="font-display text-h3 leading-none font-semibold text-sage">
+          {String(i + 1).padStart(2, '0')}
+        </span>
+      )}
+      <span class="font-display leading-snug font-semibold text-sage-dark">{item.title}</span>
+      {item.text && <span class="text-sm leading-relaxed text-ink">{item.text}</span>}
+      {item.tags && (
+        <ul role="list" aria-label="Design principles" class="mt-auto flex flex-wrap gap-1.5 pt-2">
+          {item.tags.map((t) => (
+            <li class="rounded-pill bg-sage-50 px-2.5 py-1 font-display text-xs font-medium text-sage-dark">
+              {t}
+            </li>
+          ))}
+        </ul>
+      )}
+    </li>
+  ))}
+</ul>

@@ -133,6 +133,22 @@ before the first `##` (e.g. a confidentiality `<Callout>`) sits under Overview.
 | `<StatusList items={[{label, status}]} />`                                                | "Search — Broken" style status rows                                |
 | `<LinkButton href="…" label="View prototype" />`                                          | clear CTA (external → new tab)                                     |
 
+**Interactive blocks (use to cut text, not to hide the story):**
+
+| Component                                                                                                  | Use                                                                     |
+| ---------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+| `<Cards cols={2\|3\|4} numbered? items={[{title, text, tags?}]} />`                                        | turn "Label: explanation" lists into scannable cards                    |
+| `<Expandable title="…">markdown</Expandable>`                                                              | secondary detail ("read more"); native `<details>`                      |
+| `<Personas personas={[{name, archetype, photo, age, occupation, context, goals, needs, frustrations}]} />` | persona tabs (Lauren Beck–style); photos are circle crops `…-photo.png` |
+| `<Compare id beforeLabel afterLabel>` + `<div slot="before">` / `<div slot="after">`                       | before/after toggle                                                     |
+| `<Figure … arrow />`                                                                                       | arrow between two images (flow A → B)                                   |
+
+Every `<Figure>` image gets a ⤢ magnifier that opens `Lightbox.astro` (fit / actual size).
+Stat numbers count up on scroll; cards stagger in. All of it degrades to plain visible content
+without JS and respects reduced motion. Tabs logic: `src/lib/tabs.ts`.
+Owner's direction (Oct 2026): fewer words per screen, bold key phrases, visuals over paragraphs;
+references (Manya Singh, Sugandha, Lauren Beck) are in `/reference` (gitignored).
+
 MDX gotchas: put markdown inside components on its own lines with blank lines around it, and keep
 closing tags like `</div>` unindented after a list. Give `<LinkButton>` its text via `label`.
 
