@@ -1,0 +1,36 @@
+---
+// Highlighted box for problem statements, "How might we…" questions and notes.
+// <Callout variant="problem">…</Callout>   (variant: note | problem | hmw)
+interface Props {
+  variant?: 'note' | 'problem' | 'hmw';
+  /** Overrides the default small label above the text. */
+  label?: string;
+}
+
+const { variant = 'note', label } = Astro.props;
+const labels = { note: 'Note', problem: 'Problem statement', hmw: 'How might we…' };
+---
+
+<div
+  class:list={[
+    'cs-callout my-8 rounded-card border-l-4 border-sage bg-sage-50 px-6 py-5',
+    variant === 'hmw' && 'py-7',
+  ]}
+>
+  <p class="eyebrow">
+    <span aria-hidden="true" class="mr-1.5 text-sage">
+      ✦
+    </span>
+    {label ?? labels[variant]}
+  </p>
+  <div
+    class:list={[
+      'mt-2',
+      variant === 'hmw' && 'font-display text-lg font-medium text-sage-dark md:text-h3',
+      variant === 'problem' && 'text-lg text-ink',
+      variant === 'note' && 'text-ink',
+    ]}
+  >
+    <slot />
+  </div>
+</div>

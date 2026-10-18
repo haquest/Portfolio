@@ -1,0 +1,28 @@
+---
+// Role · Timeline · Team · Tools/Methods, shown at the top of every case study.
+interface Props {
+  role?: string;
+  timeline?: string;
+  team?: string;
+  tools?: string[];
+  methods?: string[];
+}
+
+const { role, timeline, team, tools, methods } = Astro.props;
+const rows = [
+  { term: 'Role', value: role },
+  { term: 'Timeline', value: timeline },
+  { term: 'Team', value: team },
+  { term: 'Tools', value: tools?.join(' · ') },
+  { term: 'Methods', value: methods?.join(' · ') },
+].filter((r) => r.value);
+---
+
+<dl class="grid grid-cols-2 gap-x-6 gap-y-6 md:grid-cols-[repeat(auto-fit,minmax(9rem,1fr))]">
+  {rows.map((r) => (
+    <div class="flex flex-col gap-1.5">
+      <dt class="eyebrow">{r.term}</dt>
+      <dd class="text-sm leading-relaxed text-ink">{r.value}</dd>
+    </div>
+  ))}
+</dl>

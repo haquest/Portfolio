@@ -1,0 +1,81 @@
+---
+// Steps in order: horizontal on wide screens, vertical on phones.
+//   <ProcessSteps steps={[{ title: 'Discovery', text: '…' }, …]} />
+// `emphasis: true` highlights a step (e.g. the break point of a loop);
+// `loop` adds a "cycle repeats" marker after the last step.
+interface Step {
+  title: string;
+  text?: string;
+  emphasis?: boolean;
+  /** Small label on an emphasized step. Defaults to "Break point". */
+  badge?: string;
+}
+
+interface Props {
+  steps: Step[];
+  loop?: boolean;
+  /** Accessible name for the list, e.g. "Research phases". */
+  label?: string;
+}
+
+const { steps, loop = false, label } = Astro.props;
+// Many steps need more room before they fit side by side.
+const wide = steps.length > 4;
+---
+
+<div class="cs-wide my-10">
+  <ol
+    role="list"
+    aria-label={label}
+    class:list={[
+      'cs-steps grid gap-10',
+      wide
+        ? 'sm:grid-cols-2 sm:gap-x-10 lg:grid-cols-3'
+        : 'md:grid-flow-col md:auto-cols-fr md:gap-6',
+    ]}
+    data-wide={wide ? '' : undefined}
+  >
+    {steps.map((step, i) => (
+      <li
+        class:list={[
+          'relative flex flex-col gap-1.5 rounded-card border p-5',
+          step.emphasis ? 'border-sage-dark bg-sage-dark text-bg' : 'border-line bg-bg',
+        ]}
+      >
+        <span
+          class:list={[
+            'font-display text-sm font-semibold',
+            step.emphasis ? 'text-bg' : 'text-sage',
+          ]}
+        >
+          {String(i + 1).padStart(2, '0')}
+        </span>
+        {step.emphasis && (
+          <span class="w-fit rounded-pill bg-bg px-2.5 py-0.5 font-display text-xs font-medium whitespace-nowrap text-sage-dark">
+            <span aria-hidden="true">★ </span>
+            {step.badge ?? 'Break point'}
+          </span>
+        )}
+        <span class="font-display leading-snug font-semibold">{step.title}</span>
+        {step.text && (
+          <span class:list={['text-sm', step.emphasis ? 'text-bg/90' : 'text-muted']}>
+            {step.text}
+          </span>
+        )}
+        {i < steps.length - 1 && (
+          <span class="cs-step-arrow" aria-hidden="true">
+            →
+          </span>
+        )}
+      </li>
+    ))}
+  </ol>
+  {loop && (
+    <p class="mt-5 flex items-center gap-2 font-display text-sm font-medium text-sage-dark">
+      <span aria-hidden="true" class="text-lg">
+        ↩
+      </span>
+      The cycle repeats: step {steps.length} feeds back into step 1.
+    </p>
+  )}
+</div>

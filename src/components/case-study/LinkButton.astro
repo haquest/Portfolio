@@ -1,0 +1,27 @@
+---
+// A clear call-to-action link. External links open in a new tab.
+//   <LinkButton href="https://…" label="View presentation" />
+import Button from '../Button.astro';
+
+interface Props {
+  href: string;
+  label: string;
+  variant?: 'primary' | 'secondary';
+}
+
+const { href, label, variant = 'primary' } = Astro.props;
+const external = /^https?:\/\//.test(href);
+---
+
+<p class="my-8">
+  <Button
+    href={href}
+    variant={variant}
+    target={external ? '_blank' : undefined}
+    rel={external ? 'noopener noreferrer' : undefined}
+  >
+    {label}
+    <span aria-hidden="true">{external ? '↗' : '→'}</span>
+    {external && <span class="sr-only">(opens in new tab)</span>}
+  </Button>
+</p>

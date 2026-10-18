@@ -35,12 +35,16 @@ src/
   data/site.ts           # name, SEO defaults, resume/LinkedIn/email links, availability, nav
   styles/global.css      # design tokens (@theme), base styles, focus ring, reduced motion
   layouts/               # BaseLayout (html shell + SEO + nav + footer), CaseStudyLayout
+  components/case-study/ # case-study building blocks (see "Creating a case study")
   components/            # PascalCase .astro components
   components/mdx/        # components usable inside case-study MDX
   content/projects/      # one .md/.mdx file per project (kebab-case slug = URL)
   content.config.ts      # Zod schema for projects
   lib/projects.ts        # getProjects() (sorted by `order`) and projectUrl()
-  assets/                # images processed by astro:assets (illustrations/, projects/<slug>/, logos/)
+  lib/remark-case-study.mjs  # numbers case-study sections + builds the TOC from `##` headings
+  lib/mdx-components.ts  # components available in MDX without imports
+  assets/                # images processed by astro:assets: illustrations/, projects/<slug>/ (card
+                         # covers), case-studies/<slug>/ (case-study images), logos/
   pages/                 # routes: index, about, work/[slug], 404
 public/                  # files served as-is (favicon, og image, robots.txt, cursors/*.svg)
 ```
@@ -57,6 +61,91 @@ public/                  # files served as-is (favicon, og image, robots.txt, cu
 - Case-study body order: Problem → My Role → Process → Research Insights → Design Decisions →
   Outcome.
 - Site-wide text and links go in `src/data/site.ts`, not inline in components.
+
+## Creating a case study
+
+Every case study uses the same template (`src/pages/work/[slug].astro` →
+`src/layouts/CaseStudyLayout.astro`). Never build a one-off page layout.
+
+**Page order (automatic):** ← Back to work · eyebrow · title · subtitle · hero · meta grid (Role,
+Timeline, Team, Tools/Methods) · TL;DR · stat row · numbered body sections · Next project · footer.
+Desktop has a sticky TOC on the left (200px); below `lg` it becomes a sticky "On this page" bar
+with a dropdown. Reading-progress line and scroll-spy are in the layout's script.
+
+### 1. Files
+
+- `src/content/projects/<slug>.mdx`: the case study. Slug = URL `/work/<slug>`, kebab-case.
+- `src/assets/projects/<slug>/thumbnail.png`: card cover (device-mockup style, 1920×1200).
+- `src/assets/case-studies/<slug>/`: all case-study images. Name them descriptively,
+  `<short-project>-<what>-<variant>.png`, e.g. `microsite-job-listings-desktop.png`. Never put
+  case-study images in `public/` (they wouldn't be optimized).
+
+### 2. Front-matter
+
+```yaml
+title: …
+description: One line for the card + meta description
+tags: [UX Research, …]           # card pills
+thumbnail: ../../assets/projects/<slug>/thumbnail.png
+thumbnailAlt: …                  # required
+status: published                # or coming-soon (card only, no page)
+order: 3                         # home-page position; also drives "Next project"
+eyebrow: UX Research Case Study · 2026
+subtitle: One sentence under the title           # required when published
+hero: ../../assets/case-studies/<slug>/<slug>-hero.png   # optional, falls back to thumbnail
+heroAlt: …                       # required if hero is set
+heroCaption: …                   # optional
+tldr: 2–3 sentences, what I did + outcome        # required when published
+stats:                           # optional; 4, 5 or 6 items lay out evenly
+  - { value: '553', label: 'Active users' }
+role: … ; timeline: … ; team: …  # role + timeline required when published
+tools: [Figma] ; methods: [Interviews]           # either or both
+```
+
+### 3. Sections and the TOC (never maintained by hand)
+
+Each `##` starts a numbered section. Add a 1–2 word TOC label as an MDX comment:
+
+```mdx
+## Why did a tool used by 553 people stop working? {/* toc: Challenge */}
+```
+
+`src/lib/remark-case-study.mjs` wraps it in `<section id="challenge">`, adds the "01 ✦ CHALLENGE"
+eyebrow and the ✦ ★ ✦ divider, and feeds the TOC. Without a label the heading text is used. Use
+`###` for sub-sections (they don't appear in the TOC). "Overview" is added by the layout. Content
+before the first `##` (e.g. a confidentiality `<Callout>`) sits under Overview.
+
+### 4. Components (no imports needed)
+
+| Component                                                                                 | Use                                         |
+| ----------------------------------------------------------------------------------------- | ------------------------------------------- |
+| `<StatRow stats={[{value, label}]} label="…" />`                                          | headline numbers                            |
+| `<PullQuote by="Who">quote</PullQuote>`                                                   | user/stakeholder quote                      |
+| `<Callout variant="note\|problem\|hmw" label?>…</Callout>`                                | problem statement, "How might we…", notes   |
+| `<Figure src={img} alt="…" caption?="…" framed? />`                                       | one image (import it at the top of the MDX) |
+| `<Figure pair={[{src, alt, label:'Desktop'}, {src, alt, label:'Mobile'}]} caption="…" />` | side-by-side, equal heights                 |
+| `<NumberedList>` + markdown `1. **Title** text` + `</NumberedList>`                       | findings, recommendations, decisions        |
+| `<TagList tags={[…]} label="…" />`                                                        | pills matching the home cards               |
+| `<ProcessSteps steps={[{title, text, emphasis?}]} loop? />`                               | phases / loops (emphasis = "Break point")   |
+| `<TwoColumn leftTitle rightTitle>` + `<div slot="left">` / `<div slot="right">`           | "Worked well / Would change"                |
+| `<Finding n="F1" kicker="Finding ONE" title="…">…</Finding>`                              | research findings                           |
+| `<StatusList items={[{label, status}]} />`                                                | "Search — Broken" style status rows         |
+| `<LinkButton href="…" label="View prototype" />`                                          | clear CTA (external → new tab)              |
+
+MDX gotchas: put markdown inside components on its own lines with blank lines around it, and keep
+closing tags like `</div>` unindented after a list. Give `<LinkButton>` its text via `label`.
+
+### 5. Checklist before publishing
+
+- Every image has real alt text (decorative → `alt=""`); captions say what to notice.
+- TL;DR answers "what did she do and what changed" in ≤3 sentences.
+- Keep the owner's wording; **flag** inconsistencies (numbers, team size, dates) instead of
+  silently fixing them, and show copy edits as before/after for approval.
+- `npm run check && npm run format:check && npm run build`, then screenshot at 1440px and 390px.
+
+### 6. Figma workflow
+
+_Placeholder: Tanya will provide her Figma export steps (frames, sizes, naming). Add them here._
 
 ## Design tokens (use these names, never raw hex/px in components)
 

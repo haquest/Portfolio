@@ -1,0 +1,25 @@
+---
+// Label + status rows, e.g. "Search — Broken". Status is always written out, never colour alone.
+//   <StatusList items={[{ label: 'Search', status: 'Broken' }]} />
+interface Props {
+  items: { label: string; status: string }[];
+  label?: string;
+}
+
+const { items, label } = Astro.props;
+---
+
+<ul
+  role="list"
+  aria-label={label}
+  class="my-6 max-w-text divide-y divide-line border-y border-line"
+>
+  {items.map((item) => (
+    <li class="flex items-center justify-between gap-4 py-3">
+      <span class="font-display text-sm font-medium">{item.label}</span>
+      <span class="rounded-pill border border-ink/20 px-3 py-1 font-display text-xs font-medium text-ink">
+        {item.status}
+      </span>
+    </li>
+  ))}
+</ul>

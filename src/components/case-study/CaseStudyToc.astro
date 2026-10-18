@@ -1,0 +1,71 @@
+---
+// Table of contents built from the case study's sections (see src/lib/remark-case-study.mjs).
+// Desktop: sticky list on the left. Tablet/phone: slim sticky "On this page" bar with a dropdown.
+// The highlight follows scrolling via the script in CaseStudyLayout.
+interface Props {
+  items: { id: string; label: string }[];
+  variant: 'desktop' | 'mobile';
+}
+
+const { items, variant } = Astro.props;
+---
+
+{variant === 'desktop' ? (
+  <nav aria-label="On this page" class="sticky top-24 pt-1">
+    <p class="eyebrow">
+      <span aria-hidden="true" class="mr-1.5 text-sage">
+        ✦
+      </span>
+      On this page
+    </p>
+    <ol role="list" class="mt-4 border-l border-line">
+      {items.map((item) => (
+        <li>
+          <a
+            href={`#${item.id}`}
+            data-toc-link={item.id}
+            class="cs-toc-link -ml-px flex min-h-9 items-center border-l-2 border-transparent py-1 pl-4 font-display text-sm text-muted transition-colors hover:text-sage-dark aria-[current=location]:border-sage aria-[current=location]:font-medium aria-[current=location]:text-sage-dark"
+          >
+            {item.label}
+          </a>
+        </li>
+      ))}
+    </ol>
+  </nav>
+) : (
+  <nav
+    aria-label="On this page"
+    class="sticky top-16 z-30 -mx-5 border-b border-line bg-bg md:-mx-8 lg:hidden"
+  >
+    <details class="cs-toc-mobile group">
+      <summary class="flex min-h-12 cursor-pointer list-none items-center justify-between gap-3 px-5 font-display text-sm md:px-8">
+        <span class="truncate">
+          <span class="text-muted">On this page · </span>
+          <span class="font-medium text-sage-dark" data-toc-current>
+            {items[0]?.label}
+          </span>
+        </span>
+        <span
+          aria-hidden="true"
+          class="text-sage transition-transform duration-200 group-open:rotate-180"
+        >
+          ▾
+        </span>
+      </summary>
+      <ol role="list" class="max-h-[60svh] overflow-y-auto border-t border-line px-5 pb-3 md:px-8">
+        {items.map((item) => (
+          <li>
+            <a
+              href={`#${item.id}`}
+              data-toc-link={item.id}
+              class="flex min-h-11 items-center gap-2 font-display text-sm text-ink aria-[current=location]:font-medium aria-[current=location]:text-sage-dark"
+            >
+              <span aria-hidden="true" class="cs-toc-dot size-1.5 rounded-full" />
+              {item.label}
+            </a>
+          </li>
+        ))}
+      </ol>
+    </details>
+  </nav>
+)}

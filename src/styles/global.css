@@ -49,6 +49,9 @@
   --text-xs: 0.8125rem; /* 13px — tags, eyebrow labels */
   --text-xs--line-height: 1.4;
 
+  /* Readable line length for case-study text (~70 characters) */
+  --container-text: 45rem; /* 720px → `max-w-text` */
+
   /* Shape & depth */
   --radius-card: 1.25rem; /* 20px */
   --radius-pill: 999px;
@@ -224,5 +227,163 @@
 @keyframes star-spin {
   to {
     transform: rotate(1turn) scale(1);
+  }
+}
+
+/* ------------------------------------------------------------------
+   Case studies (CaseStudyLayout + src/components/case-study/*)
+   Prose rules apply to markdown written directly in a section or inside
+   a component's slot; component classes always win over these.
+   ------------------------------------------------------------------ */
+@layer components {
+  .cs-section {
+    padding-block: 2.5rem;
+    /* Lands the section eyebrow just under the nav + phone "On this page" bar
+       (the ✦ ★ ✦ divider above it scrolls out of view). */
+    scroll-margin-top: 3.5rem;
+  }
+  .cs-overview {
+    padding-top: 0;
+    padding-bottom: 0.5rem;
+    scroll-margin-top: 8rem;
+  }
+  /* ✦ ★ ✦ divider between sections */
+  .cs-section:not(.cs-overview)::before {
+    content: '✦   ★   ✦' / '';
+    display: block;
+    margin-bottom: 2.5rem;
+    text-align: center;
+    white-space: pre;
+    color: var(--color-sage);
+    letter-spacing: 0.2em;
+  }
+  @media (min-width: 1024px) {
+    .cs-section {
+      scroll-margin-top: 0.75rem;
+    }
+    .cs-overview {
+      scroll-margin-top: 6rem;
+    }
+  }
+
+  .cs-eyebrow {
+    @apply eyebrow;
+  }
+  .cs-section > h2 {
+    @apply mt-3 max-w-text text-h2 text-ink;
+  }
+  .cs-section > h3 {
+    @apply mt-10 max-w-text text-h3 text-ink;
+  }
+
+  :is(.cs-section, .cs-finding, .cs-two > div > div, .cs-callout) > :is(p, ul, ol):not([class]) {
+    @apply mt-4 max-w-text;
+  }
+  :is(.cs-section, .cs-finding, .cs-two > div > div) > ul:not([class]) {
+    @apply list-disc pl-5;
+  }
+  :is(.cs-section, .cs-finding, .cs-two > div > div) > ol:not([class]) {
+    @apply list-decimal pl-5;
+  }
+  :is(.cs-section, .cs-finding, .cs-two > div > div) > :is(ul, ol):not([class]) > li {
+    @apply mt-2 pl-1 marker:text-sage;
+  }
+  .cs-callout > div > p:first-child {
+    margin-top: 0;
+  }
+  /* <PullQuote>: MDX wraps the quote in <p>; keep it a single flowing quote */
+  .cs-quote blockquote > p {
+    display: inline;
+  }
+  .cs-article strong {
+    @apply font-bold text-ink;
+  }
+  .cs-article :is(p, li) > a:not([class]) {
+    @apply text-sage-dark underline decoration-sage/50 underline-offset-2 hover:decoration-sage;
+  }
+
+  /* <NumberedList>: big numerals beside each item; a leading **bold** becomes its title */
+  .cs-numbered > ol {
+    @apply grid max-w-text list-none gap-6 p-0;
+    counter-reset: cs-item;
+  }
+  .cs-numbered > ol > li {
+    position: relative;
+    min-height: 2.5rem;
+    padding-left: 3.75rem;
+    counter-increment: cs-item;
+  }
+  .cs-numbered > ol > li::before {
+    content: counter(cs-item, decimal-leading-zero);
+    position: absolute;
+    top: -0.1em;
+    left: 0;
+    @apply font-display text-h3 font-semibold text-sage;
+  }
+  .cs-numbered > ol > li > strong:first-child,
+  .cs-numbered > ol > li > p:first-child > strong:first-child {
+    @apply mb-1 block font-display font-semibold;
+  }
+  .cs-numbered > ol > li > p {
+    margin: 0;
+  }
+
+  /* <ProcessSteps>: arrows point down on phones, right once steps sit side by side */
+  .cs-step-arrow {
+    position: absolute;
+    bottom: -2.1rem;
+    left: 50%;
+    translate: -50% 0;
+    rotate: 90deg;
+    @apply font-display text-lg text-sage;
+  }
+  @media (min-width: 768px) {
+    .cs-steps:not([data-wide]) .cs-step-arrow {
+      top: 50%;
+      right: -1.2rem;
+      bottom: auto;
+      left: auto;
+      translate: 0 -50%;
+      rotate: none;
+    }
+  }
+  @media (min-width: 640px) {
+    .cs-steps[data-wide] .cs-step-arrow {
+      top: 50%;
+      right: -1.9rem;
+      bottom: auto;
+      left: auto;
+      translate: 0 -50%;
+      rotate: none;
+    }
+    .cs-steps[data-wide] > li:nth-child(2n) .cs-step-arrow {
+      display: none;
+    }
+  }
+  @media (min-width: 1024px) {
+    .cs-steps[data-wide] > li:nth-child(2n) .cs-step-arrow {
+      display: inline;
+    }
+    .cs-steps[data-wide] > li:nth-child(3n) .cs-step-arrow {
+      display: none;
+    }
+  }
+
+  /* Table of contents */
+  .cs-toc-mobile summary::-webkit-details-marker {
+    display: none;
+  }
+  [aria-current='location'] .cs-toc-dot {
+    background: var(--color-sage);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /* Case-study sections fade up once, a little quicker than the home page cards */
+  .js .cs-section[data-reveal] {
+    transition-duration: 300ms, 300ms;
+  }
+  .js .cs-section[data-reveal]:not(.is-visible) {
+    translate: 0 12px;
   }
 }

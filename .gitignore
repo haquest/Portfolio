@@ -15,3 +15,6 @@ npm-debug.log*
 .DS_Store
 .vscode/*
 !.vscode/extensions.json
+
+# design reference screenshots (local only)
+/reference/

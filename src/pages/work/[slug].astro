@@ -1,0 +1,34 @@
+---
+// One page per published project, at /work/<file-name>.
+import { render } from 'astro:content';
+import { getImage } from 'astro:assets';
+import CaseStudyLayout from '../../layouts/CaseStudyLayout.astro';
+import { getProjects, type Project } from '../../lib/projects';
+import { mdxComponents } from '../../lib/mdx-components';
+
+export async function getStaticPaths() {
+  const published = (await getProjects()).filter((p) => p.data.status === 'published');
+  return published.map((project, i) => ({
+    params: { slug: project.id },
+    // "Next project" follows the home page order and wraps around to the first.
+    props: {
+      project,
+      next: published.length > 1 ? published[(i + 1) % published.length] : undefined,
+    },
+  }));
+}
+
+interface Props {
+  project: Project;
+  next?: Project;
+}
+
+const { project, next } = Astro.props;
+const { Content, remarkPluginFrontmatter } = await render(project);
+const toc = (remarkPluginFrontmatter.toc ?? []) as { id: string; label: string }[];
+const og = await getImage({ src: project.data.thumbnail, width: 1200, format: 'jpeg' });
+---
+
+<CaseStudyLayout project={project} toc={toc} next={next} ogImage={og.src}>
+  <Content components={mdxComponents} />
+</CaseStudyLayout>

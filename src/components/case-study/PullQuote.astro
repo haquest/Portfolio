@@ -1,0 +1,22 @@
+---
+// A user or stakeholder quote: <PullQuote by="Executive Cabinet, DPSS">Quote text</PullQuote>
+interface Props {
+  /** Who said it. */
+  by?: string;
+}
+
+const { by } = Astro.props;
+---
+
+<figure class="cs-quote relative my-8 border-l-4 border-sage py-1 pl-6">
+  <span
+    aria-hidden="true"
+    class="block font-display text-h1 leading-none font-bold text-sage/60 select-none"
+  >
+    “
+  </span>
+  <blockquote class="-mt-3 font-display text-lg leading-relaxed font-medium text-sage-dark md:text-h3 md:leading-snug">
+    <slot />
+  </blockquote>
+  {by && <figcaption class="mt-3 text-sm text-muted">— {by}</figcaption>}
+</figure>

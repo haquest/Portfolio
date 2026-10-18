@@ -1,0 +1,18 @@
+---
+// Skill/method pills that match the home page project cards: <TagList tags={['UX Research']} />
+import Tag from '../Tag.astro';
+
+interface Props {
+  tags: string[];
+  /** Optional accessible name, e.g. "Role segments". */
+  label?: string;
+}
+
+const { tags, label } = Astro.props;
+---
+
+<ul role="list" aria-label={label} class="my-5 flex flex-wrap gap-2">
+  {tags.map((tag) => (
+    <Tag>{tag}</Tag>
+  ))}
+</ul>

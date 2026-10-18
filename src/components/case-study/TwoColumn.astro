@@ -1,0 +1,24 @@
+---
+// Two side-by-side cards (stacked on phones), e.g. "Worked well" / "Would change".
+//   <TwoColumn leftTitle="Worked well" rightTitle="Would change">
+//     <div slot="left">…markdown…</div>
+//     <div slot="right">…markdown…</div>
+//   </TwoColumn>
+interface Props {
+  leftTitle: string;
+  rightTitle: string;
+}
+
+const { leftTitle, rightTitle } = Astro.props;
+---
+
+<div class="cs-wide cs-two my-8 grid gap-4 md:grid-cols-2">
+  <div class="rounded-card bg-surface p-6">
+    <h3 class="text-h3">{leftTitle}</h3>
+    <slot name="left" />
+  </div>
+  <div class="rounded-card bg-surface p-6">
+    <h3 class="text-h3">{rightTitle}</h3>
+    <slot name="right" />
+  </div>
+</div>

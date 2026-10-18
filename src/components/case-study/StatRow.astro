@@ -1,0 +1,38 @@
+---
+// A row of headline numbers: <StatRow stats={[{ value: '553', label: 'Active users' }]} />
+import StatCard from './StatCard.astro';
+
+interface Props {
+  stats: { value: string; label: string }[];
+  /** Optional accessible name for the group, e.g. "Research outputs". */
+  label?: string;
+}
+
+const { stats, label } = Astro.props;
+// Even rows on wide screens: 4 → 4, 5 → 5, 6 → 3 + 3, 8 → 4 + 4.
+const n = stats.length;
+const cols =
+  n % 3 === 0 && n > 3
+    ? 'lg:grid-cols-3'
+    : ((
+        {
+          1: 'lg:grid-cols-1',
+          2: 'lg:grid-cols-2',
+          4: 'lg:grid-cols-4',
+          5: 'lg:grid-cols-5',
+        } as Record<number, string>
+      )[n] ?? 'lg:grid-cols-4');
+---
+
+<ul
+  role="list"
+  aria-label={label}
+  class:list={[
+    'cs-wide my-8 grid grid-cols-2 gap-3 sm:grid-cols-3 max-sm:[&>li:last-child:nth-child(odd)]:col-span-2',
+    cols,
+  ]}
+>
+  {stats.map((s) => (
+    <StatCard value={s.value} label={s.label} />
+  ))}
+</ul>

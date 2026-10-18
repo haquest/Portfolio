@@ -50,6 +50,18 @@ Every project is one file in `src/content/projects/`. The file name becomes the 
 
 Card thumbnails are shown at a 16:10 ratio, so 1600 × 1000 px (or anything wider) works best.
 
+### Writing the case study page
+
+Published projects get a full page at `/work/<file-name>`, built from the same template every
+time. Look at `src/content/projects/dpss-intranet.mdx` as the example to copy:
+
+- Add `subtitle`, `tldr` (2–3 sentences), and optionally `hero` + `heroAlt` and `stats` to the
+  section between the `---` lines.
+- Below it, start each section with `## Heading {/* toc: Short label */}`. The table of contents,
+  section numbers and dividers are created for you.
+- Put images in `src/assets/case-studies/<project-name>/` and use the ready-made blocks
+  (`<StatRow>`, `<PullQuote>`, `<Callout>`, `<Figure>`, …). The full list is in `CLAUDE.md`.
+
 ## Deploy
 
 1. Push this repo to GitHub.

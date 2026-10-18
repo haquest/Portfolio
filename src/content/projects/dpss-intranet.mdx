@@ -6,11 +6,241 @@ thumbnail: ../../assets/projects/dpss-intranet/thumbnail.png
 thumbnailAlt: A laptop showing the DPSS Intranet affinity map, with more than 130 color-coded sticky notes grouped under themes, and a zoomed-in card highlighting the research question and one theme branch, on a soft sage background.
 status: published
 order: 1
+
+# Case-study page
 eyebrow: UX Research Case Study · 2026
+subtitle: Why an intranet used by 553 staff stopped working for nearly all of them, and what DPSS should build instead.
+hero: ../../assets/case-studies/dpss-intranet/intranet-hero.png
+heroAlt: A laptop showing the full DPSS Intranet affinity map, with more than 130 color-coded sticky notes clustered under three themes, beside a zoomed-in card of the central research question and one theme branch.
+heroCaption: Affinity map synthesizing 130+ insights from surveys, interviews and analytics.
+tldr: I co-led research into why the University of Michigan DPSS intranet had become something staff worked around instead of relied on. Surveys, role-specific interviews and an executive focus group showed that broken trust, not search or content alone, was driving the cycle, and I delivered six strategic priorities, a governance model and a 20-week implementation plan to leadership.
+stats:
+  - { value: '553', label: 'Active users' }
+  - { value: '43.5%', label: 'Daily visit rate' }
+  - { value: '9', label: 'Role segments' }
+  - { value: '130+', label: 'Insights mapped' }
+  - { value: '92', label: 'Survey respondents' }
 role: UX Research Co-Lead
 timeline: Jan — Jun 2026
 team: Strategic Communications & Technology Operations
 methods: [Interviews, Surveys, Affinity Mapping, Competitive Analysis]
 ---
 
-The full case study is ported in build step 3.
+<Callout variant="note" label="Confidentiality">
+  Because of the confidential nature of internal security operations, some project details and
+  deliverables cannot be shared publicly.
+</Callout>
+
+## Why did a tool used by 553 people stop working for nearly all of them? {/* toc: Challenge */}
+
+The University of Michigan's Division of Public Safety and Security was transitioning away from Confluence. The existing site—"ComHub"—was plagued by usability issues staff worked around rather than relied upon.
+
+<Callout variant="problem">
+  DPSS staff across all roles and campuses cannot reliably access, find, or trust the tools and
+  information they need—resulting in workarounds, disengagement, and operational risk.
+</Callout>
+
+## My contributions {/* toc: My Role */}
+
+<NumberedList>
+
+1. Conducted 6+ role-specific user interviews
+2. Synthesized 130+ insights via affinity mapping
+3. Delivered strategic recommendations to leadership
+4. Facilitated executive focus group
+5. Developed personas and navigation priorities
+
+</NumberedList>
+
+## Research approach {/* toc: Approach */}
+
+<ProcessSteps
+  label="Research phases"
+  steps={[
+    {
+      title: 'Discovery',
+      text: 'Survey data (92 respondents) · 90-day site analytics · 9 role segments',
+    },
+    {
+      title: 'Qualitative',
+      text: '6 role-specific interviews · executive focus group · behavioral walkthroughs',
+    },
+    {
+      title: 'Synthesis',
+      text: 'Affinity diagram (130+ insights → 10 themes) · vendor evaluation matrix',
+    },
+  ]}
+/>
+
+### Role segments
+
+<TagList
+  label="Role segments"
+  tags={[
+    'Security Officers',
+    'Patrol / Police',
+    'Dispatch',
+    'IT',
+    'HR',
+    'Admin Assistants',
+    'Assistant Directors',
+    'Strategic Communications',
+    'Executive Cabinet',
+  ]}
+/>
+
+## Three key findings {/* toc: Findings */}
+
+<Finding n="F1" kicker="Finding ONE" title="Fragmented Ecosystem, No Single Source of Truth">
+
+Critical systems operated in isolation. BRIEFS had been offline since the July 2024 CrowdStrike incident. Telestaff required duplicate data entry. Cross-unit IT systems failed to integrate—leaving staff to triangulate between disconnected tools with no hub.
+
+<PullQuote by="Research participant">
+  Every time I make them sign in or click redundantly, it's taking time from delivering service.
+</PullQuote>
+
+**Documented gaps**
+
+- BRIEFS offline 18+ months
+- Duplicate data entry required
+- No cross-unit IT integration
+- Zero unified access point
+
+</Finding>
+
+<Finding n="F2" kicker="Finding TWO" title="Failed Trust and Content Governance">
+
+No content governance existed at any level. Org charts were approximately one year out of date. Over 75% of roster-listed staff were no longer employed by DPSS. Policy documents were up to ten years old. No channel framework meant no mechanism to flag, archive, or retire stale content.
+
+<PullQuote by="Research participant">
+  Less is more. Accuracy is the big thing. Just being able to know if I can rely on it.
+</PullQuote>
+
+<StatRow
+  label="Content health, by the numbers"
+  stats={[
+    { value: '~1yr', label: 'Org chart staleness' },
+    { value: '75%+', label: 'Roster staff no longer employed' },
+    { value: '10yr', label: 'Oldest policy documents' },
+    { value: '0', label: 'Content governance framework' },
+  ]}
+/>
+
+</Finding>
+
+<Finding n="F3" kicker="Finding THREE" title="Structural Barriers to Access">
+
+Long-scroll layout, broken search, and no role-based organization made the intranet structurally hostile to everyday use. Poor mobile experience compounded the problem for field staff. Most critically: Dearborn and Flint campuses were entirely absent from the platform.
+
+<PullQuote by="Research participant">
+  The fact that they haven't received much energy or attention has been noticeable.
+</PullQuote>
+
+<StatusList
+  label="Access status"
+  items={[
+    { label: 'Navigation', status: 'Broken' },
+    { label: 'Search', status: 'Broken' },
+    { label: 'Mobile', status: 'Poor' },
+    { label: 'Dearborn Campus', status: 'Absent' },
+    { label: 'Flint Campus', status: 'Absent' },
+  ]}
+/>
+
+</Finding>
+
+## A self-reinforcing cycle of failure {/* toc: Feedback Loop */}
+
+Every breakdown fed the next. The key leverage point was not search, not content—it was **Trust**.
+
+<ProcessSteps
+  label="The feedback loop"
+  loop
+  steps={[
+    { title: 'Findability Failures', text: "Users can't locate what they need" },
+    { title: 'Workarounds Adopted', text: 'Staff build personal bypass systems' },
+    { title: 'Content Bypassed', text: 'Intranet goes unused by staff' },
+    { title: 'Content Goes Stale', text: 'No views — no incentive to update' },
+    { title: 'Trust Erodes', text: 'Critical mass reaches disbelief', emphasis: true },
+    { title: 'More Workarounds', text: 'Cycle accelerates, never breaks' },
+  ]}
+/>
+
+## Six strategic priorities {/* toc: Recommendations */}
+
+<NumberedList>
+
+1. **Role-Based Information Architecture** Organize navigation around who you are, not where content happens to live in a folder tree.
+2. **Integrate PowerDMS** Centralize policy management with a single auditable, authoritative source used across all campuses.
+3. **Build Dearborn and Flint Presence** Regional campus inclusion as a first-class design requirement—not an afterthought or phase two.
+4. **Content Governance Model** Assign owners, establish review cycles, implement archive flags and retirement protocols throughout.
+5. **Prioritize Search** Functional, role-aware search as a platform-level requirement—not an optional feature to layer on later.
+6. **Set as Default Homepage** Drive adoption through habit formation. Make the intranet the ambient workspace, not an afterthought.
+
+</NumberedList>
+
+## Impact & deliverables {/* toc: Impact */}
+
+Research outputs
+
+<StatRow
+  label="Research outputs"
+  stats={[
+    { value: '6', label: 'Personas' },
+    { value: '24', label: 'Pages <5 views' },
+    { value: '43%', label: 'Pages flagged' },
+    { value: '4', label: 'Vendors evaluated' },
+    { value: '20wk', label: 'Implementation plan' },
+    { value: '1', label: 'Governance model' },
+  ]}
+/>
+
+### Technical requirements
+
+<TagList
+  label="Technical requirements"
+  tags={[
+    'SSO with MFA',
+    'Mobile-Responsive',
+    'Role-Based Access',
+    'PowerDMS Integration',
+    'WCAG 2.1 AA',
+  ]}
+/>
+
+### Vendors evaluated
+
+<TagList label="Vendors evaluated" tags={['Simpplr', 'LumApps', 'Interact', 'Appspace']} />
+
+## What worked. What I'd change. {/* toc: Reflection */}
+
+<TwoColumn leftTitle="Worked well" rightTitle="Would change">
+<div slot="left">
+
+- Mixed-methods approach
+- Affinity mapping at scale
+- Executive focus group
+- Behavioral walkthroughs
+
+</div>
+<div slot="right">
+
+- Involve content owners earlier
+- Include frontline officers from the start
+
+</div>
+</TwoColumn>
+
+### Key takeaway
+
+<PullQuote by="Executive Cabinet, DPSS">
+  If you build it the right way, it really becomes such a great training and onboarding system for
+  them. It's guiding them rather than the human capital we're investing in for consistency.
+</PullQuote>
+
+The intranet was used by nearly everyone—but wasn't working for nearly anyone. The opportunity: build a single, trustworthy, role-sensitive environment that reduces friction, supports emergency response, connects regional campuses, and gives leadership a reliable communications channel.
+
+<LinkButton
+  href="https://docs.google.com/presentation/d/1mUAxtQ_FB8yguZ_ZdEDCryLY0haw_1CaKa-ARCzEDxg/edit?usp=sharing"
+  label="View presentation"
+/>
