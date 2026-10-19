@@ -1,25 +1,16 @@
 ---
-// Sparkle cursor: a sage four-point sparkle with an ink outline (so it shows on white and
-// doesn't echo the logo's five-point ★), plus a tiny companion sparkle that twinkles.
-// Over clickable things it turns a quarter, grows and the companion swings round; a click
-// spins it and sends out a ring. Only runs for mouse/trackpad users who haven't asked for
-// reduced motion; everyone else gets the static sparkle from global.css.
+// Doodle-star cursor: a hand-drawn sage star (slightly uneven points, soft rounded corners)
+// that leaves a trail of little sparkles as it moves. Over clickable things it grows and
+// wiggles; a click spins it and pops a ring of sparkles. Only runs for mouse/trackpad users
+// who haven't asked for reduced motion; everyone else gets the static star from global.css.
 ---
 
 <div id="star-cursor" aria-hidden="true">
   <div class="star-cursor__shape">
-    <svg viewBox="0 0 32 32" width="32" height="32">
-      <path
-        class="main"
-        d="M16 4c1 6.4 5.6 11 12 12-6.4 1-11 5.6-12 12-1-6.4-5.6-11-12-12 6.4-1 11-5.6 12-12Z"
-      ></path>
-      <path
-        class="mini"
-        d="M27 1.5c.4 2.3 1.2 3.1 3.5 3.5-2.3.4-3.1 1.2-3.5 3.5-.4-2.3-1.2-3.1-3.5-3.5 2.3-.4 3.1-1.2 3.5-3.5Z"
-      ></path>
+    <svg viewBox="0 0 32 32" width="30" height="30">
+      <path d="M16 3.5c1.1 3.9 2.3 6.9 3.7 8.9 3.3.2 6.5.5 8.9 1.2-2.4 2.4-5 4.4-7.2 6 .8 3.4 1.4 6.4 1.6 9-2.4-1.6-4.7-3.3-6.8-4.7-2.4 1.6-4.9 3.3-7.4 4.5.7-2.8 1.5-5.8 2.2-8.8-2.4-1.8-4.9-3.8-7.4-6.2 3-.5 6-.9 9-1.2 1.2-2.8 2.2-5.8 3.4-8.7Z"></path>
     </svg>
   </div>
-  <span class="star-cursor__ring"></span>
 </div>
 
 <style>
@@ -28,9 +19,9 @@
     top: 0;
     left: 0;
     z-index: 9999;
-    width: 32px;
-    height: 32px;
-    margin: -16px 0 0 -16px; /* centre the sparkle on the pointer */
+    width: 30px;
+    height: 30px;
+    margin: -15px 0 0 -15px; /* centre the star on the pointer */
     pointer-events: none;
     opacity: 0;
     transition: opacity 150ms;
@@ -47,56 +38,47 @@
   svg {
     overflow: visible;
   }
-  .main {
+  path {
     fill: var(--color-sage);
-    stroke: var(--color-ink);
-    stroke-width: 1.6;
+    stroke: var(--color-sage);
+    stroke-width: 2.2;
     stroke-linejoin: round;
-    transition: fill 200ms;
+    transition:
+      fill 200ms,
+      stroke 200ms;
   }
-  .mini {
-    fill: var(--color-ink);
-    transform-origin: 16px 16px;
-    transition: transform 400ms var(--ease-spring);
-    animation: mini-twinkle 1.6s ease-in-out infinite;
-  }
-  /* Over anything clickable: quarter turn, grow, light fill; the mini sparkle swings round */
+  /* Over anything clickable: grow and wiggle */
   #star-cursor.is-hover .star-cursor__shape {
-    transform: rotate(45deg) scale(1.25);
+    transform: scale(1.3);
   }
-  #star-cursor.is-hover .main {
+  #star-cursor.is-hover svg {
+    animation: star-wiggle 900ms ease-in-out infinite;
+  }
+  /* Pale fill + green edge so it still shows on the green buttons */
+  #star-cursor.is-hover path {
     fill: var(--color-sage-50);
+    stroke: var(--color-sage-dark);
   }
-  #star-cursor.is-hover .mini {
-    transform: rotate(180deg);
-  }
-  /* On click: one spin plus a ring that ripples out */
-  #star-cursor.is-click .star-cursor__shape {
+  /* On click: one spin */
+  #star-cursor.is-click svg {
     animation: star-spin 550ms var(--ease-out);
   }
-  .star-cursor__ring {
-    position: absolute;
-    inset: 4px;
-    border: 1.5px solid var(--color-sage-dark);
-    border-radius: 50%;
+  /* Trail sparkles (created by the script below) */
+  :global(.star-trail) {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9998;
+    pointer-events: none;
+    clip-path: polygon(50% 0, 62% 38%, 100% 50%, 62% 62%, 50% 100%, 38% 62%, 0 50%, 38% 38%);
     opacity: 0;
   }
-  #star-cursor.is-click .star-cursor__ring {
-    animation: star-ring 550ms var(--ease-out);
-  }
-  @keyframes mini-twinkle {
-    50% {
-      opacity: 0.25;
+  @keyframes star-wiggle {
+    25% {
+      transform: rotate(-12deg);
     }
-  }
-  @keyframes star-ring {
-    from {
-      opacity: 0.8;
-      transform: scale(0.4);
-    }
-    to {
-      opacity: 0;
-      transform: scale(1.8);
+    75% {
+      transform: rotate(12deg);
     }
   }
 </style>
@@ -105,19 +87,55 @@
   const fine = window.matchMedia('(pointer: fine)');
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
   const star = document.getElementById('star-cursor');
-  const shape = star?.firstElementChild;
+  const svg = star?.querySelector('svg');
   const clickable = 'a, button, summary, label, [role="button"], [role="tab"], .cs-media';
 
-  if (star && shape && fine.matches && !reduce.matches) {
+  if (star && svg && fine.matches && !reduce.matches) {
     document.documentElement.classList.add('star-cursor');
+
+    // A small pool of sparkles, reused round-robin so the page never fills up with nodes.
+    const colors = ['var(--color-sage)', 'var(--color-sage-dark)'];
+    const pool = Array.from({ length: 16 }, () => {
+      const s = document.createElement('span');
+      s.className = 'star-trail';
+      s.setAttribute('aria-hidden', 'true');
+      document.body.append(s);
+      return s;
+    });
+    let next = 0;
+    let last = { x: 0, y: 0, t: 0 };
+
+    // Each sparkle appears near the pointer, drifts down a little, spins and fades.
+    const sparkle = (x: number, y: number, dx: number, dy: number, life = 900) => {
+      const s = pool[next++ % pool.length];
+      const size = 8 + Math.random() * 7;
+      s.style.width = s.style.height = `${size}px`;
+      s.style.background = colors[Math.floor(Math.random() * colors.length)];
+      const from = `translate(${x - size / 2}px, ${y - size / 2}px)`;
+      const to = `translate(${x - size / 2 + dx}px, ${y - size / 2 + dy}px)`;
+      s.animate(
+        [
+          { transform: `${from} scale(1) rotate(0deg)`, opacity: 0.95 },
+          { transform: `${to} scale(0.2) rotate(140deg)`, opacity: 0 },
+        ],
+        { duration: life, easing: 'ease-in' },
+      );
+    };
 
     window.addEventListener(
       'pointermove',
       (e) => {
         if (e.pointerType !== 'mouse') return;
-        star.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0)`;
+        const { clientX: x, clientY: y } = e;
+        star.style.transform = `translate3d(${x}px, ${y}px, 0)`;
         star.classList.add('is-visible');
         star.classList.toggle('is-hover', !!(e.target as Element).closest?.(clickable));
+        // Drop a sparkle every ~18px of movement (and not more than every 35ms)
+        if (Math.hypot(x - last.x, y - last.y) > 18 && e.timeStamp - last.t > 35) {
+          const jitter = () => (Math.random() - 0.5) * 10;
+          sparkle(x + jitter(), y + jitter(), jitter(), 10 + Math.random() * 12);
+          last = { x, y, t: e.timeStamp };
+        }
       },
       { passive: true },
     );
@@ -129,8 +147,13 @@
       star.classList.remove('is-click');
       void star.offsetWidth; // restart the spin if clicking quickly
       star.classList.add('is-click');
+      // A little ring of sparkles bursting outwards
+      for (let i = 0; i < 6; i++) {
+        const a = (i / 6) * Math.PI * 2;
+        sparkle(e.clientX, e.clientY, Math.cos(a) * 30, Math.sin(a) * 30, 700);
+      }
     });
-    shape.addEventListener('animationend', (e) => {
+    svg.addEventListener('animationend', (e) => {
       if ((e as AnimationEvent).animationName.includes('spin')) star.classList.remove('is-click');
     });
   }

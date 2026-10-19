@@ -200,20 +200,22 @@ purpose. Edit roles/dates in the data file, not the page.
 
 ## Brand details (from the Framer site — keep them)
 
-- **Star theme**: the logo is "TM ★". `StarCursor.astro` replaces the mouse cursor with a sage
-  four-point sparkle with an **ink outline** (visible on white, deliberately not the logo's
-  five-point ★) and a tiny twinkling companion sparkle. Over clickable things it turns 45°, grows
-  and goes light; a click spins it and ripples a ring. It only runs for mouse users with motion
-  allowed; everyone else gets the static `public/cursors/star.svg` / `star-hover.svg` via CSS.
-  Touch devices are untouched. The logo ★ spins on hover; ✦ is used as a small decorative accent.
+- **Star theme**: the logo is "TM ★". `StarCursor.astro` replaces the mouse cursor with a
+  hand-drawn **doodle star in sage** (no dark outline; the owner disliked it) that leaves a
+  **trail of little sparkles** (sage / sage-dark, a reused pool of 16 nodes). Over clickable
+  things it grows, turns pale green (sage-50 fill, sage-dark edge, so it shows on green buttons) and wiggles; a click spins it and bursts a ring of sparkles. It only
+  runs for mouse users with motion allowed; everyone else gets the static
+  `public/cursors/star.svg` / `star-hover.svg` via CSS. Touch devices are untouched. The logo ★
+  spins on hover; ✦ is used as a small decorative accent.
 - **Hero**: fills the screen below the nav (`min-h-[calc(100svh-4rem)]`) so projects are only
   seen after scrolling or clicking "Take a Peek". "Hiya, I'm Tanya." in `sage-dark`, letters pop
   in one by one (`.letter`, CSS only, with an `sr-only` copy of the sentence for screen readers).
   Illustration sits in the Framer circle composition (outline ring + three sage circles, 367×493
   ratio, image 192px wide). Letters and circles share one slow timeline in `global.css`
-  (both finish ≈2.5s); keep them in sync if you change either. The tagline's three values
-  ("creative simplicity", "precision", "passion") get hand-drawn sage underlines that draw in one
-  after another from 2.4s (`.doodle-word` in `Hero.astro`).
+  (both finish ≈2.5s); keep them in sync if you change either. Only "creative
+  simplicity" in the tagline gets a hand-drawn sage underline (a nearly straight, tapered pen
+  stroke) that draws in from 2.4s (`.doodle-word` in `Hero.astro`). The owner rejected
+  underlines on "precision" and "passion" and wavier lines; keep it to this one.
 - **Availability badge**: two lines, outlined pill. Line 1 "Available for Full-Time" (priority),
   line 2 "Starting Summer 2027 ✦ Open to Relocate".
 - **Project covers**: device mockups (laptop, plus phone when a mobile screen exists) on a soft
