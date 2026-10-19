@@ -1,5 +1,6 @@
 ---
-// Doodle-star cursor: a hand-drawn sage star (slightly uneven points, soft rounded corners)
+// Doodle-star cursor: a hand-drawn light-sage star with a thin sage-dark edge (so it shows on
+// white and on the green buttons), slightly uneven points and soft rounded corners,
 // that leaves a trail of little sparkles as it moves. Over clickable things it grows and
 // wiggles; a click spins it and pops a ring of sparkles. Only runs for mouse/trackpad users
 // who haven't asked for reduced motion; everyone else gets the static star from global.css.
@@ -7,7 +8,7 @@
 
 <div id="star-cursor" aria-hidden="true">
   <div class="star-cursor__shape">
-    <svg viewBox="0 0 32 32" width="30" height="30">
+    <svg viewBox="0 0 32 32" width="24" height="24">
       <path d="M16 3.5c1.1 3.9 2.3 6.9 3.7 8.9 3.3.2 6.5.5 8.9 1.2-2.4 2.4-5 4.4-7.2 6 .8 3.4 1.4 6.4 1.6 9-2.4-1.6-4.7-3.3-6.8-4.7-2.4 1.6-4.9 3.3-7.4 4.5.7-2.8 1.5-5.8 2.2-8.8-2.4-1.8-4.9-3.8-7.4-6.2 3-.5 6-.9 9-1.2 1.2-2.8 2.2-5.8 3.4-8.7Z"></path>
     </svg>
   </div>
@@ -19,9 +20,9 @@
     top: 0;
     left: 0;
     z-index: 9999;
-    width: 30px;
-    height: 30px;
-    margin: -15px 0 0 -15px; /* centre the star on the pointer */
+    width: 24px;
+    height: 24px;
+    margin: -12px 0 0 -12px; /* centre the star on the pointer */
     pointer-events: none;
     opacity: 0;
     transition: opacity 150ms;
@@ -39,9 +40,10 @@
     overflow: visible;
   }
   path {
-    fill: var(--color-sage);
-    stroke: var(--color-sage);
-    stroke-width: 2.2;
+    --sage-light: color-mix(in srgb, var(--color-sage) 45%, var(--color-bg));
+    fill: var(--sage-light);
+    stroke: var(--color-sage-dark);
+    stroke-width: 1.8;
     stroke-linejoin: round;
     transition:
       fill 200ms,
@@ -49,12 +51,12 @@
   }
   /* Over anything clickable: grow and wiggle */
   #star-cursor.is-hover .star-cursor__shape {
-    transform: scale(1.3);
+    transform: scale(1.25);
   }
   #star-cursor.is-hover svg {
     animation: star-wiggle 900ms ease-in-out infinite;
   }
-  /* Pale fill + green edge so it still shows on the green buttons */
+  /* Paler over buttons and links */
   #star-cursor.is-hover path {
     fill: var(--color-sage-50);
     stroke: var(--color-sage-dark);
@@ -94,7 +96,10 @@
     document.documentElement.classList.add('star-cursor');
 
     // A small pool of sparkles, reused round-robin so the page never fills up with nodes.
-    const colors = ['var(--color-sage)', 'var(--color-sage-dark)'];
+    const colors = [
+      'var(--color-sage)',
+      'color-mix(in srgb, var(--color-sage) 45%, var(--color-bg))',
+    ];
     const pool = Array.from({ length: 16 }, () => {
       const s = document.createElement('span');
       s.className = 'star-trail';

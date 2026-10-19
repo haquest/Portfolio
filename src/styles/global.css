@@ -209,7 +209,7 @@
 @media (pointer: fine) {
   html {
     cursor:
-      url('/cursors/star.svg') 16 16,
+      url('/cursors/star.svg') 12 12,
       auto;
   }
   a,
@@ -217,7 +217,7 @@
   summary,
   label {
     cursor:
-      url('/cursors/star-hover.svg') 16 16,
+      url('/cursors/star-hover.svg') 14 14,
       pointer;
   }
   html.star-cursor,

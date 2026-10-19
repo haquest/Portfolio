@@ -201,8 +201,9 @@ purpose. Edit roles/dates in the data file, not the page.
 ## Brand details (from the Framer site — keep them)
 
 - **Star theme**: the logo is "TM ★". `StarCursor.astro` replaces the mouse cursor with a
-  hand-drawn **doodle star in sage** (no dark outline; the owner disliked it) that leaves a
-  **trail of little sparkles** (sage / sage-dark, a reused pool of 16 nodes). Over clickable
+  small (24px) hand-drawn **doodle star in light sage with a thin sage-dark edge** (no ink/black
+  outline; the owner disliked it; the edge keeps it visible on green elements) that leaves a
+  **trail of little sparkles** (sage / light sage, a reused pool of 16 nodes). Over clickable
   things it grows, turns pale green (sage-50 fill, sage-dark edge, so it shows on green buttons) and wiggles; a click spins it and bursts a ring of sparkles. It only
   runs for mouse users with motion allowed; everyone else gets the static
   `public/cursors/star.svg` / `star-hover.svg` via CSS. Touch devices are untouched. The logo ★
