@@ -1,0 +1,412 @@
+---
+title: Cardamom – Ann Arbor
+description: A UX/UI redesign of a local restaurant’s e-commerce experience, focused on simplifying online ordering and making the brand more accessible to students.
+tags: [UX Design, E-Commerce Design, Usability Testing, End-to-End Product Design]
+thumbnail: ../../assets/projects/cardamom/thumbnail.png
+thumbnailAlt: The redesigned Cardamom website shown on a laptop and a phone, with the headline “Ann Arbor’s Fresh Indian” over a biryani photo, set against a warm saffron background.
+status: published
+order: 4
+
+# Case-study page
+eyebrow: Course Project · SI 407 Advanced Interaction Design · 2025
+subtitle: Redesigning the e-commerce experience to connect with students and streamline online ordering.
+tldr: In a 6-week solo project for SI 407, I redesigned the website of Cardamom, a local Indian restaurant in Ann Arbor, to replace phone-only ordering with a complete online ordering flow. Research with diners and the owner shaped a clearer menu structure and a cart and checkout built from scratch, and usability testing with 3 users led to two rounds of fixes, with testers calling it “so much easier than calling in.”
+stats:
+  - { value: '6 wk', label: 'Timeline' }
+  - { value: '4', label: 'Research methods' }
+  - { value: '3', label: 'Usability test participants' }
+  - { value: '2', label: 'Design iterations' }
+role: UX/UI Designer & Researcher
+timeline: Fall 2025 (6 weeks)
+team: Individual project
+tools: [Figma, UserTesting, Miro]
+methods: [Heuristic Evaluation, On-Site Observations, User Interviews, Usability Testing]
+---
+
+import persona from '../../assets/case-studies/cardamom/cardamom-persona-priya-sharma.png';
+import crazy8s from '../../assets/case-studies/cardamom/cardamom-crazy8s.png';
+import sketchDesktop from '../../assets/case-studies/cardamom/cardamom-sketch-desktop.jpg';
+import sketchMobile from '../../assets/case-studies/cardamom/cardamom-sketch-mobile.jpg';
+import affinity from '../../assets/case-studies/cardamom/cardamom-affinity-diagram.png';
+import categoriesBefore from '../../assets/case-studies/cardamom/cardamom-menu-categories-before.png';
+import categoriesAfter from '../../assets/case-studies/cardamom/cardamom-menu-categories-after.png';
+import cartBefore from '../../assets/case-studies/cardamom/cardamom-cart-before.png';
+import cartAfter from '../../assets/case-studies/cardamom/cardamom-cart-after.png';
+import homeDesktop from '../../assets/case-studies/cardamom/cardamom-homepage-desktop.png';
+import homeMobile from '../../assets/case-studies/cardamom/cardamom-homepage-mobile.png';
+import menuDesktop from '../../assets/case-studies/cardamom/cardamom-menu-desktop.png';
+import menuMobile from '../../assets/case-studies/cardamom/cardamom-menu-mobile.png';
+import productDesktop from '../../assets/case-studies/cardamom/cardamom-product-desktop.png';
+import productMobile from '../../assets/case-studies/cardamom/cardamom-product-mobile.png';
+import checkoutDesktop from '../../assets/case-studies/cardamom/cardamom-checkout-desktop.png';
+import checkoutMobile from '../../assets/case-studies/cardamom/cardamom-checkout-mobile.png';
+
+Cardamom is a beloved local restaurant in Ann Arbor, located about 10 minutes from Central Campus. Despite their exceptional food and community atmosphere, their website's **confusing navigation and inefficient ordering process** was creating barriers. Additionally, the cafe was **struggling to attract students** due to the distance from campus.
+
+This 6-week individual project focused on redesigning the complete e-commerce experience to **replace their phone-based ordering system** with a modern, digital solution that maintains their warm, authentic brand identity.
+
+## The problem {/* toc: Problem */}
+
+<TwoColumn leftTitle="The Problem" leftIcon="alert" rightTitle="The Goal" rightIcon="target">
+<div slot="left">
+
+- **No online ordering**: customers must call to place orders
+- Static website with **limited menu browsing** functionality
+- Users found calling **inconvenient and time-consuming**
+
+</div>
+<div slot="right">
+
+- Design a **modern e-commerce flow** for seamless online ordering
+- Allow users to browse menu, add items to cart, and checkout digitally
+- Maintain Cardamom's **warm, authentic brand identity**
+
+</div>
+</TwoColumn>
+
+## Research & discovery {/* toc: Research */}
+
+### Methods used
+
+<Cards
+  cols={4}
+  label="Research methods"
+  items={[
+    { title: 'Heuristic Evaluation', text: 'Evaluated existing Cardamom website' },
+    { title: 'On-Site Observations', text: 'Observed customer behavior at restaurant' },
+    { title: 'User Interviews', text: 'Intercept interviews with diners' },
+    { title: 'Competitive Analysis', text: 'Analyzed restaurant ordering systems' },
+  ]}
+/>
+
+### Key research findings
+
+<Cards
+  cols={3}
+  numbered
+  label="Key research findings"
+  items={[
+    {
+      title: 'No Online Ordering = Major Pain Point',
+      text: 'Customers found calling inconvenient and wanted an easier online option',
+    },
+    {
+      title: 'Users Want Clear Organization',
+      text: 'Appreciated categorization and visuals but disliked excessive scrolling and poor text contrast',
+    },
+    {
+      title: 'Balancing Brand & Modernity',
+      text: 'Owner wanted to improve digital experience while maintaining authentic, welcoming identity',
+    },
+  ]}
+/>
+
+### What users said
+
+<PullQuote by="Frequent customer, User Interview">
+  I love the food, but I never remember to call ahead. I wish I could just order online like
+  everywhere else.
+</PullQuote>
+
+<PullQuote by="First-time visitor, On-site observation">
+  The website looks outdated. I didn't even know they had one—I just use the phone number from
+  Google.
+</PullQuote>
+
+### User persona
+
+The persona kept the design grounded in **real user behavior rather than assumptions**, prioritizing users who want a **quick, convenient, and straightforward way to order takeout**.
+
+<Figure
+  src={persona}
+  alt="Persona card for Priya Sharma, a 25-year-old University of Michigan grad student who lives off-campus with one roommate. Bio, behaviors, needs and goals, and frustrations sections describe calling for carry-out because there is no online ordering, wanting a quick way to order for pickup and a smooth checkout, and finding the carry-out process backdated. A technical profile rates her internet use, online shopping and tech savviness as high. Her quote: “I love the food here, but I wish there was a way to order online and pick it up. It would make my life so much easier!”"
+  caption="Priya wants to order online and pick up, which the old site couldn't offer."
+/>
+
+## Ideation & design process {/* toc: Ideation */}
+
+### Initial sketches
+
+I began by sketching out ideas for both the desktop and mobile versions of the **menu structure, cart page, and checkout flow**. In addition to these initial sketches, I completed a separate **Crazy 8’s exercise** focused on my innovative page, which helped me rapidly explore different layout and interaction ideas before choosing the most effective direction for my design.
+
+<Figure
+  src={crazy8s}
+  narrow
+  alt="A sheet of paper folded into eight panels of hand-drawn cart and checkout layouts: item lists with checkboxes, quantities and prices, totals with tax, add-ons and suggested items, and Proceed to Checkout and Back buttons."
+  caption="Crazy 8’s: eight quick takes on the cart and checkout page."
+/>
+
+<Figure
+  pair={[
+    {
+      src: sketchDesktop,
+      alt: 'Hand-drawn desktop sketches: a homepage with hero, About Us, reviews and footer; a category page; a product listing for Tandoori Entrées; a product detail overlay; and checkout notes covering input fields, card options, order summary, tips, breadcrumb navigation and a return-to-homepage button.',
+      label: 'Desktop sketches',
+    },
+    {
+      src: sketchMobile,
+      alt: 'Hand-drawn mobile sketches: eight phone screens for the homepage, menu categories, a Tandoori listing, an item overlay with quantity and Add to Cart, the cart with add-ons, checkout info with card choice, a thank-you confirmation, and a full-width menu.',
+      label: 'Mobile sketches',
+    },
+  ]}
+/>
+
+### User flow
+
+I mapped out the complete ordering journey **from homepage to checkout completion**.
+
+<ProcessSteps
+  label="User flow: online ordering"
+  steps={[
+    { title: 'Homepage', text: "User lands & clicks 'Order Now'" },
+    { title: 'Menu Categories', text: 'Browse food categories' },
+    { title: 'Product Listing', text: 'View items in category' },
+    { title: 'Product Detail', text: 'Select item & add to cart' },
+    { title: 'Cart Review', text: 'Review order & proceed' },
+    { title: 'Checkout', text: 'Enter details & complete order' },
+  ]}
+/>
+
+### Key design decisions
+
+<Cards
+  cols={3}
+  numbered
+  label="Key design decisions"
+  items={[
+    {
+      title: 'Added "Menu Categories" Page',
+      text: 'Created a dedicated page to organize food types (Appetizers, Entrees, Desserts, etc.) to reduce confusion and improve discoverability.',
+      tags: ['Information Architecture', 'Clear Hierarchy'],
+    },
+    {
+      title: 'Designed Full Cart & Checkout Experience',
+      text: 'Built an innovative cart page from scratch to replace phone-based ordering, with clear item review, quantity adjustment, and checkout flow.',
+      tags: ['Task Flow', 'Feedback', 'Error Prevention'],
+    },
+    {
+      title: 'Maintained Brand Identity',
+      text: "Incorporated Cardamom's logo, warm color palette, and cultural typography while improving readability, contrast, and visual hierarchy.",
+      tags: ['Consistency', 'Accessibility (WCAG Color Contrast)'],
+    },
+  ]}
+/>
+
+## Usability testing & iteration {/* toc: Testing */}
+
+### Testing methodology
+
+<Cards
+  cols={3}
+  label="Testing methodology"
+  items={[
+    { title: 'Method', text: 'Moderated usability testing via UserTesting.com' },
+    { title: 'Participants', text: '3 users representative of target audience' },
+    { title: 'Tasks', text: 'Browse menu, add Tandoori Chicken to cart, complete checkout' },
+  ]}
+/>
+
+### What I learned
+
+<TwoColumn leftTitle="Strength" leftIcon="check" rightTitle="Issues" rightIcon="alert">
+<div slot="left">
+
+- Users found the prototype **easy to navigate and intuitive** overall
+
+</div>
+<div slot="right">
+
+- Users wanted **better differentiation between menu categories and individual items**
+- Participants wanted an **easier way to navigate back and forth** during checkout
+
+</div>
+</TwoColumn>
+
+I organized feedback from the usability tests in an **affinity diagram**: I reviewed each participant’s session, grouped similar notes on what worked well and what caused confusion, and translated the patterns into **actionable insights** for the next prototype iteration.
+
+<Figure
+  src={affinity}
+  framed
+  alt="Affinity diagram of sticky notes under four themes. Navigation & Flow: easy to navigate, Order Now and View Menu buttons stood out, tasks felt simple, recommendations encouraged engagement, difficulty navigating back, couldn't edit items after checkout. Visual Design & Readability: clear text and buttons, simple menu categories, design looked outdated to some, visual polish concerns. Menu & Food Presentation: clear categorization, liked images alongside items, some confusion between categories and items. Customization & Flexibility: wanted allergy, spice level and portion options."
+  caption="Navigation back and category vs. item confusion became the two iterations below."
+/>
+
+### Design iterations based on feedback
+
+#### Iteration 1: Added category descriptions
+
+Added **short descriptions under "Menu Categories" titles** for clarity and to help users understand what's in each section.
+
+<Compare id="cardamom-categories">
+<div slot="before">
+
+<Figure
+  src={categoriesBefore}
+  alt="Menu Categories page before the change: a heading straight above a grid of food photos labeled Starters, Entrée Salads, Tandoori Entrées and Cardamom Plates."
+/>
+
+</div>
+<div slot="after">
+
+<Figure
+  src={categoriesAfter}
+  alt="Menu Categories page after the change: a new line under the heading reads “Browse by category to explore all of Cardamom’s dishes. Click a category below to see the full list of items.”"
+/>
+
+</div>
+</Compare>
+
+#### Iteration 2: Improved navigation & accessibility
+
+Added **back buttons to the checkout process** and retained existing breadcrumb navigation.
+
+<Compare id="cardamom-cart">
+<div slot="before">
+
+<Figure
+  src={cartBefore}
+  alt="My Cart page before the change: the Cart → Checkout → Confirmation breadcrumb above three cart items with quantity controls and an Order Summary panel, with no back link."
+/>
+
+</div>
+<div slot="after">
+
+<Figure
+  src={cartAfter}
+  alt="My Cart page after the change: a “Continue Shopping” back link with an arrow now sits above the breadcrumb, cart items and Order Summary."
+/>
+
+</div>
+</Compare>
+
+## Final designs {/* toc: Final Designs */}
+
+A clickable prototype of the checkout experience for **ordering Tandoori Chicken and completing the full purchase process**, designed for both **desktop (1440px)** and **mobile (390px)** screens.
+
+<LinkButton
+  href="https://www.figma.com/proto/n4JASDHls1D92BSZlPyoDO/407_ResponsiveProject_htanya?page-id=333%3A159&node-id=410-1871&viewport=281%2C195%2C0.09&t=baffWRWHYglwN5eI-1&scaling=min-zoom&content-scaling=fixed"
+  label="View interactive prototype"
+/>
+
+### Homepage
+
+Introduces Cardamom with hero imagery, restaurant info, and **prominent "Order Now" CTA**. Designed to be welcoming and set brand expectations immediately.
+
+<Figure
+  pair={[
+    {
+      src: homeDesktop,
+      alt: 'Final homepage on desktop: the Cardamom logo and menu with an orange Order Now button above a dark biryani photo with “Cardamom, Ann Arbor’s Fresh Indian”, View Our Menu and Order Online for Pickup buttons, then an About Us section.',
+      label: 'Desktop',
+    },
+    {
+      src: homeMobile,
+      alt: 'Final homepage on mobile: the logo and an orange menu button above the same hero text with View Our Menu and Order Online for Pickup buttons.',
+      label: 'Mobile',
+    },
+  ]}
+/>
+
+<TagList label="Design principles" tags={['Navigation Design', 'Brand Identity', 'Clear CTAs']} />
+
+### Menu categories
+
+Clear organization of food sections with **visual cards, descriptions, and imagery**. Helps users quickly find what they're looking for without excessive scrolling.
+
+<Figure
+  pair={[
+    {
+      src: menuDesktop,
+      alt: 'Final Menu Categories page on desktop: a short description under the heading and a grid of photo cards for Starters, Entrée Salads, Tandoori Entrées and Cardamom Plates, each with a one-line description.',
+      label: 'Desktop',
+    },
+    {
+      src: menuMobile,
+      alt: 'Final Menu Categories page on mobile: a stacked list of categories, each with a thumbnail photo, name and one-line description.',
+      label: 'Mobile',
+    },
+  ]}
+/>
+
+<TagList
+  label="Design principles"
+  tags={['Information Architecture', 'Visual Hierarchy', 'Card Design']}
+/>
+
+### Product listing & detail
+
+Individual menu items displayed with **images, descriptions, prices, and "Add to Cart"** functionality. Detail pages provide additional information and customization options.
+
+<Figure
+  pair={[
+    {
+      src: productDesktop,
+      alt: 'Final product listing on desktop: a scrollable row of category tabs with Tandoori Entrées selected, then cards for Tandoori Chicken, Chicken Tikka, Seekh Kabab and Achari Paneer Tikka, each with a photo, an add button, price and calories.',
+      label: 'Desktop',
+    },
+    {
+      src: productMobile,
+      alt: 'Final product detail on mobile: a large photo of Tandoori Chicken, its price, a short description, quantity controls, the total and an orange Add to Cart button.',
+      label: 'Mobile',
+    },
+  ]}
+/>
+
+<TagList label="Design principles" tags={['E-commerce Patterns', 'Affordances', 'Readability']} />
+
+### Cart & checkout
+
+The centerpiece of the redesign: a **complete cart and checkout experience that replaces phone-based ordering**. Includes item review, quantity adjustment, breadcrumb navigation, and form validation.
+
+<Figure
+  pair={[
+    {
+      src: checkoutDesktop,
+      alt: 'Final checkout on desktop: a Back to Cart link and the Cart → Checkout → Confirmation breadcrumb above Contact Information fields, the pickup address with hours and a map, and an Order Summary of three items.',
+      label: 'Desktop',
+    },
+    {
+      src: checkoutMobile,
+      alt: 'Final cart on mobile: a Continue Shopping link and breadcrumb above My Cart with three items, quantity controls, Edit and Remove links, and a You Might Also Like section.',
+      label: 'Mobile',
+    },
+  ]}
+/>
+
+<TagList
+  label="Design principles"
+  tags={['Task Completion', 'Error Prevention', 'Feedback & Constraints', 'Accessibility']}
+/>
+
+## Impact & reflection {/* toc: Impact */}
+
+### Results from usability testing
+
+<Cards
+  cols={3}
+  label="Usability testing results"
+  items={[
+    { title: 'Easy & Intuitive', text: 'Users described navigation as straightforward' },
+    { title: 'Visually Accessible', text: 'Improved contrast and readability noted' },
+    { title: 'Problem Solved', text: 'Cart successfully addresses main pain point' },
+  ]}
+/>
+
+<PullQuote by="Usability test participant">
+  This is so much easier than calling in. I can see everything I'm ordering and make changes without
+  feeling rushed.
+</PullQuote>
+
+### My top 3 contributions
+
+<NumberedList>
+
+1. **Designed full e-commerce checkout flow from scratch** Built cart, checkout pages, and form validation that didn't exist before
+2. **Created cart experience to replace phone-based ordering** Directly solved the main user pain point and business need
+3. **Improved accessibility and navigation clarity** Enhanced layout, color contrast, and added breadcrumb navigation based on testing
+
+</NumberedList>
+
+### What made this project unique?
+
+This redesign focused on transforming a real local restaurant’s outdated website into a **fully functional online ordering experience that didn’t previously exist**. It combined UX research, usability testing, and visual design to solve a genuine business pain point while maintaining Cardamom’s authentic brand identity and cultural essence.

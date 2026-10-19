@@ -167,7 +167,12 @@ closing tags like `</div>` unindented after a list. Give `<LinkButton>` its text
 
 ### 6. Figma workflow
 
-_Placeholder: Tanya will provide her Figma export steps (frames, sizes, naming). Add them here._
+Case studies can be pulled straight from Tanya's Figma files with the Figma connector
+(`get_metadata` for structure, `get_design_context` for verbatim text, `download_assets` for the
+original images; `www.figma.com` must be in the environment's allowed domains). Rebuild the
+content in this template rather than copying the Figma layout, keep her wording, and leave out
+old footers/credits (the 2025 files say "Tanya Haque"; her name is now **Tanya Mirza**). Very large
+photos (e.g. 4032px sketch scans) are saved as ~2400px JPGs; screenshots stay PNG.
 
 ## About page
 
