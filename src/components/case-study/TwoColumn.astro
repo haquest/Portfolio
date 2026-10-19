@@ -1,24 +1,83 @@
 ---
 // Two side-by-side cards (stacked on phones), e.g. "Worked well" / "Would change".
-//   <TwoColumn leftTitle="Worked well" rightTitle="Would change">
+//   <TwoColumn leftTitle="Worked well" leftIcon="check" rightTitle="Would change" rightIcon="refresh">
 //     <div slot="left">…markdown…</div>
 //     <div slot="right">…markdown…</div>
 //   </TwoColumn>
+// Icons tell the two sides apart at a glance; list bullets in each card take a matching marker.
+//   alert (problems) · target (goals) · sparkle (highlights) · lightbulb (lessons)
+//   check (went well) · refresh (would change)
+type Icon = 'alert' | 'target' | 'sparkle' | 'lightbulb' | 'check' | 'refresh';
+
 interface Props {
   leftTitle: string;
   rightTitle: string;
+  leftIcon?: Icon;
+  rightIcon?: Icon;
 }
 
-const { leftTitle, rightTitle } = Astro.props;
+const { leftTitle, rightTitle, leftIcon, rightIcon } = Astro.props;
+
+// Which bullet marker each icon uses (see .cs-two [data-marker] in global.css).
+const marker: Record<Icon, string> = {
+  alert: 'cross',
+  target: 'check',
+  sparkle: 'star',
+  lightbulb: 'star',
+  check: 'check',
+  refresh: 'arrow',
+};
+
+const paths: Record<Icon, string> = {
+  alert: 'M12 3 2.5 20h19L12 3Zm0 6v5m0 3v.5',
+  target:
+    'M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Zm0-4a5 5 0 1 0 0-10 5 5 0 0 0 0 10Zm0-4a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z',
+  sparkle: 'M12 3c.6 4.6 2.4 6.4 7 7-4.6.6-6.4 2.4-7 7-.6-4.6-2.4-6.4-7-7 4.6-.6 6.4-2.4 7-7Z',
+  lightbulb:
+    'M9 18h6m-5 3h4M12 3a6 6 0 0 0-3.5 10.9c.6.4 1 1.1 1 1.8V16h5v-.3c0-.7.4-1.4 1-1.8A6 6 0 0 0 12 3Z',
+  check: 'M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Zm-4-9 3 3 5-6',
+  refresh: 'M20 11a8 8 0 0 0-14.5-4.5L4 8m0-4v4h4m-4 5a8 8 0 0 0 14.5 4.5L20 16m0 4v-4h-4',
+};
+
+const cards = [
+  { title: leftTitle, icon: leftIcon, slot: 'left' },
+  { title: rightTitle, icon: rightIcon, slot: 'right' },
+];
 ---
 
 <div class="cs-wide cs-two my-8 grid gap-4 md:grid-cols-2">
-  <div class="rounded-card bg-surface p-6">
-    <h3 class="text-h3">{leftTitle}</h3>
-    <slot name="left" />
-  </div>
-  <div class="rounded-card bg-surface p-6">
-    <h3 class="text-h3">{rightTitle}</h3>
-    <slot name="right" />
-  </div>
+  {cards.map((c, i) => (
+    <div
+      class:list={['cs-card rounded-card p-6', i === 0 ? 'bg-surface' : 'bg-sage-50']}
+      style={`--i: ${i}`}
+      data-marker={c.icon ? marker[c.icon] : undefined}
+    >
+      <div class="flex items-start gap-3">
+        {c.icon && (
+          <span
+            class:list={[
+              'inline-flex size-11 shrink-0 items-center justify-center rounded-full',
+              i === 0 ? 'bg-bg text-sage-dark' : 'bg-sage text-bg',
+            ]}
+            aria-hidden="true"
+          >
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d={paths[c.icon]} />
+            </svg>
+          </span>
+        )}
+        <h3 class="self-center text-h3">{c.title}</h3>
+      </div>
+      {c.slot === 'left' ? <slot name="left" /> : <slot name="right" />}
+    </div>
+  ))}
 </div>

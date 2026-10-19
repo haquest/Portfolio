@@ -98,7 +98,7 @@ const items = [{ id: 'overview', label: 'Overview' }, ...toc];
               methods={d.methods}
             />
             {d.tldr && (
-              <div class="mt-8 max-w-text rounded-card bg-sage-50 px-6 py-5">
+              <div class="mt-8 rounded-card bg-sage-50 px-6 py-5">
                 <p class="eyebrow">
                   <span aria-hidden="true" class="mr-1.5 text-sage">
                     ✦
@@ -183,7 +183,7 @@ const items = [{ id: 'overview', label: 'Overview' }, ...toc];
           const decimals = (target.split('.')[1] ?? '').length;
           const start = performance.now();
           const tick = (now: number) => {
-            const t = Math.min((now - start) / 1000, 1);
+            const t = Math.min((now - start) / 1800, 1);
             const eased = 1 - Math.pow(1 - t, 3);
             el.textContent = t < 1 ? (end * eased).toFixed(decimals) : target;
             if (t < 1) requestAnimationFrame(tick);

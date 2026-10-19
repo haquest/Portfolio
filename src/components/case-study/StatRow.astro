@@ -33,7 +33,7 @@ const cols =
     cols,
   ]}
 >
-  {stats.map((s) => (
-    <StatCard value={s.value} label={s.label} />
+  {stats.map((s, i) => (
+    <StatCard value={s.value} label={s.label} i={i} />
   ))}
 </ul>

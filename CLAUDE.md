@@ -117,28 +117,28 @@ before the first `##` (e.g. a confidentiality `<Callout>`) sits under Overview.
 
 ### 4. Components (no imports needed)
 
-| Component                                                                                 | Use                                                                |
-| ----------------------------------------------------------------------------------------- | ------------------------------------------------------------------ |
-| `<StatRow stats={[{value, label}]} label="…" />`                                          | headline numbers                                                   |
-| `<PullQuote by="Who">quote</PullQuote>`                                                   | user/stakeholder quote                                             |
-| `<Callout variant="note\|problem\|hmw" label?>…</Callout>`                                | problem statement, "How might we…", notes                          |
-| `<Figure src={img} alt="…" caption?="…" framed? />`                                       | one image (import it at the top of the MDX)                        |
-| `<Figure … narrow />` / `<Figure pair={[…]} columns={2} />`                               | square/tall charts at a readable size / grids (e.g. persona cards) |
-| `<Figure pair={[{src, alt, label:'Desktop'}, {src, alt, label:'Mobile'}]} caption="…" />` | side-by-side, equal heights                                        |
-| `<NumberedList>` + markdown `1. **Title** text` + `</NumberedList>`                       | findings, recommendations, decisions                               |
-| `<TagList tags={[…]} label="…" />`                                                        | pills matching the home cards                                      |
-| `<ProcessSteps steps={[{title, text, emphasis?}]} loop? />`                               | phases / loops (emphasis = "Break point")                          |
-| `<TwoColumn leftTitle rightTitle>` + `<div slot="left">` / `<div slot="right">`           | "Worked well / Would change"                                       |
-| `<Finding n="F1" kicker="Finding ONE" title="…">…</Finding>`                              | research findings                                                  |
-| `<StatusList items={[{label, status}]} />`                                                | "Search — Broken" style status rows                                |
-| `<LinkButton href="…" label="View prototype" />`                                          | clear CTA (external → new tab)                                     |
+| Component                                                                                          | Use                                                                |
+| -------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------ |
+| `<StatRow stats={[{value, label}]} label="…" />`                                                   | headline numbers                                                   |
+| `<PullQuote by="Who">quote</PullQuote>`                                                            | user/stakeholder quote                                             |
+| `<Callout variant="note\|problem\|hmw" label?>…</Callout>`                                         | problem statement, "How might we…", notes                          |
+| `<Figure src={img} alt="…" caption?="…" framed? />`                                                | one image (import it at the top of the MDX)                        |
+| `<Figure … narrow />` / `<Figure pair={[…]} columns={2} />`                                        | square/tall charts at a readable size / grids (e.g. persona cards) |
+| `<Figure pair={[{src, alt, label:'Desktop'}, {src, alt, label:'Mobile'}]} caption="…" />`          | side-by-side, equal heights                                        |
+| `<NumberedList>` + markdown `1. **Title** text` + `</NumberedList>`                                | findings, recommendations, decisions                               |
+| `<TagList tags={[…]} label="…" />`                                                                 | pills matching the home cards                                      |
+| `<ProcessSteps steps={[{title, text, emphasis?}]} loop? />`                                        | phases / loops (emphasis = "Break point")                          |
+| `<TwoColumn leftTitle leftIcon rightTitle rightIcon>` + `<div slot="left">` / `<div slot="right">` | "Worked well / Would change"                                       |
+| `<Finding n="F1" kicker="Finding ONE" title="…">…</Finding>`                                       | research findings                                                  |
+| `<StatusList items={[{label, status}]} />`                                                         | "Search — Broken" style status rows                                |
+| `<LinkButton href="…" label="View prototype" />`                                                   | clear CTA (external → new tab)                                     |
 
 **Interactive blocks (use to cut text, not to hide the story):**
 
 | Component                                                                                                  | Use                                                                     |
 | ---------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
 | `<Cards cols={2\|3\|4} numbered? items={[{title, text, tags?}]} />`                                        | turn "Label: explanation" lists into scannable cards                    |
-| `<Expandable title="…">markdown</Expandable>`                                                              | secondary detail ("read more"); native `<details>`                      |
+| `<Expandable title="…">markdown</Expandable>` (owner disliked these on the Microsite; avoid)               | secondary detail ("read more"); native `<details>`                      |
 | `<Personas personas={[{name, archetype, photo, age, occupation, context, goals, needs, frustrations}]} />` | persona tabs (Lauren Beck–style); photos are circle crops `…-photo.png` |
 | `<Compare id beforeLabel afterLabel>` + `<div slot="before">` / `<div slot="after">`                       | before/after toggle                                                     |
 | `<Figure … arrow />`                                                                                       | arrow between two images (flow A → B)                                   |
@@ -148,6 +148,11 @@ Stat numbers count up on scroll; cards stagger in. All of it degrades to plain v
 without JS and respects reduced motion. Tabs logic: `src/lib/tabs.ts`.
 Owner's direction (Oct 2026): fewer words per screen, bold key phrases, visuals over paragraphs;
 references (Manya Singh, Sugandha, Lauren Beck) are in `/reference` (gitignored).
+
+`<TwoColumn>` icons: `alert`/`target` (problem vs goal), `sparkle`/`lightbulb` (highlights vs
+lessons), `check`/`refresh` (worked well vs would change); bullets get matching markers.
+Box-shaped blocks (TL;DR, stat rows, cards, callouts, status lists) span the full article column so
+their edges line up; only running text uses `max-w-text`.
 
 MDX gotchas: put markdown inside components on its own lines with blank lines around it, and keep
 closing tags like `</div>` unindented after a list. Give `<LinkButton>` its text via `label`.
@@ -164,6 +169,14 @@ closing tags like `</div>` unindented after a list. Give `<LinkButton>` its text
 
 _Placeholder: Tanya will provide her Figma export steps (frames, sizes, naming). Add them here._
 
+## About page
+
+`src/pages/about.astro`: scrapbook polaroid portrait (washi tape, twinkling star doodles,
+straightens on hover), bio with a hand-drawn squiggle under the key phrase, facts list, Let's
+connect buttons, then an Experience list from `src/data/experience.ts` (orgs newest first; orgs
+with several roles show a ✦ timeline). The Framer "Wonder Who I Am?" cat section was removed on
+purpose. Edit roles/dates in the data file, not the page.
+
 ## Design tokens (use these names, never raw hex/px in components)
 
 - Colors: `sage` #5C6F55 (brand/buttons/links), `sage-dark` #4B6043 (hover), `sage-50`
@@ -178,7 +191,9 @@ _Placeholder: Tanya will provide her Figma export steps (frames, sizes, naming).
 - Utilities: `container-page` (max-w-6xl + gutters), `eyebrow` (small uppercase Poppins label,
   prefixed with a decorative ✦, e.g. "✦ Selected work").
 - Radius: `rounded-card` (20px), `rounded-pill`. Shadows: `shadow-card`, `shadow-card-hover`.
-- Motion: `ease-out` token; fade-up ≈500ms, hover lift 4px. All motion must respect
+- Motion: `ease-out` token; reveals ≈900ms with a 28px rise, case-study cards stagger 150ms
+  apart, stat numbers count up over 1.8s, hover lift 4px. The owner wants motion slow enough to
+  notice; don't speed it back up. All motion must respect
   `prefers-reduced-motion` (handled globally in `global.css`; don't override it).
 
 ## Brand details (from the Framer site — keep them)

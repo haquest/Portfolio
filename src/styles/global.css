@@ -139,12 +139,12 @@
 @media (prefers-reduced-motion: no-preference) {
   .js [data-reveal] {
     transition:
-      opacity 500ms var(--ease-out) var(--reveal-delay, 0ms),
-      translate 500ms var(--ease-out) var(--reveal-delay, 0ms);
+      opacity 900ms var(--ease-out) var(--reveal-delay, 0ms),
+      translate 900ms var(--ease-out) var(--reveal-delay, 0ms);
   }
   .js [data-reveal]:not(.is-visible) {
     opacity: 0;
-    translate: 0 16px;
+    translate: 0 28px;
   }
 
   /* Hero intro: one shared timeline so the heading letters and the circles
@@ -181,6 +181,14 @@
   from {
     opacity: 0;
     transform: scale(0.6);
+  }
+}
+
+@keyframes card-in {
+  from {
+    opacity: 0;
+    translate: 0 32px;
+    scale: 0.97;
   }
 }
 
@@ -379,6 +387,37 @@
   .cs-toc-mobile summary::-webkit-details-marker {
     display: none;
   }
+  /* <TwoColumn> icon markers: each card's bullets match its header icon */
+  .cs-two [data-marker] > div > ul:not([class]) {
+    list-style: none;
+    padding-left: 0;
+  }
+  .cs-two [data-marker] > div > ul:not([class]) > li {
+    position: relative;
+    padding-left: 1.9rem;
+  }
+  .cs-two [data-marker] > div > ul:not([class]) > li::before {
+    content: '';
+    position: absolute;
+    top: 0.3em;
+    left: 0;
+    width: 1.15rem;
+    height: 1.15rem;
+    background: var(--color-sage);
+    mask: var(--marker) center / contain no-repeat;
+  }
+  .cs-two [data-marker='cross'] {
+    --marker: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.4' stroke-linecap='round'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Cpath d='m9 9 6 6m0-6-6 6'/%3E%3C/svg%3E");
+  }
+  .cs-two [data-marker='check'] {
+    --marker: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Cpath d='m8 12 3 3 5-6'/%3E%3C/svg%3E");
+  }
+  .cs-two [data-marker='star'] {
+    --marker: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 3c.6 4.6 2.4 6.4 7 7-4.6.6-6.4 2.4-7 7-.6-4.6-2.4-6.4-7-7 4.6-.6 6.4-2.4 7-7Z'/%3E%3C/svg%3E");
+  }
+  .cs-two [data-marker='arrow'] {
+    --marker: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12h14m-5-5 5 5-5 5'/%3E%3C/svg%3E");
+  }
   .cs-expand summary::-webkit-details-marker {
     display: none;
   }
@@ -410,14 +449,14 @@
 @media (prefers-reduced-motion: no-preference) {
   /* Case-study sections fade up once, a little quicker than the home page cards */
   .js .cs-section[data-reveal] {
-    transition-duration: 300ms, 300ms;
+    transition-duration: 800ms, 800ms;
   }
   .js .cs-section[data-reveal]:not(.is-visible) {
-    translate: 0 12px;
+    translate: 0 28px;
   }
   /* Cards inside a section rise in one after another as the section appears */
   .js .cs-section.is-visible .cs-card {
-    animation: fade-up 500ms var(--ease-out) both;
-    animation-delay: calc(150ms + var(--i, 0) * 80ms);
+    animation: card-in 900ms var(--ease-out) both;
+    animation-delay: calc(250ms + var(--i, 0) * 150ms);
   }
 }
