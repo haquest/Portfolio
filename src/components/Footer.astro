@@ -1,14 +1,62 @@
 ---
+// Starry-night footer: a deep green sky (sage-dark mixed toward ink) with twinkling stars,
+// a few ✦ sparkles, a crescent moon and an occasional shooting star, above rolling sage hills.
+// All decoration is aria-hidden and only animates when motion is allowed.
 import { links, site } from '../data/site';
 
 const year = new Date().getFullYear();
+
+// Fixed pseudo-random star field (same on every build, so nothing shifts between deploys).
+let seed = 7;
+const rand = () => ((seed = (seed * 16807) % 2147483647) - 1) / 2147483646;
+const stars = Array.from({ length: 46 }, () => ({
+  x: rand() * 100,
+  y: rand() * 92,
+  size: rand() < 0.8 ? 1.5 + rand() : 2.5 + rand(),
+  delay: rand() * 6,
+  duration: 2.5 + rand() * 3,
+}));
+const sparkles = [
+  { x: 6, y: 18, size: 14, delay: 0.4 },
+  { x: 23, y: 72, size: 10, delay: 2.1 },
+  { x: 41, y: 12, size: 12, delay: 1.2 },
+  { x: 58, y: 64, size: 9, delay: 3.3 },
+  { x: 71, y: 24, size: 16, delay: 0.9 },
+  { x: 92, y: 58, size: 11, delay: 2.7 },
+];
 ---
 
-<footer class="mt-24 border-t border-line bg-surface">
-  <div class="container-page flex flex-col gap-10 py-16 md:flex-row md:items-end md:justify-between">
+<footer class="night relative mt-24 overflow-hidden text-sage-50">
+  <div class="sky pointer-events-none absolute inset-0" aria-hidden="true">
+    {stars.map((s) => (
+      <span
+        class="star"
+        style={`left:${s.x.toFixed(2)}%;top:${s.y.toFixed(2)}%;width:${s.size.toFixed(1)}px;height:${s.size.toFixed(1)}px;animation-delay:${s.delay.toFixed(2)}s;animation-duration:${s.duration.toFixed(2)}s`}
+      ></span>
+    ))}
+    {sparkles.map((s) => (
+      <span
+        class="sparkle"
+        style={`left:${s.x}%;top:${s.y}%;font-size:${s.size}px;animation-delay:${s.delay}s`}
+      >
+        ✦
+      </span>
+    ))}
+    <svg class="moon" viewBox="0 0 48 48" width="44" height="44">
+      <path d="M31 6a19 19 0 1 0 11 33A16 16 0 0 1 31 6Z"></path>
+    </svg>
+    <span class="shooting-star"></span>
+  </div>
+
+  <div class="container-page relative flex flex-col gap-10 pt-20 pb-10 md:flex-row md:items-end md:justify-between">
     <div>
-      <h2 class="text-h2 text-sage-dark">Let's connect, I don't bite!</h2>
-      <p class="mt-2 text-lg text-muted">
+      <h2 class="text-h2 text-sage-50">
+        Let's connect, I don't bite!{' '}
+        <span aria-hidden="true" class="text-[0.6em] align-super">
+          ✦
+        </span>
+      </h2>
+      <p class="mt-2 text-lg text-sage-50/85">
         Unless you're banana bread…
         <span role="img" aria-label="banana and bread">
           🍌🍞
@@ -22,7 +70,7 @@ const year = new Date().getFullYear();
           href={links.linkedin}
           target="_blank"
           rel="noopener noreferrer"
-          class="inline-flex min-h-11 items-center gap-2 rounded-pill border border-ink/15 bg-bg px-5 font-display text-sm font-medium transition-colors hover:border-sage hover:text-sage"
+          class="inline-flex min-h-11 items-center gap-2 rounded-pill border border-sage-50/50 px-5 font-display text-sm font-medium text-sage-50 transition-colors hover:border-sage-50 hover:bg-sage-50/10"
         >
           LinkedIn <span aria-hidden="true">↗</span>
           <span class="sr-only">(opens in new tab)</span>
@@ -31,7 +79,7 @@ const year = new Date().getFullYear();
       <li>
         <a
           href={`mailto:${links.email}`}
-          class="inline-flex min-h-11 items-center gap-2 rounded-pill bg-sage px-5 font-display text-sm font-medium text-bg transition-colors hover:bg-sage-dark"
+          class="inline-flex min-h-11 items-center gap-2 rounded-pill bg-sage-50 px-5 font-display text-sm font-medium text-sage-dark transition-colors hover:bg-bg"
         >
           Email me <span class="sr-only">at {links.email}</span>
         </a>
@@ -39,9 +87,121 @@ const year = new Date().getFullYear();
     </ul>
   </div>
 
-  <div class="border-t border-line">
-    <p class="container-page py-6 text-sm text-muted">
+  <!-- Rolling hills -->
+  <svg
+    class="relative block h-14 w-full md:h-20"
+    viewBox="0 0 1440 100"
+    preserveAspectRatio="none"
+    aria-hidden="true"
+  >
+    <path
+      class="hill-back"
+      d="M0 62C160 30 300 26 470 48s310 40 470 16 330-46 500-20V100H0Z"
+    ></path>
+    <path
+      class="hill-front"
+      d="M0 80c190-30 360-38 560-16s380 30 560 6 230-26 320-18V100H0Z"
+    ></path>
+  </svg>
+  <div class="relative bg-sage-dark">
+    <p class="container-page py-5 text-sm text-sage-50/85">
       Made with love (and some stress on the side) · {`© ${year} ${site.name}`}
     </p>
   </div>
 </footer>
+
+<style>
+  .night {
+    background: linear-gradient(
+      to bottom,
+      color-mix(in srgb, var(--color-sage-dark) 40%, var(--color-ink)),
+      color-mix(in srgb, var(--color-sage-dark) 72%, var(--color-ink))
+    );
+  }
+  .star {
+    position: absolute;
+    border-radius: 9999px;
+    background: var(--color-sage-50);
+    opacity: 0.75;
+  }
+  .sparkle {
+    position: absolute;
+    line-height: 1;
+    color: color-mix(in srgb, var(--color-sage) 45%, var(--color-sage-50));
+    opacity: 0.8;
+  }
+  .moon {
+    position: absolute;
+    top: 28px;
+    right: 9%;
+    fill: var(--color-sage-50);
+    filter: drop-shadow(0 0 12px color-mix(in srgb, var(--color-sage-50) 55%, transparent));
+  }
+  .hill-back {
+    fill: var(--color-sage);
+  }
+  .hill-front {
+    fill: var(--color-sage-dark);
+  }
+  .shooting-star {
+    position: absolute;
+    top: 14%;
+    left: 30%;
+    width: 120px;
+    height: 1.5px;
+    border-radius: 9999px;
+    background: linear-gradient(to right, transparent, var(--color-sage-50));
+    opacity: 0;
+    rotate: 18deg;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .star {
+      animation: twinkle-star 4s ease-in-out infinite;
+    }
+    .sparkle {
+      animation: twinkle-sparkle 3.6s ease-in-out infinite;
+    }
+    .moon {
+      animation: moon-float 7s ease-in-out infinite;
+    }
+    .shooting-star {
+      animation: shoot 9s ease-in 3s infinite;
+    }
+  }
+
+  @keyframes twinkle-star {
+    50% {
+      opacity: 0.2;
+      transform: scale(0.6);
+    }
+  }
+  @keyframes twinkle-sparkle {
+    50% {
+      opacity: 0.25;
+      transform: scale(0.7) rotate(25deg);
+    }
+  }
+  @keyframes moon-float {
+    50% {
+      transform: translateY(-5px);
+    }
+  }
+  @keyframes shoot {
+    0% {
+      opacity: 0;
+      transform: translateX(0);
+    }
+    2% {
+      opacity: 1;
+    }
+    9% {
+      opacity: 0;
+      transform: translateX(340px);
+    }
+    100% {
+      opacity: 0;
+      transform: translateX(340px);
+    }
+  }
+</style>

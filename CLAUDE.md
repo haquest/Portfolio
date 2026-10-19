@@ -62,8 +62,8 @@ public/                  # files served as-is (favicon, og image, robots.txt, cu
 - **Privacy / NDA:** never name real people (clients, teammates, participants) or use their pronouns;
   say "the client team", "a participant". Screenshots of publicly live sites can stay unblurred
   (the owner's call).
-  MHNSC work is under an NDA: keep the "All rights reserved to MHNSC" callout at the top and the
-  rights note at the end of that case study, and never imply the team owns the work.
+  MHNSC work is under an NDA: keep the © MHNSC "All rights reserved" note at the end of that case study
+  (the owner removed the duplicate at the top), and never imply the team owns the work.
 - Case-study body order: Problem → My Role → Process → Research Insights → Design Decisions →
   Outcome.
 - Site-wide text and links go in `src/data/site.ts`, not inline in components.
@@ -196,7 +196,9 @@ purpose. Edit roles/dates in the data file, not the page.
   (tag tint), `ink` #1C1B1F (text), `muted` #5F5E66 (secondary text), `surface` #F4F4F4,
   `line` #D9D9D9 (decorative borders only), `bg` #FFFFFF. Palette is the owner's existing Framer
   palette; don't introduce new colors without asking. Light mode only (for now).
-- Green is the brand: page headings (`h1`, footer heading) and the "TM ★" logo use `sage-dark`.
+- Green is the brand: page headings (`h1`) and the "TM ★" logo use `sage-dark`. The footer is a
+  starry night (`Footer.astro`): deep green sky (sage-dark mixed toward ink), twinkling stars, ✦
+  sparkles, crescent moon, an occasional shooting star, sage hills; its text is `sage-50`.
   Project-cover backdrops may use per-project tints (they're part of the image, not the UI).
 - Type: `font-display` (Poppins: headings, buttons, tags, labels), `font-sans` (Lato, body).
   Sizes: `text-display`, `text-h1`, `text-h2`, `text-h3`, `text-lg`, `text-base`,
