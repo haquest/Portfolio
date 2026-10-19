@@ -1,0 +1,814 @@
+---
+title: Michigan Healthy Nail Salon Cooperative
+description: Redesigned a health resource website for Michigan nail salon workers, simplifying complex content and making critical information easier to find and trust.
+tags: [UX Research, Usability Testing, Information Architecture, Interaction Design]
+thumbnail: ../../assets/projects/nail-salon-cooperative/thumbnail.png
+thumbnailAlt: Laptop showing the Michigan Healthy Nail Salon Cooperative homepage, with its purple and green lotus logo.
+status: published
+order: 3
+
+# Case-study page
+eyebrow: UX Capstone · SI 487/497 · 2025–2026
+subtitle: Turning a text-heavy Google Site into a clear, trustworthy health and safety hub for Michigan’s nail salon community.
+tldr: Over two semesters, my team of four UMSI students partnered with the Michigan Healthy Nail Salon Cooperative (MHNSC) to redesign the website nail salon workers rely on for health and safety information. An accessibility audit, card sorting, a survey and three rounds of usability testing showed people were guessing their way through the site, so we rebuilt it inside Google Sites around how they actually look for information, with one Salon Safety hub, plain-language labels, clear contact paths and scannable visuals. All three evaluation participants preferred the redesign, and we handed it off with tutorials so the client can keep it up to date.
+stats:
+  - { value: '2', label: 'Semesters, Sep 2025 – Apr 2026' }
+  - { value: '3', label: 'Rounds of usability testing' }
+  - { value: '8', label: 'Research participants' }
+  - { value: '33', label: 'Cards in the open card sort' }
+  - { value: '3/3', label: 'Evaluation participants preferred the redesign' }
+role: UX Designer & Accessibility Lead · Task & Timeline Coordinator
+timeline: Sep 2025 — Apr 2026 (2 semesters)
+team: 4 UMSI students, with MHNSC’s faculty leads as clients
+tools: [Google Sites, Figma, Miro, Canva, Zoom]
+methods: [Accessibility Audit, Card Sorting, Usability Testing, Survey, Affinity Mapping, Personas]
+---
+
+import beforeHome from '../../assets/case-studies/nail-salon-cooperative/mhnsc-before-home.png';
+import afterHome from '../../assets/case-studies/nail-salon-cooperative/mhnsc-after-home.png';
+import beforeSafety from '../../assets/case-studies/nail-salon-cooperative/mhnsc-before-salon-safety.png';
+import afterSafety from '../../assets/case-studies/nail-salon-cooperative/mhnsc-after-salon-safety.png';
+import beforeResources from '../../assets/case-studies/nail-salon-cooperative/mhnsc-before-resources.png';
+import afterResources from '../../assets/case-studies/nail-salon-cooperative/mhnsc-after-resources.png';
+import beforeAbout from '../../assets/case-studies/nail-salon-cooperative/mhnsc-before-about.png';
+import afterTeam from '../../assets/case-studies/nail-salon-cooperative/mhnsc-after-our-team.png';
+import translateBanner from '../../assets/case-studies/nail-salon-cooperative/mhnsc-translate-banner.png';
+import linh from '../../assets/case-studies/nail-salon-cooperative/mhnsc-persona-linh-tran-photo.png';
+import alex from '../../assets/case-studies/nail-salon-cooperative/mhnsc-persona-alex-wilson-photo.png';
+import sitemapBefore from '../../assets/case-studies/nail-salon-cooperative/mhnsc-sitemap-before.png';
+import sitemapAfter from '../../assets/case-studies/nail-salon-cooperative/mhnsc-sitemap-after.png';
+import affinity from '../../assets/case-studies/nail-salon-cooperative/mhnsc-affinity-diagram.png';
+import chartConfusion from '../../assets/case-studies/nail-salon-cooperative/mhnsc-chart-confusion.png';
+import chartConfidence from '../../assets/case-studies/nail-salon-cooperative/mhnsc-chart-confidence.png';
+import annotatedNav from '../../assets/case-studies/nail-salon-cooperative/mhnsc-annotated-header-nav.png';
+import annotatedSafety from '../../assets/case-studies/nail-salon-cooperative/mhnsc-annotated-salon-safety.png';
+import annotatedResources from '../../assets/case-studies/nail-salon-cooperative/mhnsc-annotated-resources.png';
+import annotatedFooter from '../../assets/case-studies/nail-salon-cooperative/mhnsc-annotated-footer.png';
+import findingExternal from '../../assets/case-studies/nail-salon-cooperative/mhnsc-finding-external-resources.png';
+import findingContact from '../../assets/case-studies/nail-salon-cooperative/mhnsc-finding-contact-black-hole.png';
+import cardSortBoard from '../../assets/case-studies/nail-salon-cooperative/mhnsc-card-sort-board.png';
+import sketches from '../../assets/case-studies/nail-salon-cooperative/mhnsc-sketches.png';
+import wireframes from '../../assets/case-studies/nail-salon-cooperative/mhnsc-wireframes.png';
+import expo from '../../assets/case-studies/nail-salon-cooperative/mhnsc-expo-team.jpg';
+
+The **Michigan Healthy Nail Salon Cooperative (MHNSC)** is a group of University of Michigan researchers and students working to protect the health and safety of nail salon workers and owners through three pillars: **research, education, and advocacy**. Many of the workers it serves are immigrants, often Vietnamese, with **limited English proficiency**.
+
+Its website was meant to be their hub for safety resources and free chemical safety training. Our year-long UMSI capstone set out to make it one.
+
+<Callout variant="note" label="The constraint">
+  The client maintains the site herself, so **everything had to be built directly in Google Sites**:
+  no custom code and no new platform. Our prototype _is_ the live website.
+</Callout>
+
+## Why couldn’t salon workers find safety information on a site built for them? {/* toc: Challenge */}
+
+Nail salon workers face ongoing exposure to harmful chemicals and occupational hazards, yet access to clear, usable health and safety information remains limited. MHNSC’s website was **functional but overly academic and text-heavy**, and it was not built for the people who needed it most.
+
+<TwoColumn leftTitle="The original site" leftIcon="alert" rightTitle="Our goals" rightIcon="target">
+<div slot="left">
+
+- **Safety information scattered** across Resources, Salon Safety and About
+- **Dense, academic text** and jargon like “The Toxic Trio”
+- Infographics with **text locked inside images**: no alt text, impossible to translate
+- **No direct way to contact the director**
+- Inconsistent, dated visuals that **undermined trust**
+
+</div>
+<div slot="right">
+
+- Reorganize navigation around **how users think**
+- Simplify content to **plain language** (6th–8th grade)
+- Make **contact pathways** explicit and easy to scan
+- Prioritize **scannable, visual** formats
+- Keep it **maintainable in Google Sites** after handoff
+
+</div>
+</TwoColumn>
+
+<Callout variant="problem">
+  Users lack a reliable and intuitive way to locate, understand, and engage with critical health and
+  safety resources on the MHNSC website.
+</Callout>
+
+<Callout variant="hmw">
+  How might we make MHNSC’s health and safety resources easy to find, understand, and trust, for
+  workers with varying levels of English, within the limits of Google Sites?
+</Callout>
+
+## My contributions {/* toc: My Role */}
+
+I was one of four UMSI students on the team. My role grew with the project, from leading accessibility in the fall to keeping a two-semester project on track in the winter.
+
+<Cards
+  cols={2}
+  label="My contributions"
+  items={[
+    {
+      title: 'Design & accessibility lead',
+      text: 'Led the language and accessibility questions at our client kickoff and co-ran the accessibility audit of the original site.',
+      tags: ['Accessibility', 'Client Communication'],
+    },
+    {
+      title: 'Task & timeline coordinator',
+      text: 'Broke down weekly tasks, managed deadlines and ran our weekly check-ins, so every milestone landed on time across both semesters.',
+      tags: ['Project Management'],
+    },
+    {
+      title: 'Research & synthesis',
+      text: 'Recruited through six U-M student organizations, moderated usability and card-sort sessions, led our synthesis session and was Analysis & Synthesis Lead for the final evaluation.',
+      tags: ['Usability Testing', 'Synthesis'],
+    },
+    {
+      title: 'Design direction',
+      text: 'Drafted our design principles and UX goals, reorganized content into the new information architecture and wrote the guide our team used to critique wireframes.',
+      tags: ['Design Principles', 'Information Architecture'],
+    },
+  ]}
+/>
+
+## A year-long, research-led process {/* toc: Process */}
+
+<ProcessSteps
+  label="Project timeline"
+  steps={[
+    {
+      title: 'Discover · Fall 2025',
+      text: 'Client kickoff, project scope, desk research and a comparison with peer nail salon coalitions',
+    },
+    {
+      title: 'Plan · Nov–Dec 2025',
+      text: 'Research plan, recruitment outreach and a $160 grant for participant compensation',
+    },
+    {
+      title: 'Research · Jan–Feb 2026',
+      text: 'Accessibility audit, card sorting, usability testing and a survey',
+    },
+    {
+      title: 'Synthesize · Feb 2026',
+      text: 'Affinity diagram, personas, journey map and a new site map',
+    },
+    {
+      title: 'Design & test · Feb–Apr 2026',
+      text: 'Sketches, wireframes, Google Sites builds and two more rounds of testing',
+    },
+    {
+      title: 'Hand off · Apr 2026',
+      text: 'UMSI Expo, tutorial videos and a guide to switching the live domain',
+    },
+  ]}
+/>
+
+## What we learned from users {/* toc: Research */}
+
+We used a sequential, mixed-methods approach. Each method built on the last: **card sorting** explored how people group information, **usability testing** showed how they actually move through the site, and a **survey** checked the patterns we saw.
+
+<Cards
+  cols={4}
+  label="Research methods"
+  items={[
+    {
+      title: 'Accessibility audit',
+      text: 'WAVE, axe DevTools, keyboard, screen-reader and 200% zoom checks across the site',
+    },
+    {
+      title: 'Open card sort',
+      text: '33 cards in Miro, to see how users naturally group MHNSC’s content',
+    },
+    {
+      title: 'Usability testing',
+      text: 'Moderated Zoom sessions, 5 tasks and think-aloud on the original site',
+    },
+    {
+      title: 'Survey',
+      text: 'Ease of use, trust, readability and preferred content formats',
+    },
+  ]}
+/>
+
+Participants were young adults (21–25) with **direct ties to the nail salon industry**: family-run salons, a former salon receptionist, relatives who are licensed technicians. We recruited them through the Vietnamese Student Association, other student groups, family and friends. Because the group was small and specific, **we report exact fractions instead of percentages**.
+
+### The accessibility audit
+
+<StatusList
+  label="Accessibility audit of the original site"
+  items={[
+    { label: 'Alt text', status: 'Missing on nearly all images' },
+    { label: 'Color contrast', status: 'Errors site-wide' },
+    { label: 'Infographic text', status: 'Locked inside images' },
+    { label: 'Director contact', status: 'Not listed anywhere' },
+  ]}
+/>
+
+### Three key insights
+
+<Finding n="F1" kicker="Insight ONE" title="Navigation didn’t match how users think">
+
+Users completed **4 of 5 tasks on average, but by trial and error**, often checking the wrong section first, like looking in Resources before finding safety tips in Salon Safety. In the card sort, both participants grouped every safety card into one place: they expected a single **“safety hub.”**
+
+<PullQuote by="Round 1 participant, on the Resources page">
+  It’s just, like, a huge list. And it’s not really categorized or anything.
+</PullQuote>
+
+<Figure
+  src={cardSortBoard}
+  framed
+  alt="Open card sort board in Miro: participants’ groups of sticky notes, with all safety-related cards such as Safety Tips, Salon Safety Series and Safe Product Storage clustered into one group."
+  caption="Card sorting: safety content belonged together, not split across tabs."
+/>
+
+</Finding>
+
+<Finding n="F2" kicker="Insight TWO" title="Jargon and dense text blocked understanding">
+
+Specialized labels caused hesitation and confusion, and long paragraphs were especially hard for **someone less proficient in English**. Every participant asked for information to be **“chunked up”** and visual.
+
+<TagList
+  label="Labels participants couldn’t place"
+  tags={['The Toxic Trio', 'Routes of Exposure', 'Improving Ergonomics']}
+/>
+
+<PullQuote by="Round 1 participant">
+  I hate, like, reading, like, a lot of words, or, like, big paragraphs… chunk it up, I guess, but
+  also be succinct and, like, straightforward.
+</PullQuote>
+
+</Finding>
+
+<Finding n="F3" kicker="Insight THREE" title="No clear contact path undermined trust">
+
+**Every participant failed to find the director’s contact information.** They fell back on a general form, unsure their message would reach the right person. In the survey, the two participants who struggled most rated their likelihood to recommend the site **1/5 and 2/5**.
+
+<Figure
+  pair={[
+    {
+      src: findingContact,
+      alt: 'Annotated screenshot of the original About Us page with team photos and bios: no contact information for MHNSC staff, and all participants failed to find the director’s info.',
+      label: 'The “contact” black hole',
+    },
+    {
+      src: findingExternal,
+      alt: 'Annotated screenshots showing the original Resources page opening an external training portal in a new site, which confused a participant.',
+      label: 'Links that left the site',
+    },
+  ]}
+/>
+
+</Finding>
+
+### Who we designed for
+
+Personas kept us from designing for “everyone.” **Linh**, a licensed nail technician, is our primary user; **Alex**, a student learning safe nail practices, represents supporting users.
+
+<Personas
+  id="mhnsc-personas"
+  personas={[
+    {
+      name: 'Linh Tran',
+      archetype: 'Primary Persona',
+      photo: linh,
+      age: 42,
+      occupation: 'Licensed Nail Tech',
+      details: [
+        { label: 'Language', value: 'Vietnamese + moderate English' },
+        { label: 'Device', value: 'Mobile' },
+        { label: 'Tech comfort', value: 'Moderate' },
+      ],
+      context:
+        'Linh works full-time in a nail salon and is familiar with common health and safety risks through workshops, license renewal, and social media. She visits MHNSC to quickly find practical, trustworthy resources for her work.',
+      columns: [
+        {
+          title: 'Motivations',
+          items: [
+            'Motivated to prevent health risks for herself and clients',
+            'Wants confidence in safe, legally appropriate practices',
+            'Values clear, credible information',
+            'Prefers efficient learning that fits a busy workday',
+          ],
+        },
+        {
+          title: 'Goals',
+          items: [
+            'Find specific safety topics',
+            'Confirm best and legally compliant practices',
+            'Access Vietnamese-language resources',
+            'Learn quickly without reading long text blocks',
+          ],
+        },
+        {
+          title: 'Frustrations',
+          items: [
+            'Resources feel overwhelming and uncategorized',
+            'Vietnamese materials are hard to locate',
+            'Content is text-heavy and hard to scan',
+            'Clickable elements are unclear',
+          ],
+        },
+        {
+          title: 'Behaviors',
+          items: [
+            'Completes simple tasks quickly',
+            'Tries multiple paths when information isn’t obvious',
+            'Uses translation tools as a workaround',
+            'Prefers information grouped into clear categories',
+          ],
+        },
+        {
+          title: 'Needs',
+          items: [
+            'Categorized resources',
+            'Visible language options',
+            'Scannable layouts (headings, visuals)',
+            'Clear visual cues for interaction',
+          ],
+        },
+      ],
+    },
+    {
+      name: 'Alex Wilson',
+      archetype: 'Secondary Persona',
+      photo: alex,
+      age: 22,
+      occupation: 'Student',
+      details: [
+        { label: 'Language', value: 'English' },
+        { label: 'Device', value: 'Mobile + Desktop' },
+        { label: 'Tech comfort', value: 'High' },
+      ],
+      context:
+        'Alex is a student who does her own and her friends’ nails. While not licensed, she is increasingly aware of nail health and safety risks and uses MHNSC to learn safe practices and find credible information beyond social media.',
+      columns: [
+        {
+          title: 'Motivations',
+          items: [
+            'Wants to avoid unsafe nail practices',
+            'Seeks reliable information beyond social media',
+            'Wants reassurance she is learning the right way',
+          ],
+        },
+        {
+          title: 'Goals',
+          items: [
+            'Learn basic nail safety practices',
+            'Understand MHNSC’s mission and role',
+            'Find trustworthy, beginner-friendly resources',
+            'Know who to contact with questions',
+          ],
+        },
+        {
+          title: 'Frustrations',
+          items: [
+            'Unsure where to look for information',
+            'Navigation labels feel unclear',
+            'Contact information is hard to find',
+            'No search when she feels stuck',
+            'Clickable elements are unclear',
+          ],
+        },
+        {
+          title: 'Behaviors',
+          items: [
+            'Clicks through multiple sections when unsure',
+            'Relies on navigation labels for direction',
+            'Slows down when hierarchy is unclear',
+            'Abandons tasks when information isn’t surfaced',
+          ],
+        },
+        {
+          title: 'Needs',
+          items: [
+            'Clear starting points for beginners',
+            'Descriptive navigation and page titles',
+            'Search functionality',
+            'Simple explanations with visual cues',
+          ],
+        },
+      ],
+    },
+  ]}
+/>
+
+## From insights to direction {/* toc: Direction */}
+
+### Design principles
+
+I turned our research into four principles that guided every design decision, each tied to a measurable UX goal.
+
+<Cards
+  cols={2}
+  numbered
+  label="Design principles"
+  items={[
+    {
+      title: 'Clarity over Complexity',
+      text: 'Plain language, scannable content and intuitive organization over industry jargon and dense text.',
+      tags: ['Goal: 6th–8th grade reading level'],
+    },
+    {
+      title: 'Design for Trust',
+      text: 'Transparent contact pathways and clear, authoritative language, so users feel confident recommending the site.',
+      tags: ['Goal: Clear contact on every page'],
+    },
+    {
+      title: 'Meet the User’s Mental Model',
+      text: 'Organize content the way users naturally group it, like a consolidated “safety hub.”',
+      tags: ['Goal: First-click findability'],
+    },
+    {
+      title: 'Prioritize Scannability',
+      text: 'Infographics, icons and clear headings so critical safety information can be found at a glance.',
+      tags: ['Goal: 75% of key resources visual'],
+    },
+  ]}
+/>
+
+### A new information architecture
+
+Card sorting became our new site map. **Safety content now lives in one Salon Safety hub** with three clear categories, “What We Do” became the three **pillars** on About, and **In the News moved under Resources**, which now separates MHNSC’s own work from external resources.
+
+<Figure
+  pair={[
+    {
+      src: sitemapBefore,
+      alt: 'Original MHNSC site map: Home, About Us (Our Team, Projects, What We Do), Resources with six mixed sub-items, In The News, Salon Safety as infographics and text, and Contact Us as a Google Form.',
+      label: 'Original site map',
+    },
+    {
+      src: sitemapAfter,
+      alt: 'New MHNSC site map: Home and About each show the mission, who we are, the 3 pillars and projects; Resources splits into MHNSC Resources (free training, publications) and External Resources (articles, videos, news, documents) plus In The News; Salon Safety splits into Health Safety, Chemical Safety and Safe Salon Practice.',
+      label: 'New site map',
+    },
+  ]}
+  caption="Before and after: scattered content regrouped into the categories users created."
+/>
+
+## Designing within Google Sites {/* toc: Design */}
+
+### From sketches straight to a live build
+
+We sketched layouts for the homepage and Salon Safety page, then made two wireframe versions of each. Because Google Sites was both our prototyping tool and our final product, **we skipped a separate mid-fidelity phase** and built directly in Google Sites, so every test happened on the real interface.
+
+<Figure
+  pair={[
+    {
+      src: sketches,
+      alt: 'Hand-drawn sketches of the homepage and Salon Safety page: a header, mission statement, the three pillars as circles, card grids and section titles.',
+      label: 'Initial sketches',
+    },
+    {
+      src: wireframes,
+      alt: 'Grayscale wireframes: two versions of the homepage with hero, mission, reports and contact sections, and two versions of the Salon Safety page with titled sections.',
+      label: 'Wireframes (v1 and v2)',
+    },
+  ]}
+/>
+
+<Callout variant="note" label="A guide I wrote for the team">
+  To keep critique productive, I wrote a guide for giving feedback on wireframes: **anchor every
+  comment in what we learned from users, not personal preferences.** Each review asked three
+  questions: _Does the structure match how users think? Can all users understand what they’re
+  seeing? Does this feel like a reliable resource users would share?_
+</Callout>
+
+### Key design decisions
+
+<Cards
+  cols={3}
+  numbered
+  label="Key design decisions"
+  items={[
+    {
+      title: 'Reorganized navigation',
+      text: 'Consolidated scattered content, removed redundant options and used plain-language labels.',
+      tags: ['Mental Models', 'Cognitive Load'],
+    },
+    {
+      title: 'Plain language & clear labels',
+      text: 'Replaced jargon and used words users expect, like naming the three “pillars” directly.',
+      tags: ['Clarity', 'Accessibility'],
+    },
+    {
+      title: 'Scannable visual hierarchy',
+      text: 'One type system (Prompt + Montserrat), purple color-coded sections, icons and spacing to break up dense content.',
+      tags: ['Hierarchy', 'Scannability'],
+    },
+    {
+      title: 'Visuals that explain',
+      text: 'Infographic text rebuilt as real, translatable text with images, diagrams and myth/fact cards.',
+      tags: ['Comprehension', 'Translation'],
+    },
+    {
+      title: 'Credibility signals',
+      text: 'Homepage sections for publications, reports and featured stories; current work clearly separated from past projects.',
+      tags: ['Trust', 'Storytelling'],
+    },
+    {
+      title: 'Consistent headers, footers & buttons',
+      text: 'Branded page headers, a footer with contact info on every page, and buttons that say where they lead (Article, Video, Webinar).',
+      tags: ['Consistency', 'Clear CTAs'],
+    },
+  ]}
+/>
+
+<Figure
+  pair={[
+    {
+      src: annotatedNav,
+      alt: 'Annotated redesign homepage on a laptop: a translation announcement banner, a redesigned header image, and a condensed, reorganized navigation bar.',
+      label: 'Header & navigation',
+    },
+    {
+      src: annotatedSafety,
+      alt: 'Annotated redesign Salon Safety page on a laptop: information divided into categories and rebuilt from infographics into text and images.',
+      label: 'Salon Safety',
+    },
+    {
+      src: annotatedResources,
+      alt: 'Annotated redesign Resources page on a laptop: YouTube thumbnails and articles embedded directly instead of long lists of links.',
+      label: 'Resources',
+    },
+    {
+      src: annotatedFooter,
+      alt: 'Annotated redesign page bottom on a laptop: a new footer with contact information and social links on every page.',
+      label: 'Footer',
+    },
+  ]}
+  columns={2}
+/>
+
+## Testing, iterating, testing again {/* toc: Testing */}
+
+We tested real Google Sites builds, refined them in place and tested again, comparing the **original site and the redesign with the same tasks** each time.
+
+<ProcessSteps
+  label="Three rounds of usability testing"
+  steps={[
+    {
+      title: 'Round 1 · Baseline',
+      text: 'Original site only · 4 participants · 5 tasks plus card sorts',
+    },
+    {
+      title: 'Round 2 · Work in progress',
+      text: 'Original vs. draft redesign · 2 participants',
+    },
+    {
+      title: 'Round 3 · Evaluation',
+      text: 'Original vs. final redesign · 3 participants, same tasks',
+    },
+  ]}
+/>
+
+### What Round 2 changed
+
+<Cards
+  cols={2}
+  label="Round 2 findings and revisions"
+  items={[
+    {
+      title: 'Salon Safety was still too dense',
+      text: 'Added specific headings, broke paragraphs into scannable sections, and added icons and diagrams.',
+    },
+    {
+      title: 'Director contact was still unclear',
+      text: 'Added role-based contact information to the Our Team bios, as a participant suggested.',
+    },
+    {
+      title: 'Resources were clear but dense',
+      text: 'Reduced redundancy and improved the layout and visibility of training resources.',
+    },
+    {
+      title: 'Outdated content hurt credibility',
+      text: 'Clearly separated current resources and projects from past work.',
+    },
+  ]}
+/>
+
+<PullQuote by="Round 2 participant, on the redesign">
+  Definitely the redesign one… because of, like, the salon safety page… this was a really helpful
+  one, that I can glance in less than 2 minutes and get what I need.
+</PullQuote>
+
+### Round 3: did the redesign work?
+
+<StatRow
+  label="Evaluation results"
+  stats={[
+    { value: '3/3', label: 'Preferred the redesign' },
+    { value: '7.5', label: 'Average task confidence out of 10 (up from 6.67)' },
+    { value: '3/3', label: 'Found the safe-storage tip on the redesign' },
+  ]}
+/>
+
+<Figure
+  pair={[
+    {
+      src: chartConfusion,
+      alt: 'Bar chart of the percentage of tasks where each of three participants showed verbal confusion: lower on the redesign than on the original for all three.',
+      label: 'Confusion, original vs. redesign',
+    },
+    {
+      src: chartConfidence,
+      alt: 'Bar chart of self-rated task confidence on a 1–10 scale for three participants on the original site and the redesign.',
+      label: 'Task confidence, original vs. redesign',
+    },
+  ]}
+/>
+
+<Callout variant="note" label="Reading the numbers honestly">
+  With three participants, the confidence gain wasn’t statistically significant (paired t-test, p >
+  .05), and one participant’s confidence dipped. We treated it as a **directional signal** and
+  leaned on what we observed: fewer wrong turns, clearer paths to contact information and a
+  unanimous preference for the redesign.
+</Callout>
+
+<TwoColumn leftTitle="What improved" leftIcon="check" rightTitle="Still to fix" rightIcon="refresh">
+<div slot="left">
+
+- **Contact information** was far easier to find
+- **Clearer organization**: tabs felt “more directive”
+- More **professional and credible** look
+- **Easier to scan**, with less on screen at once
+
+</div>
+<div slot="right">
+
+- **Podcasts** were still hard to find
+- One participant **couldn’t find a Vietnamese resource**
+- The Projects page still felt **wordy**
+- Next: **subcategories** and clearer resource types in the navigation
+
+</div>
+</TwoColumn>
+
+<PullQuote by="Round 3 participant">
+  I could tell someone, like, took the time and dedication to make it look prettier, and that
+  already just, like, makes me a lot more interested, and I guess it also makes MHNSC more, like,
+  credible and reliable.
+</PullQuote>
+
+## Before & after {/* toc: Before & After */}
+
+Toggle between the original site and our redesign. Every page was rebuilt in Google Sites, so the client can keep editing it.
+
+### Homepage
+
+The homepage now says **what MHNSC is at a glance**, puts the three pillars and the **free chemical safety training** front and center, and showcases MHNSC’s own publications.
+
+<Compare id="mhnsc-home" beforeLabel="Original" afterLabel="Redesign">
+<div slot="before">
+
+<Figure
+  src={beforeHome}
+  alt="Original MHNSC homepage: a large purple geometric header with the organization name, the tagline “Polish with purpose,” a short paragraph next to the logo and three photo links for Research, Education and Advocacy."
+/>
+
+</div>
+<div slot="after">
+
+<Figure
+  src={afterHome}
+  alt="Redesigned MHNSC homepage: a translation tutorial banner, a photo header with the lotus logo and Research · Advocacy · Education, a “What is MHNSC?” section, an Our Pillars band, and a featured Free Chemical Safety Training section."
+/>
+
+</div>
+</Compare>
+
+### Salon Safety
+
+The biggest change. Infographics whose text was locked inside images became **real text, organized into Health Safety, Chemical Safety and Safe Salon Practice**, which screen readers and translation tools can read.
+
+<Compare id="mhnsc-safety" beforeLabel="Original" afterLabel="Redesign">
+<div slot="before">
+
+<Figure
+  src={beforeSafety}
+  alt="Original Salon Safety page: a grid of green and white #SalonSafetySeries infographics packed with small text about effects, safety tips, nail infections and the Toxic Trio."
+/>
+
+</div>
+<div slot="after">
+
+<Figure
+  src={afterSafety}
+  alt="Redesigned Salon Safety page: a Health Safety section explaining toluene with photos and three columns for Hazard, Effects and Safety Tips, followed by a section on protecting yourself from nail infections."
+/>
+
+</div>
+</Compare>
+
+### Resources
+
+A wall of links became **organized sections**: free training, publication cards with thumbnails, and topics grouped into collapsible categories with labeled media types.
+
+<Compare id="mhnsc-resources" beforeLabel="Original" afterLabel="Redesign">
+<div slot="before">
+
+<Figure
+  src={beforeResources}
+  alt="Original Resources page: a long, dense list of underlined publication links under Publications from Us and Publications from Other Groups."
+/>
+
+</div>
+<div slot="after">
+
+<Figure
+  src={afterResources}
+  alt="Redesigned Resources page: a Free Training section with photo cards for the chemical safety training and a coming-soon course, then a Publications section of cards with cover thumbnails."
+/>
+
+</div>
+</Compare>
+
+### Our Team
+
+Each team member now has a role, affiliation, short bio, interests and **contact information**, which answers the question no one could answer in Round 1.
+
+<Compare id="mhnsc-team" beforeLabel="Original" afterLabel="Redesign">
+<div slot="before">
+
+<Figure
+  src={beforeAbout}
+  alt="Original About Us page: a photo of hands during a manicure next to a long Who We Are paragraph, Our Mission, a group photo and the start of a grid of team member photos, with no contact details."
+/>
+
+</div>
+<div slot="after">
+
+<Figure
+  src={afterTeam}
+  alt="Redesigned Our Team page: Current Members listed one per row with a photo, role label such as Director of MHNSC or Co-Director, name and credentials, affiliation, bio, interests and a contact email."
+/>
+
+</div>
+</Compare>
+
+### Translation within the platform
+
+Google Sites can’t host a language toggle, so we added a **site-wide banner linking to a short tutorial on translating any page with Google Chrome**. Plain, real text (rather than text inside images) makes those translations work.
+
+<Figure
+  src={translateBanner}
+  alt="The redesign’s top banner: “Click here to learn how to translate this page using Google Chrome” with a Watch Tutorial button."
+/>
+
+<LinkButton
+  href="https://sites.google.com/umich.edu/umsiversion-mhnsc/home"
+  label="View the redesign"
+/>
+
+## Handoff & impact {/* toc: Impact */}
+
+Because the prototype was the live product, our final meeting was a **hands-on walkthrough of the real site**, focused on making sure our client felt confident maintaining it herself.
+
+<Cards
+  cols={3}
+  label="What we handed off"
+  items={[
+    {
+      title: 'Design assets & layout guidelines',
+      text: 'Everything we created, organized in a shared Drive so the site stays cohesive over time.',
+    },
+    {
+      title: 'Google Sites tutorial videos',
+      text: 'Walkthroughs tailored to the MHNSC site, like editing pages and duplicating sections.',
+    },
+    {
+      title: 'Domain switch guide',
+      text: 'Step-by-step instructions to move MHNSC’s web address to the redesign, so it can go public.',
+    },
+  ]}
+/>
+
+Our client’s feedback was **very positive**. She especially appreciated our hands-on approach across both semesters and the assets and tutorials we left behind. We also recommended:
+
+<NumberedList>
+
+1. **Content maintenance** Remove outdated resources, fix broken links and keep health and safety information accurate.
+2. **Analytics** Use Google Analytics to see which pages are visited most and how long people stay.
+3. **Community voices** Add testimonials and stories from salon workers to strengthen credibility.
+
+</NumberedList>
+
+<Figure
+  src={expo}
+  alt="Our four-person team standing beside our research poster, “Enhancing Salon Safety through the Michigan Healthy Nail Salon Cooperative,” at the UMSI Expo."
+  caption="Presenting our work at the UMSI Expo, April 2026."
+/>
+
+## What worked. What I learned. {/* toc: Reflection */}
+
+<TwoColumn leftTitle="What worked" leftIcon="sparkle" rightTitle="What I learned" rightIcon="lightbulb">
+<div slot="left">
+
+- **Anchoring every decision in research**, from principles to wireframe critiques
+- **Testing the real build** instead of mockups, round after round
+- **Designing for handoff**, so the client can own the site after we leave
+
+</div>
+<div slot="right">
+
+- **Constraints shape good solutions**: a translation banner instead of a language toggle we couldn’t build
+- **Plain language is accessibility**: clearer English helps everyone, especially multilingual users
+- **Small samples need honest reporting**: fractions and directional signals, not big claims
+
+</div>
+</TwoColumn>
