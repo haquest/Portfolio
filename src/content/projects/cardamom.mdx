@@ -23,7 +23,7 @@ tools: [Figma, UserTesting, Miro]
 methods: [Heuristic Evaluation, On-Site Observations, User Interviews, Usability Testing]
 ---
 
-import persona from '../../assets/case-studies/cardamom/cardamom-persona-priya-sharma.png';
+import priya from '../../assets/case-studies/cardamom/cardamom-persona-priya-sharma-photo.png';
 import crazy8s from '../../assets/case-studies/cardamom/cardamom-crazy8s.png';
 import sketchDesktop from '../../assets/case-studies/cardamom/cardamom-sketch-desktop.jpg';
 import sketchMobile from '../../assets/case-studies/cardamom/cardamom-sketch-mobile.jpg';
@@ -117,10 +117,56 @@ This 6-week individual project focused on redesigning the complete e-commerce ex
 
 The persona kept the design grounded in **real user behavior rather than assumptions**, prioritizing users who want a **quick, convenient, and straightforward way to order takeout**.
 
-<Figure
-  src={persona}
-  alt="Persona card for Priya Sharma, a 25-year-old University of Michigan grad student who lives off-campus with one roommate. Bio, behaviors, needs and goals, and frustrations sections describe calling for carry-out because there is no online ordering, wanting a quick way to order for pickup and a smooth checkout, and finding the carry-out process backdated. A technical profile rates her internet use, online shopping and tech savviness as high. Her quote: “I love the food here, but I wish there was a way to order online and pick it up. It would make my life so much easier!”"
-  caption="Priya wants to order online and pick up, which the old site couldn't offer."
+<Personas
+  id="cardamom-persona"
+  personas={[
+    {
+      name: 'Priya Sharma',
+      archetype: 'Grad Student @ UM',
+      photo: priya,
+      age: 25,
+      occupation: 'Graduate student, University of Michigan',
+      details: [{ label: 'Lives', value: 'Off-campus, 1 roommate' }],
+      context:
+        'Priya is a 25 year old busy graduate student at the University of Michigan who juggles long days of classes, research, and group projects. She lives off-campus with one roommate and frequently turns to local restaurants for convenient meals. Priya loves Indian food and visits Cardamom often, sometimes even dining in with her friends, but more or so orders takeout when she doesn’t have much time.',
+      profile: [
+        { label: 'Internet Usage', value: 5 },
+        { label: 'Online Shopping', value: 4 },
+        { label: 'Tech Savvy', value: 4 },
+      ],
+      columns: [
+        {
+          title: 'Behaviors',
+          items: [
+            'Often calls restaurant for carry out since there’s no online ordering',
+            'When dining in, she’s willing to wait a little, but dislikes the crowding at the entrance',
+            'Sometimes has to call over staff for orders, bills, or extra food boxes',
+            'Uses her laptop and phone daily for anything tech related',
+          ],
+        },
+        {
+          title: 'Needs & Goals',
+          items: [
+            'Quick and convenient way to order food online for pick up',
+            'Wants some sort of seating while waiting for a table during busy periods',
+            'Values good food quality and friendly interactions with staff',
+            'Wants a smooth and easy checkout process (dine in and take out)',
+          ],
+        },
+        {
+          title: 'Frustrations / Pain Points',
+          items: [
+            'No designated waiting area, making things uncomfortable when it is crowded',
+            'Having to sometimes call staff over to order or get the bill',
+            'Carry out process feels backdated and time consuming',
+            'Some dishes flavors don’t really match her expectations, which throws her off sometimes',
+          ],
+        },
+      ],
+      quote:
+        'I love the food here, but I wish there was a way to order online and pick it up. It would make my life so much easier!',
+    },
+  ]}
 />
 
 ## Ideation & design process {/* toc: Ideation */}

@@ -135,13 +135,13 @@ before the first `##` (e.g. a confidentiality `<Callout>`) sits under Overview.
 
 **Interactive blocks (use to cut text, not to hide the story):**
 
-| Component                                                                                                  | Use                                                                     |
-| ---------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
-| `<Cards cols={2\|3\|4} numbered? items={[{title, text, tags?}]} />`                                        | turn "Label: explanation" lists into scannable cards                    |
-| `<Expandable title="…">markdown</Expandable>` (owner disliked these on the Microsite; avoid)               | secondary detail ("read more"); native `<details>`                      |
-| `<Personas personas={[{name, archetype, photo, age, occupation, context, goals, needs, frustrations}]} />` | persona tabs (Lauren Beck–style); photos are circle crops `…-photo.png` |
-| `<Compare id beforeLabel afterLabel>` + `<div slot="before">` / `<div slot="after">`                       | before/after toggle                                                     |
-| `<Figure … arrow />`                                                                                       | arrow between two images (flow A → B)                                   |
+| Component                                                                                                  | Use                                                                                                                                                     |
+| ---------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `<Cards cols={2\|3\|4} numbered? items={[{title, text, tags?}]} />`                                        | turn "Label: explanation" lists into scannable cards                                                                                                    |
+| `<Expandable title="…">markdown</Expandable>` (owner disliked these on the Microsite; avoid)               | secondary detail ("read more"); native `<details>`                                                                                                      |
+| `<Personas personas={[{name, archetype, photo, age, occupation, context, goals, needs, frustrations}]} />` | persona tabs (Lauren Beck–style; one persona = no tabs); photos are circle crops `…-photo.png`; optional `details`, `columns`, `profile` (1–5), `quote` |
+| `<Compare id beforeLabel afterLabel>` + `<div slot="before">` / `<div slot="after">`                       | before/after toggle                                                                                                                                     |
+| `<Figure … arrow />`                                                                                       | arrow between two images (flow A → B)                                                                                                                   |
 
 Every `<Figure>` image gets a ⤢ magnifier that opens `Lightbox.astro` (fit / actual size).
 Stat numbers count up on scroll; cards stagger in. All of it degrades to plain visible content
