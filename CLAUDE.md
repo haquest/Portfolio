@@ -212,10 +212,8 @@ purpose. Edit roles/dates in the data file, not the page.
   in one by one (`.letter`, CSS only, with an `sr-only` copy of the sentence for screen readers).
   Illustration sits in the Framer circle composition (outline ring + three sage circles, 367×493
   ratio, image 192px wide). Letters and circles share one slow timeline in `global.css`
-  (both finish ≈2.5s); keep them in sync if you change either. Only "creative
-  simplicity" in the tagline gets a hand-drawn sage underline (a nearly straight, tapered pen
-  stroke) that draws in from 2.4s (`.doodle-word` in `Hero.astro`). The owner rejected
-  underlines on "precision" and "passion" and wavier lines; keep it to this one.
+  (both finish ≈2.5s); keep them in sync if you change either. The owner tried doodle
+  underlines on the tagline and asked for them removed; don't add them back.
 - **Availability badge**: two lines, outlined pill. Line 1 "Available for Full-Time" (priority),
   line 2 "Starting Summer 2027 ✦ Open to Relocate".
 - **Project covers**: device mockups (laptop, plus phone when a mobile screen exists) on a soft
