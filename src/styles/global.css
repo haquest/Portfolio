@@ -203,13 +203,13 @@
    Star cursor
    Baseline (no JS, or reduced motion): a static star cursor image.
    With JS + a mouse + motion allowed, StarCursor.astro hides the
-   system cursor and draws an animated star that pulses over links
+   system cursor and draws an animated sparkle that turns over links
    and spins on click. Touch screens keep their normal behaviour.
    ------------------------------------------------------------------ */
 @media (pointer: fine) {
   html {
     cursor:
-      url('/cursors/star.svg') 12 12,
+      url('/cursors/star.svg') 16 16,
       auto;
   }
   a,
@@ -217,18 +217,12 @@
   summary,
   label {
     cursor:
-      url('/cursors/star-hover.svg') 14 14,
+      url('/cursors/star-hover.svg') 16 16,
       pointer;
   }
   html.star-cursor,
   html.star-cursor * {
     cursor: none !important;
-  }
-}
-
-@keyframes star-pulse {
-  50% {
-    transform: scale(1.35);
   }
 }
 

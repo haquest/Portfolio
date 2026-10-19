@@ -9,6 +9,14 @@ import illustration from '../assets/illustrations/tanya-and-oreo.png';
 const heading = "Hiya, I'm Tanya.";
 let index = 0;
 const words = heading.split(' ').map((word) => [...word].map((char) => ({ char, i: index++ })));
+
+// Hand-drawn underlines under the three values (like the Framer doodles). Each one
+// draws itself in after the heading finishes; reduced motion shows them straight away.
+const doodles = [
+  'M2 9c22-5 48-6 76-3s52 3 80-2c14-2 26-2 38 0',
+  'M2 8c30-6 66-7 100-3s62 3 96-1',
+  'M3 9c34-8 78-7 118-1 30 4 54 1 76-4',
+];
 ---
 
 <section
@@ -42,7 +50,23 @@ const words = heading.split(' ').map((word) => [...word].map((char) => ({ char, 
     </h1>
 
     <p class="mt-6 max-w-[38ch] text-lg text-ink">
-      A Product Designer redefining boundaries through creative simplicity, precision, and passion
+      {'A Product Designer redefining boundaries through '}
+      {['creative simplicity', 'precision', 'passion'].map((word, n) => (
+        <>
+          <span class="doodle-word">
+            {word}
+            <svg
+              viewBox="0 0 200 14"
+              preserveAspectRatio="none"
+              aria-hidden="true"
+              style={`--n: ${n}`}
+            >
+              <path d={doodles[n]} pathLength="1" />
+            </svg>
+          </span>
+          {[', ', ', and ', ' '][n]}
+        </>
+      ))}
       to craft intuitive, user-centered digital experiences.
     </p>
     <p class="mt-4 max-w-[46ch] text-muted">
@@ -94,3 +118,41 @@ const words = heading.split(' ').map((word) => [...word].map((char) => ({ char, 
     />
   </div>
 </section>
+
+<style>
+  .doodle-word {
+    position: relative;
+    display: inline-block;
+    white-space: nowrap;
+  }
+  .doodle-word svg {
+    position: absolute;
+    left: -2%;
+    bottom: -0.3em;
+    width: 104%;
+    height: 0.45em;
+    overflow: visible;
+    rotate: calc(-1deg - var(--n) * 1deg);
+  }
+  .doodle-word path {
+    fill: none;
+    stroke: var(--color-sage);
+    stroke-width: 3;
+    stroke-linecap: round;
+    vector-effect: non-scaling-stroke;
+  }
+  /* Draw in one after another once "Hiya, I'm Tanya." has popped in (≈2.5s) */
+  @media (prefers-reduced-motion: no-preference) {
+    .doodle-word path {
+      stroke-dasharray: 1;
+      stroke-dashoffset: 1;
+      animation: doodle-draw 900ms var(--ease-out) forwards;
+      animation-delay: calc(2400ms + var(--n) * 450ms);
+    }
+  }
+  @keyframes doodle-draw {
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+</style>

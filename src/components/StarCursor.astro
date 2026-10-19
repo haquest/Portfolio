@@ -1,18 +1,25 @@
 ---
-// Animated star cursor (Tanya's "TM ★" brand). Only runs for mouse/trackpad users who
-// haven't asked for reduced motion; everyone else gets the static star from global.css.
+// Sparkle cursor: a sage four-point sparkle with an ink outline (so it shows on white and
+// doesn't echo the logo's five-point ★), plus a tiny companion sparkle that twinkles.
+// Over clickable things it turns a quarter, grows and the companion swings round; a click
+// spins it and sends out a ring. Only runs for mouse/trackpad users who haven't asked for
+// reduced motion; everyone else gets the static sparkle from global.css.
 ---
 
 <div id="star-cursor" aria-hidden="true">
   <div class="star-cursor__shape">
-    <svg viewBox="0 0 24 24" width="24" height="24">
+    <svg viewBox="0 0 32 32" width="32" height="32">
       <path
-        d="M12 2.5l2.8 6.1 6.7.7-5 4.5 1.4 6.6L12 17l-5.9 3.4 1.4-6.6-5-4.5 6.7-.7z"
-        stroke-width="1.6"
-        stroke-linejoin="round"
+        class="main"
+        d="M16 4c1 6.4 5.6 11 12 12-6.4 1-11 5.6-12 12-1-6.4-5.6-11-12-12 6.4-1 11-5.6 12-12Z"
+      ></path>
+      <path
+        class="mini"
+        d="M27 1.5c.4 2.3 1.2 3.1 3.5 3.5-2.3.4-3.1 1.2-3.5 3.5-.4-2.3-1.2-3.1-3.5-3.5 2.3-.4 3.1-1.2 3.5-3.5Z"
       ></path>
     </svg>
   </div>
+  <span class="star-cursor__ring"></span>
 </div>
 
 <style>
@@ -21,9 +28,9 @@
     top: 0;
     left: 0;
     z-index: 9999;
-    width: 24px;
-    height: 24px;
-    margin: -12px 0 0 -12px; /* centre the star on the pointer */
+    width: 32px;
+    height: 32px;
+    margin: -16px 0 0 -16px; /* centre the sparkle on the pointer */
     pointer-events: none;
     opacity: 0;
     transition: opacity 150ms;
@@ -35,23 +42,62 @@
   .star-cursor__shape {
     width: 100%;
     height: 100%;
-    transition: transform 200ms var(--ease-out);
+    transition: transform 300ms var(--ease-spring);
   }
-  path {
+  svg {
+    overflow: visible;
+  }
+  .main {
     fill: var(--color-sage);
-    stroke: var(--color-bg);
+    stroke: var(--color-ink);
+    stroke-width: 1.6;
+    stroke-linejoin: round;
     transition: fill 200ms;
   }
-  /* Over anything clickable: grow and gently pulse */
+  .mini {
+    fill: var(--color-ink);
+    transform-origin: 16px 16px;
+    transition: transform 400ms var(--ease-spring);
+    animation: mini-twinkle 1.6s ease-in-out infinite;
+  }
+  /* Over anything clickable: quarter turn, grow, light fill; the mini sparkle swings round */
   #star-cursor.is-hover .star-cursor__shape {
-    animation: star-pulse 900ms ease-in-out infinite;
+    transform: rotate(45deg) scale(1.25);
   }
-  #star-cursor.is-hover path {
-    fill: var(--color-sage-dark);
+  #star-cursor.is-hover .main {
+    fill: var(--color-sage-50);
   }
-  /* On click: one spin */
+  #star-cursor.is-hover .mini {
+    transform: rotate(180deg);
+  }
+  /* On click: one spin plus a ring that ripples out */
   #star-cursor.is-click .star-cursor__shape {
     animation: star-spin 550ms var(--ease-out);
+  }
+  .star-cursor__ring {
+    position: absolute;
+    inset: 4px;
+    border: 1.5px solid var(--color-sage-dark);
+    border-radius: 50%;
+    opacity: 0;
+  }
+  #star-cursor.is-click .star-cursor__ring {
+    animation: star-ring 550ms var(--ease-out);
+  }
+  @keyframes mini-twinkle {
+    50% {
+      opacity: 0.25;
+    }
+  }
+  @keyframes star-ring {
+    from {
+      opacity: 0.8;
+      transform: scale(0.4);
+    }
+    to {
+      opacity: 0;
+      transform: scale(1.8);
+    }
   }
 </style>
 
@@ -60,7 +106,7 @@
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
   const star = document.getElementById('star-cursor');
   const shape = star?.firstElementChild;
-  const clickable = 'a, button, summary, label, [role="button"], .cs-media';
+  const clickable = 'a, button, summary, label, [role="button"], [role="tab"], .cs-media';
 
   if (star && shape && fine.matches && !reduce.matches) {
     document.documentElement.classList.add('star-cursor');

@@ -171,8 +171,10 @@ _Placeholder: Tanya will provide her Figma export steps (frames, sizes, naming).
 
 ## About page
 
-`src/pages/about.astro`: scrapbook polaroid portrait (washi tape, twinkling star doodles,
-straightens on hover), bio with a hand-drawn squiggle under the key phrase, facts list, Let's
+`src/pages/about.astro`: scrapbook polaroid portrait (`tanya-portrait-flowers.jpg`, shown
+uncropped and unedited at its own 2:3 ratio, per the owner; washi tape, twinkling star doodles,
+straightens on hover), photo and text columns vertically centred so they balance, a short bio
+(condensed from Framer; keep it about this length) with a hand-drawn squiggle under the key phrase, facts list, Let's
 connect buttons, then an Experience list from `src/data/experience.ts` (orgs newest first; orgs
 with several roles show a ✦ timeline). The Framer "Wonder Who I Am?" cat section was removed on
 purpose. Edit roles/dates in the data file, not the page.
@@ -199,15 +201,19 @@ purpose. Edit roles/dates in the data file, not the page.
 ## Brand details (from the Framer site — keep them)
 
 - **Star theme**: the logo is "TM ★". `StarCursor.astro` replaces the mouse cursor with a sage
-  star that pulses over clickable things and spins on click. It only runs for mouse users with
-  motion allowed; everyone else gets the static `public/cursors/star.svg` via CSS. Touch devices
-  are untouched. The logo ★ spins on hover; ✦ is used as a small decorative accent.
+  four-point sparkle with an **ink outline** (visible on white, deliberately not the logo's
+  five-point ★) and a tiny twinkling companion sparkle. Over clickable things it turns 45°, grows
+  and goes light; a click spins it and ripples a ring. It only runs for mouse users with motion
+  allowed; everyone else gets the static `public/cursors/star.svg` / `star-hover.svg` via CSS.
+  Touch devices are untouched. The logo ★ spins on hover; ✦ is used as a small decorative accent.
 - **Hero**: fills the screen below the nav (`min-h-[calc(100svh-4rem)]`) so projects are only
   seen after scrolling or clicking "Take a Peek". "Hiya, I'm Tanya." in `sage-dark`, letters pop
   in one by one (`.letter`, CSS only, with an `sr-only` copy of the sentence for screen readers).
   Illustration sits in the Framer circle composition (outline ring + three sage circles, 367×493
   ratio, image 192px wide). Letters and circles share one slow timeline in `global.css`
-  (both finish ≈2.5s); keep them in sync if you change either.
+  (both finish ≈2.5s); keep them in sync if you change either. The tagline's three values
+  ("creative simplicity", "precision", "passion") get hand-drawn sage underlines that draw in one
+  after another from 2.4s (`.doodle-word` in `Hero.astro`).
 - **Availability badge**: two lines, outlined pill. Line 1 "Available for Full-Time" (priority),
   line 2 "Starting Summer 2027 ✦ Open to Relocate".
 - **Project covers**: device mockups (laptop, plus phone when a mobile screen exists) on a soft

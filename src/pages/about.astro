@@ -6,7 +6,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Reveal from '../components/Reveal.astro';
 import { links, availability } from '../data/site';
 import { experience } from '../data/experience';
-import portrait from '../assets/about/tanya-portrait.jpg';
+import portrait from '../assets/about/tanya-portrait-flowers.jpg';
 
 const facts = [
   {
@@ -29,7 +29,7 @@ const facts = [
   description="Meet Tanya Mirza, a product designer and HCI master's student at the University of Michigan who designs with intention, empathy, and accessibility in mind."
 >
   <section class="about-hero relative overflow-hidden" aria-labelledby="about-title">
-    <div class="container-page grid items-start gap-14 pt-12 pb-16 md:pt-20 lg:grid-cols-[5fr_7fr] lg:gap-20">
+    <div class="container-page grid items-center gap-14 pt-12 pb-16 md:pt-20 lg:grid-cols-[5fr_7fr] lg:gap-20">
       <!-- Scrapbook polaroid -->
       <div class="mx-auto w-full max-w-sm">
         <div class="polaroid group relative">
@@ -38,14 +38,14 @@ const facts = [
           <figure class="relative rotate-[-3deg] rounded-lg bg-bg p-3 pb-12 shadow-card-hover transition-transform duration-700 ease-out group-hover:rotate-0 group-hover:-translate-y-1.5 motion-reduce:transition-none">
             <Picture
               src={portrait}
-              alt="Tanya smiling in a field of purple wildflowers, wearing a white dress and a maize-and-blue Michigan graduation stole."
+              alt="Tanya sitting in a field of lilac phlox flowers, smiling over her shoulder in a white dress and a maize-and-blue Michigan graduation stole."
               formats={['avif']}
               fallbackFormat="webp"
               widths={[360, 540, 720, 960]}
               sizes="(min-width: 1024px) 384px, (min-width: 640px) 384px, 90vw"
               loading="eager"
               fetchpriority="high"
-              class="aspect-[4/5] h-auto w-full rounded-md object-cover object-top"
+              class="h-auto w-full rounded-md"
             />
             <figcaption class="absolute inset-x-0 bottom-3 text-center font-display text-sm font-medium text-sage-dark">
               Go Blue!{' '}
@@ -112,29 +112,23 @@ const facts = [
 
         <div class="mt-8 space-y-5 text-lg text-muted">
           <p>
-            In a world where computing and engineering drive rapid change, UX design plays a
-            critical role in elevating technology beyond its function to create meaningful
-            experiences that are <strong class="text-ink">intuitive, intentional, and human</strong>
-            . This is where my interests naturally come together, allowing me to design experiences
-            grounded in clarity, usability, and accessibility.
+            UX design lifts technology beyond its function into experiences that are{' '}
+            <strong class="text-ink">intuitive, intentional, and human</strong>. That’s where my
+            interests meet: designing for clarity, usability, and accessibility.
           </p>
           <p>
-            As a Product Designer, I approach my work with{' '}
-            <strong class="text-ink">intention, empathy, and structure</strong>. I enjoy taking
-            ambiguous problems and translating them into clear, intuitive experiences through
-            research-driven decision making and strong visual systems. Accessibility and inclusivity
-            are central to my process which is mainly inspired by my{' '}
-            <strong class="text-ink">Bengali heritage</strong> and its emphasis on storytelling and
-            attention to detail. Coming from a culture that fought to preserve its language, art,
-            and voice, I’ve learned the importance of being intentional with even the smallest
-            details, recognizing how they come together to tell a larger story.
+            I work with <strong class="text-ink">intention, empathy, and structure</strong>, turning
+            ambiguous problems into clear experiences through research and strong visual systems.
+            Accessibility and inclusivity are central to my process, inspired by my{' '}
+            <strong class="text-ink">Bengali heritage</strong>: a culture that fought to preserve
+            its language, art, and voice taught me that even the smallest details tell a larger
+            story.
           </p>
           <p>
-            Outside of design work, creativity is a constant in my life. I bring an appreciation for
-            care, craftsmanship, and detail into everything I do. I believe that what may seem
-            "small" or "minuscule" can often carry the most meaning, and I aim to create experiences
-            where <strong class="text-ink">thoughtful details work cohesively</strong> to form
-            systems that feel seamless and human.
+            Outside of design, creativity is a constant. What seems “small” often carries the most
+            meaning, so I aim for{' '}
+            <strong class="text-ink">thoughtful details that work together</strong> to feel seamless
+            and human.
           </p>
         </div>
 
