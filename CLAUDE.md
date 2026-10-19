@@ -60,7 +60,8 @@ public/                  # files served as-is (favicon, og image, robots.txt, cu
   MHNSC (2), DPSS Microsite (3), Cardamom (4). "Next project" follows the same order and skips
   coming-soon projects.
 - **Privacy / NDA:** never name real people (clients, teammates, participants) or use their pronouns;
-  say "the client team", "a participant". Blur names, emails and faces of real people in screenshots.
+  say "the client team", "a participant". Screenshots of publicly live sites can stay unblurred
+  (the owner's call).
   MHNSC work is under an NDA: keep the "All rights reserved to MHNSC" callout at the top and the
   rights note at the end of that case study, and never imply the team owns the work.
 - Case-study body order: Problem → My Role → Process → Research Insights → Design Decisions →
