@@ -56,8 +56,13 @@ public/                  # files served as-is (favicon, og image, robots.txt, cu
 - File name = slug = URL (`dpss-intranet.mdx` → `/work/dpss-intranet`). Use kebab-case.
 - `status: coming-soon` shows a non-linked card and generates no page; `status: published`
   generates `/work/<slug>`.
-- Card order on the home page comes from `order` (ascending). "Next project" follows the same
-  order and skips coming-soon projects.
+- Card order on the home page comes from `order` (ascending), newest project first: DPSS Intranet (1),
+  MHNSC (2), DPSS Microsite (3), Cardamom (4). "Next project" follows the same order and skips
+  coming-soon projects.
+- **Privacy / NDA:** never name real people (clients, teammates, participants) or use their pronouns;
+  say "the client team", "a participant". Blur names, emails and faces of real people in screenshots.
+  MHNSC work is under an NDA: keep the "All rights reserved to MHNSC" callout at the top and the
+  rights note at the end of that case study, and never imply the team owns the work.
 - Case-study body order: Problem → My Role → Process → Research Insights → Design Decisions →
   Outcome.
 - Site-wide text and links go in `src/data/site.ts`, not inline in components.
@@ -135,13 +140,14 @@ before the first `##` (e.g. a confidentiality `<Callout>`) sits under Overview.
 
 **Interactive blocks (use to cut text, not to hide the story):**
 
-| Component                                                                                                  | Use                                                                                                                                                     |
-| ---------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `<Cards cols={2\|3\|4} numbered? items={[{title, text, tags?}]} />`                                        | turn "Label: explanation" lists into scannable cards                                                                                                    |
-| `<Expandable title="…">markdown</Expandable>` (owner disliked these on the Microsite; avoid)               | secondary detail ("read more"); native `<details>`                                                                                                      |
-| `<Personas personas={[{name, archetype, photo, age, occupation, context, goals, needs, frustrations}]} />` | persona tabs (Lauren Beck–style; one persona = no tabs); photos are circle crops `…-photo.png`; optional `details`, `columns`, `profile` (1–5), `quote` |
-| `<Compare id beforeLabel afterLabel>` + `<div slot="before">` / `<div slot="after">`                       | before/after toggle                                                                                                                                     |
-| `<Figure … arrow />`                                                                                       | arrow between two images (flow A → B)                                                                                                                   |
+| Component                                                                                                  | Use                                                                                                                                                                                                      |
+| ---------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `<Cards cols={2\|3\|4} numbered? items={[{title, text, tags?}]} />`                                        | turn "Label: explanation" lists into scannable cards                                                                                                                                                     |
+| `<Expandable title="…">markdown</Expandable>` (owner disliked these on the Microsite; avoid)               | secondary detail ("read more"); native `<details>`                                                                                                                                                       |
+| `<Personas personas={[{name, archetype, photo, age, occupation, context, goals, needs, frustrations}]} />` | persona tabs (Lauren Beck–style; one persona = no tabs); photos are square crops `…-photo.png/jpg` with the **head centered** (check every one); optional `details`, `columns`, `profile` (1–5), `quote` |
+| `<Compare id beforeLabel afterLabel>` + `<div slot="before">` / `<div slot="after">`                       | before/after toggle                                                                                                                                                                                      |
+| `<CardSort id sorts={[{label, groups:[{title, cards, highlight?}]}]} confusing={[…]} />`                   | card-sort results in portfolio style, toggle per participant (never paste Miro screenshots)                                                                                                              |
+| `<Figure … arrow />`                                                                                       | arrow between two images (flow A → B)                                                                                                                                                                    |
 
 Every `<Figure>` image gets a ⤢ magnifier that opens `Lightbox.astro` (fit / actual size).
 Stat numbers count up on scroll; cards stagger in. All of it degrades to plain visible content
@@ -178,9 +184,8 @@ photos (e.g. 4032px sketch scans) are saved as ~2400px JPGs; screenshots stay PN
 
 `src/pages/about.astro`: scrapbook polaroid portrait (`tanya-portrait-flowers.jpg`, shown
 uncropped and unedited at its own 2:3 ratio, per the owner; washi tape, twinkling star doodles,
-straightens on hover), photo and text columns vertically centred so they balance, a short bio
-(condensed from Framer; keep it about this length) with a hand-drawn squiggle under the key phrase, facts list, Let's
-connect buttons, then an Experience list from `src/data/experience.ts` (orgs newest first; orgs
+straightens on hover), photo and text columns vertically centred so they balance, a bio
+(mostly the owner's original Framer wording; the photo fills its column on `lg` to balance it) with a hand-drawn squiggle under the key phrase, facts list (no "Let's connect" buttons: the owner removed them as redundant with the footer), then an Experience list from `src/data/experience.ts` (orgs newest first; orgs
 with several roles show a ✦ timeline). The Framer "Wonder Who I Am?" cat section was removed on
 purpose. Edit roles/dates in the data file, not the page.
 
