@@ -265,4 +265,9 @@ purpose. Edit roles/dates in the data file, not the page.
 - Tailwind classes in markup. Add a token to `@theme` instead of arbitrary values when a value
   repeats.
 - Commits: short imperative subject (e.g. "Add project card component"), body explains why.
-- Deploy: Vercel auto-detects Astro; every push to the production branch deploys.
+- Deploy: Vercel. `vercel.json` sets `npm ci` + `npm run build` → `dist/`, `trailingSlash: false`,
+  long-lived caching for `/_astro/*` and basic security headers. Node 22 is pinned (`engines`,
+  `.nvmrc`). Astro uses `trailingSlash: 'never'`, so links, canonicals and the sitemap are all
+  slash-less (`/about`). `src/pages/404.astro` (noindex) becomes Vercel's 404. The social preview is
+  `public/og-default.png` (1200×630). Every push to the production branch deploys; other branches
+  get preview URLs. If the Vercel address or domain changes, update `site` and `robots.txt`.

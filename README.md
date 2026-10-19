@@ -62,9 +62,24 @@ time. Look at `src/content/projects/dpss-intranet.mdx` as the example to copy:
 - Put images in `src/assets/case-studies/<project-name>/` and use the ready-made blocks
   (`<StatRow>`, `<PullQuote>`, `<Callout>`, `<Figure>`, …). The full list is in `CLAUDE.md`.
 
-## Deploy
+## Deploy on Vercel
 
-1. Push this repo to GitHub.
-2. Go to [vercel.com/new](https://vercel.com/new), import the repo, and click **Deploy**. Vercel
-   detects Astro automatically.
-3. From then on, every push publishes the site automatically.
+The repo is already set up for Vercel (`vercel.json` holds the build settings, Node 22 is pinned in
+`package.json` and `.nvmrc`), so there is nothing to configure.
+
+1. Go to [vercel.com/new](https://vercel.com/new) and sign in with GitHub.
+2. Find **Portfolio** in the list and click **Import**. If it isn't listed, click "Adjust GitHub App
+   Permissions" and give Vercel access to the repo.
+3. Leave every setting as it is (Vercel reads them from `vercel.json`) and click **Deploy**. The
+   first build takes a few minutes.
+4. Vercel gives you an address like `something.vercel.app`. If it isn't
+   `tanyamirza.vercel.app`, change the project name under **Settings → General**, or tell Claude
+   the new address: it has to match `site` in `astro.config.mjs` and the last line of
+   `public/robots.txt` so Google and link previews use the right URL.
+5. **Which branch goes live:** Vercel publishes the repo's default branch. Every other branch you
+   push gets its own preview link, so you can check changes before they go live. To change the
+   live branch: **Settings → Git → Production Branch**.
+6. **Custom domain (optional):** **Settings → Domains → Add**, then follow Vercel's DNS steps at
+   your domain provider. Afterwards update `site` and `robots.txt` to the new domain.
+
+From then on, every push publishes the site automatically.

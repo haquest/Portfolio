@@ -10,6 +10,8 @@ interface Props {
   image?: string;
   imageAlt?: string;
   type?: 'website' | 'article';
+  /** Keep this page out of search results (e.g. the 404 page). */
+  noindex?: boolean;
 }
 
 const {
@@ -18,10 +20,13 @@ const {
   image = site.ogImage,
   imageAlt = `${site.name}, ${site.jobTitle}`,
   type = 'website',
+  noindex = false,
 } = Astro.props;
 
 const fullTitle = title ? `${title} · ${site.name}` : site.title;
-const canonical = new URL(Astro.url.pathname, Astro.site);
+// No trailing slash ("/about", not "/about/"), matching the site's links and vercel.json.
+const path = Astro.url.pathname.replace(/(.)\/$/, '$1').replace(/\.html$/, '');
+const canonical = new URL(path, Astro.site);
 const imageUrl = new URL(image, Astro.site);
 
 const person = {
@@ -38,6 +43,7 @@ const person = {
 
 <title>{fullTitle}</title>
 <meta name="description" content={description} />
+{noindex && <meta name="robots" content="noindex" />}
 <link rel="canonical" href={canonical} />
 
 <meta property="og:type" content={type} />

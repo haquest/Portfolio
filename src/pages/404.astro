@@ -1,0 +1,44 @@
+---
+// Shown for any address that doesn't exist (Vercel serves dist/404.html automatically).
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Button from '../components/Button.astro';
+---
+
+<BaseLayout
+  title="Page not found"
+  description="This page drifted off. Head back to Tanya Mirza's portfolio."
+  noindex
+>
+  <section
+    aria-labelledby="nf-title"
+    class="container-page flex min-h-[calc(100svh-4rem)] flex-col items-center justify-center py-20 text-center"
+  >
+    <!-- prettier-ignore -->
+    <p class="font-display text-display font-bold text-sage-dark">4<span aria-hidden="true" class="nf-star inline-block text-sage">★</span>4<span class="sr-only"> (error 404)</span></p>
+    <h1 id="nf-title" class="mt-4 text-h2 text-ink">
+      Looks like this page drifted off into the stars.
+    </h1>
+    <p class="mt-3 max-w-[46ch] text-lg text-muted">
+      The link might be old or mistyped. Let’s get you back to something worth seeing.
+    </p>
+    <div class="mt-10 flex flex-wrap justify-center gap-3">
+      <Button href="/">Back home</Button>
+      <Button href="/#projects" variant="secondary">
+        See my work
+      </Button>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  @media (prefers-reduced-motion: no-preference) {
+    .nf-star {
+      animation: nf-spin 6s ease-in-out infinite;
+    }
+  }
+  @keyframes nf-spin {
+    50% {
+      transform: rotate(180deg) scale(0.85);
+    }
+  }
+</style>

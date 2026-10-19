@@ -10,6 +10,8 @@ import remarkCaseStudy from './src/lib/remark-case-study.mjs';
 // Open Graph tags and the sitemap.
 export default defineConfig({
   site: 'https://tanyamirza.vercel.app',
+  // Addresses have no trailing slash (/about, not /about/); vercel.json matches this.
+  trailingSlash: 'never',
   integrations: [mdx(), sitemap()],
   markdown: {
     // Case studies are MDX (which inherits this processor). The plugin numbers their sections
