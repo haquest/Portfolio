@@ -257,7 +257,8 @@ purpose. Edit roles/dates in the data file, not the page.
 - `SEO.astro` (used by `BaseLayout`) renders title, description, canonical, OG, Twitter and
   JSON-LD Person. Pass `title`, `description`, `image`, `imageAlt` props per page.
 - Title pattern: `{Page} · Tanya Mirza`; home uses `site.title`.
-- `site` in `astro.config.mjs` (and `public/robots.txt`) must match the live domain.
+- Live domain: **https://mirzatanya.com**. `site` in `astro.config.mjs` and `public/robots.txt`
+  must match it.
 
 ## Conventions
 

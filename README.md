@@ -72,10 +72,9 @@ The repo is already set up for Vercel (`vercel.json` holds the build settings, N
    Permissions" and give Vercel access to the repo.
 3. Leave every setting as it is (Vercel reads them from `vercel.json`) and click **Deploy**. The
    first build takes a few minutes.
-4. Vercel gives you an address like `something.vercel.app`. If it isn't
-   `tanyamirza.vercel.app`, change the project name under **Settings → General**, or tell Claude
-   the new address: it has to match `site` in `astro.config.mjs` and the last line of
-   `public/robots.txt` so Google and link previews use the right URL.
+4. The live site is **https://mirzatanya.com**. That address must match `site` in
+   `astro.config.mjs` and the last line of `public/robots.txt` so Google and link previews use the
+   right URL; if the domain ever changes, update both.
 5. **Which branch goes live:** Vercel publishes the repo's default branch. Every other branch you
    push gets its own preview link, so you can check changes before they go live. To change the
    live branch: **Settings → Git → Production Branch**.

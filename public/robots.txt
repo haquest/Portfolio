@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://tanyamirza.vercel.app/sitemap-index.xml
+Sitemap: https://mirzatanya.com/sitemap-index.xml
