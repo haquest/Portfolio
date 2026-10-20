@@ -11,7 +11,7 @@ export const site = {
 };
 
 export const links = {
-  resume: 'https://drive.google.com/file/d/1FcgDjws0EVd0dWotmqq4H8xMzLxfqjHm/view?usp=sharing',
+  resume: 'https://drive.google.com/file/d/1ELDBodb5VZQ39YEkjitOhmPdS6RPm00T/view?usp=sharing',
   linkedin: 'https://www.linkedin.com/in/tanyamirza/',
   email: 'htanya@umich.edu',
 };
