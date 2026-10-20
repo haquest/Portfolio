@@ -7,7 +7,7 @@ export const site = {
     "Tanya Mirza is a product designer and HCI master's student at the University of Michigan, crafting intuitive, accessible, research-driven experiences. Open to full-time roles from Summer 2027.",
   jobTitle: 'Product Designer',
   locale: 'en_US',
-  ogImage: '/og-default.png',
+  ogImage: '/og-default.png?v=2',
 };
 
 export const links = {
